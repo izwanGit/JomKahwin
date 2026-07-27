@@ -8,7 +8,7 @@ export const SalamKautModal: React.FC = () => {
 
   const bankAcc = '12029020481982';
   const bankName = 'Bank Islam Malaysia Berhad';
-  const accHolder = 'Fatimah Az-Zahra binti Ahmad';
+  const accHolder = 'Alyea Dania binti Ahmad';
 
   const handleCopy = () => {
     navigator.clipboard.writeText(bankAcc);

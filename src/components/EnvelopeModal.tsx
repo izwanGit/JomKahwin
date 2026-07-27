@@ -21,7 +21,7 @@ export const EnvelopeModal: React.FC<EnvelopeModalProps> = ({ onOpen, guestName 
         particleCount: 70,
         spread: 80,
         origin: { y: 0.6 },
-        colors: ['#D4AF37', '#F5E6AB', '#064E3B', '#E8B4B8', '#FAF9F6'],
+        colors: ['#D4AF37', '#F5E6AB', '#4A0E17', '#E8B4B8', '#FAF9F6'],
       });
     } catch {
       // Fallback silently if canvas-confetti isn't present
@@ -42,7 +42,7 @@ export const EnvelopeModal: React.FC<EnvelopeModalProps> = ({ onOpen, guestName 
         initial={{ opacity: 1 }}
         exit={{ opacity: 0, scale: 0.95 }}
         transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-        className="fixed inset-0 z-50 flex items-center justify-center bg-emerald-950/95 backdrop-blur-md px-4 py-8 overflow-hidden"
+        className="fixed inset-0 z-50 flex items-center justify-center bg-burgundy-950/95 backdrop-blur-md px-4 py-8 overflow-hidden"
       >
         {/* Background Islamic Geometric Pattern Accent */}
         <div className="absolute inset-0 opacity-10 bg-[radial-gradient(#D4AF37_1px,transparent_1px)] [background-size:16px_16px] pointer-events-none" />
@@ -59,10 +59,10 @@ export const EnvelopeModal: React.FC<EnvelopeModalProps> = ({ onOpen, guestName 
               Walimatulurus
             </span>
             <h1 className="text-3xl md:text-4xl font-serif text-white font-bold tracking-wide">
-              Fatimah <span className="text-gold-500 font-normal">&</span> Sahrin
+              Alyea <span className="text-gold-500 font-normal">&amp;</span> Amirul
             </h1>
             {guestName && (
-              <div className="mt-3 inline-block px-4 py-1 rounded-full bg-emerald-900/80 border border-gold-500/40 text-gold-200 text-xs tracking-wider">
+              <div className="mt-3 inline-block px-4 py-1 rounded-full bg-burgundy-900/80 border border-gold-500/40 text-gold-200 text-xs tracking-wider">
                 Kepada Tuan/Puan: <span className="font-semibold text-white">{guestName}</span>
               </div>
             )}
@@ -88,15 +88,15 @@ export const EnvelopeModal: React.FC<EnvelopeModalProps> = ({ onOpen, guestName 
               <motion.div
                 animate={isOpen ? { scale: [1, 1.2, 0], rotate: 180, opacity: 0 } : { scale: [1, 1.04, 1] }}
                 transition={{ repeat: isOpen ? 0 : Infinity, duration: 2.5, ease: 'easeInOut' }}
-                className="w-16 h-16 rounded-full bg-gradient-to-br from-gold-400 via-gold-500 to-gold-700 shadow-gold-glow border-2 border-gold-200 flex items-center justify-center text-emerald-950 font-serif font-bold text-xl shadow-lg relative my-2"
+                className="w-16 h-16 rounded-full bg-gradient-to-br from-gold-400 via-gold-500 to-gold-700 shadow-gold-glow border-2 border-gold-200 flex items-center justify-center text-burgundy-950 font-serif font-bold text-xl shadow-lg relative my-2"
               >
                 <div className="absolute inset-1 rounded-full border border-gold-200/50" />
-                <Heart className="w-6 h-6 text-emerald-950 fill-emerald-950/20" />
+                <Heart className="w-6 h-6 text-burgundy-950 fill-burgundy-950/20" />
               </motion.div>
 
               {/* Envelope Text */}
               <div className="space-y-1 pb-2">
-                <p className="text-xs font-serif text-emerald-900 tracking-widest uppercase font-semibold">
+                <p className="text-xs font-serif text-burgundy-900 tracking-widest uppercase font-semibold">
                   Kad Jemputan Digital
                 </p>
                 <p className="text-[10px] text-slate-500 tracking-wider">
@@ -124,11 +124,11 @@ export const EnvelopeModal: React.FC<EnvelopeModalProps> = ({ onOpen, guestName 
             whileTap={{ scale: 0.97 }}
             onClick={handleOpenEnvelope}
             disabled={isOpen}
-            className="mt-6 px-8 py-3.5 rounded-full bg-gradient-to-r from-gold-400 via-gold-500 to-gold-600 text-emerald-950 font-semibold tracking-wider text-sm shadow-gold-glow flex items-center gap-2.5 transition-all focus:outline-none focus:ring-2 focus:ring-gold-300"
+            className="mt-6 px-8 py-3.5 rounded-full bg-gradient-to-r from-gold-400 via-gold-500 to-gold-600 text-burgundy-950 font-semibold tracking-wider text-sm shadow-gold-glow flex items-center gap-2.5 transition-all focus:outline-none focus:ring-2 focus:ring-gold-300"
           >
-            <Sparkles className="w-4 h-4 text-emerald-950" />
+            <Sparkles className="w-4 h-4 text-burgundy-950" />
             <span>{isOpen ? 'Membuka Kad...' : 'Buka Sampul'}</span>
-            <Volume2 className="w-4 h-4 text-emerald-950/70 ml-1" />
+            <Volume2 className="w-4 h-4 text-burgundy-950/70 ml-1" />
           </motion.button>
           
           <p className="text-[11px] text-gold-300/60 mt-3 flex items-center gap-1">

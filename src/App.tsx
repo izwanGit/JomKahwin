@@ -24,7 +24,7 @@ export function App() {
     {
       id: '1',
       name: 'Dr. Hakimi & Keluarga',
-      message: 'Tahniah Fatimah & Sahrin! Semoga mahligai yang dibina sentiasa diberkati Allah SWT hingga ke anak cucu.',
+      message: 'Tahniah Alyea & Amirul! Semoga mahligai yang dibina sentiasa diberkati Allah SWT hingga ke anak cucu.',
       createdAt: 'Semalam',
       attendance: 'hadir',
     },
@@ -38,7 +38,7 @@ export function App() {
     {
       id: '3',
       name: 'Amirul & Isteri',
-      message: 'Selamat Pengantin Baru bro Sahrin & Fatimah! Semoga kekal bahagia hingga ke syurga.',
+      message: 'Selamat Pengantin Baru bro Amirul & Alyea! Semoga kekal bahagia hingga ke syurga.',
       createdAt: '30 minit yang lalu',
       attendance: 'hadir',
     },

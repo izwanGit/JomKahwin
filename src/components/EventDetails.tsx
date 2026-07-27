@@ -12,7 +12,7 @@ export const EventDetails: React.FC = () => {
 
   const wazeUrl = 'https://waze.com/ul?q=Dewan%20Seri%20Endon%20Putrajaya';
   const googleMapsUrl = 'https://maps.google.com/?q=Dewan+Seri+Endon+Presint+10+Putrajaya';
-  const googleCalendarUrl = 'https://calendar.google.com/calendar/render?action=TEMPLATE&text=Walimatulurus+Fatimah+%26+Sahrin&dates=20261024T030000Z/20261024T080000Z&details=Majlis+Perkahwinan+Fatimah+Az-Zahra+%26+Sahrin+bin+Ahmad.&location=Dewan+Seri+Endon,+Presint+10,+Putrajaya';
+  const googleCalendarUrl = 'https://calendar.google.com/calendar/render?action=TEMPLATE&text=Walimatulurus+Alyea+%26+Amirul&dates=20261024T030000Z/20261024T080000Z&details=Majlis+Perkahwinan+Alyea+Dania+%26+Amirul+Ikhwan.&location=Dewan+Seri+Endon,+Presint+10,+Putrajaya';
 
   return (
     <section className="py-16 px-4 max-w-4xl mx-auto space-y-12">
@@ -28,7 +28,7 @@ export const EventDetails: React.FC = () => {
         <span className="text-gold-600 font-serif text-xs md:text-sm tracking-[0.25em] uppercase font-semibold block">
           Lokasi Majlis
         </span>
-        <h2 className="text-3xl md:text-4xl font-serif font-bold text-emerald-950">
+        <h2 className="text-3xl md:text-4xl font-serif font-bold text-burgundy-950">
           Dewan Seri Endon
         </h2>
         <p className="text-slate-600 text-xs md:text-sm max-w-md mx-auto">
@@ -50,8 +50,8 @@ export const EventDetails: React.FC = () => {
           rel="noopener noreferrer"
           className="group flex flex-col items-center justify-center p-6 rounded-2xl bg-white border border-gold-500/30 shadow-card-soft hover:shadow-gold-glow hover:border-gold-500 transition-all duration-300"
         >
-          <div className="w-12 h-12 rounded-full bg-emerald-50 flex items-center justify-center text-emerald-800 mb-3 group-hover:scale-110 transition-transform">
-            <Navigation className="w-6 h-6 text-emerald-700" />
+          <div className="w-12 h-12 rounded-full bg-burgundy-50 flex items-center justify-center text-burgundy-800 mb-3 group-hover:scale-110 transition-transform">
+            <Navigation className="w-6 h-6 text-burgundy-700" />
           </div>
           <span className="font-serif font-bold text-slate-800 text-sm">Waze</span>
           <span className="text-[11px] text-slate-500 mt-1 flex items-center gap-1">
@@ -65,8 +65,8 @@ export const EventDetails: React.FC = () => {
           rel="noopener noreferrer"
           className="group flex flex-col items-center justify-center p-6 rounded-2xl bg-white border border-gold-500/30 shadow-card-soft hover:shadow-gold-glow hover:border-gold-500 transition-all duration-300"
         >
-          <div className="w-12 h-12 rounded-full bg-emerald-50 flex items-center justify-center text-emerald-800 mb-3 group-hover:scale-110 transition-transform">
-            <MapPin className="w-6 h-6 text-emerald-700" />
+          <div className="w-12 h-12 rounded-full bg-burgundy-50 flex items-center justify-center text-burgundy-800 mb-3 group-hover:scale-110 transition-transform">
+            <MapPin className="w-6 h-6 text-burgundy-700" />
           </div>
           <span className="font-serif font-bold text-slate-800 text-sm">Google Maps</span>
           <span className="text-[11px] text-slate-500 mt-1 flex items-center gap-1">
@@ -80,8 +80,8 @@ export const EventDetails: React.FC = () => {
           rel="noopener noreferrer"
           className="group flex flex-col items-center justify-center p-6 rounded-2xl bg-white border border-gold-500/30 shadow-card-soft hover:shadow-gold-glow hover:border-gold-500 transition-all duration-300"
         >
-          <div className="w-12 h-12 rounded-full bg-emerald-50 flex items-center justify-center text-emerald-800 mb-3 group-hover:scale-110 transition-transform">
-            <CalendarIcon className="w-6 h-6 text-emerald-700" />
+          <div className="w-12 h-12 rounded-full bg-burgundy-50 flex items-center justify-center text-burgundy-800 mb-3 group-hover:scale-110 transition-transform">
+            <CalendarIcon className="w-6 h-6 text-burgundy-700" />
           </div>
           <span className="font-serif font-bold text-slate-800 text-sm">Tambah Kalendar</span>
           <span className="text-[11px] text-slate-500 mt-1 flex items-center gap-1">
@@ -99,7 +99,7 @@ export const EventDetails: React.FC = () => {
         className="p-8 rounded-3xl bg-white border border-gold-500/30 shadow-card-soft space-y-6"
       >
         <div className="text-center space-y-1">
-          <h3 className="text-xl font-serif font-bold text-emerald-950">
+          <h3 className="text-xl font-serif font-bold text-burgundy-950">
             Hubungi Tuan Rumah
           </h3>
           <p className="text-xs text-slate-500">
@@ -111,10 +111,10 @@ export const EventDetails: React.FC = () => {
           {contacts.map((c, i) => (
             <a
               key={i}
-              href={`https://wa.me/${c.phone}?text=Assalamualaikum%20${encodeURIComponent(c.name)},%20saya%20ingin%20bertanya%20mengenai%20majlis%20Fatimah%20%26%20Sahrin.`}
+              href={`https://wa.me/${c.phone}?text=Assalamualaikum%20${encodeURIComponent(c.name)},%20saya%20ingin%20bertanya%20mengenai%20majlis%20Alyea%20%26%20Amirul.`}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center justify-between p-4 rounded-xl bg-cream-100/70 border border-gold-300/40 hover:bg-emerald-900 hover:text-white group transition-all duration-300"
+              className="flex items-center justify-between p-4 rounded-xl bg-cream-100/70 border border-gold-300/40 hover:bg-burgundy-900 hover:text-white group transition-all duration-300"
             >
               <div>
                 <span className="text-[10px] uppercase font-bold tracking-wider text-gold-600 group-hover:text-gold-300 block">
@@ -124,7 +124,7 @@ export const EventDetails: React.FC = () => {
                   {c.name}
                 </span>
               </div>
-              <div className="w-9 h-9 rounded-full bg-emerald-100 text-emerald-800 group-hover:bg-gold-500 group-hover:text-emerald-950 flex items-center justify-center transition-colors">
+              <div className="w-9 h-9 rounded-full bg-burgundy-100 text-burgundy-800 group-hover:bg-gold-500 group-hover:text-burgundy-950 flex items-center justify-center transition-colors">
                 <Phone className="w-4 h-4" />
               </div>
             </a>

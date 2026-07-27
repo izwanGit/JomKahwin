@@ -48,7 +48,7 @@ export const HeroSection: React.FC = () => {
             Walimatulurus
           </span>
           <h2 className="text-slate-800 text-xs md:text-sm uppercase tracking-widest mt-1">
-            Majlis Kesyukuran & Perkahwinan
+            Majlis Kesyukuran &amp; Perkahwinan
           </h2>
         </motion.div>
 
@@ -60,7 +60,7 @@ export const HeroSection: React.FC = () => {
           className="py-4 space-y-2"
         >
           <h1 className="text-4xl md:text-6xl font-serif font-bold text-burgundy-950 tracking-tight leading-tight">
-            Fatimah Az-Zahra
+            Alyea Dania
           </h1>
           
           <div className="flex items-center justify-center gap-3 my-2">
@@ -70,7 +70,7 @@ export const HeroSection: React.FC = () => {
           </div>
 
           <h1 className="text-4xl md:text-6xl font-serif font-bold text-burgundy-950 tracking-tight leading-tight">
-            Sahrin bin Ahmad
+            Amirul Ikhwan
           </h1>
         </motion.div>
 
@@ -82,13 +82,13 @@ export const HeroSection: React.FC = () => {
           className="text-xs md:text-sm text-slate-600 font-sans max-w-lg space-y-1 pt-2"
         >
           <p className="font-serif italic text-gold-800 font-medium">
-            Dengan penuh rasa kesyukuran ke hadrat Allah SWT, kami:
+            Dengan penuh rasa kesyukuran ke hadrat Allah SWT, kami menjemput:
           </p>
           <p className="font-semibold text-slate-800">
-            Hj. Ahmad bin Ismail &amp; Hjh. Aminah binti Hassan
+            Dato&apos;/Datin/Tuan/Puan/Encik/Cik Seisi Keluarga
           </p>
           <p className="text-slate-500 text-[11px]">
-            Menjemput Dato&apos;/Datin/Tuan/Puan/Encik/Cik seisi keluarga ke majlis perkahwinan anakanda kami
+            Ke majlis perkahwinan anakanda kesayangan kami
           </p>
         </motion.div>
 
@@ -105,7 +105,7 @@ export const HeroSection: React.FC = () => {
           </div>
 
           <div className="flex flex-col items-center gap-1 text-slate-700 text-xs md:text-sm">
-            <div className="flex items-center gap-1.5 font-medium text-emerald-950">
+            <div className="flex items-center gap-1.5 font-medium text-burgundy-950">
               <MapPin className="w-4 h-4 text-gold-600" />
               <span>Dewan Seri Endon, Presint 10, Putrajaya</span>
             </div>
