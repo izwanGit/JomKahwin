@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Heart, Sparkles, Volume2 } from 'lucide-react';
+import { Sparkles, Volume2 } from 'lucide-react';
 import confetti from 'canvas-confetti';
 
 interface EnvelopeModalProps {
@@ -18,20 +18,20 @@ export const EnvelopeModal: React.FC<EnvelopeModalProps> = ({ onOpen, guestName 
     // Trigger celebratory gold & rose confetti
     try {
       confetti({
-        particleCount: 70,
-        spread: 80,
+        particleCount: 80,
+        spread: 90,
         origin: { y: 0.6 },
         colors: ['#D4AF37', '#F5E6AB', '#4A0E17', '#E8B4B8', '#FAF9F6'],
       });
     } catch {
-      // Fallback silently if canvas-confetti isn't present
+      // Fallback silently
     }
 
-    // Delay dismissal to let 3D unfold animation play gracefully
+    // Delay dismissal to let photorealistic envelope reveal transition finish
     setTimeout(() => {
       onOpen();
       setIsDismissed(true);
-    }, 1400);
+    }, 1600);
   };
 
   if (isDismissed) return null;
@@ -53,9 +53,9 @@ export const EnvelopeModal: React.FC<EnvelopeModalProps> = ({ onOpen, guestName 
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2, duration: 0.6 }}
-            className="text-center mb-8"
+            className="text-center mb-6"
           >
-            <span className="text-gold-300 font-serif text-sm tracking-[0.3em] uppercase block mb-1">
+            <span className="text-gold-300 font-serif text-xs md:text-sm tracking-[0.3em] uppercase block mb-1">
               Walimatulurus
             </span>
             <h1 className="text-3xl md:text-4xl font-serif text-white font-bold tracking-wide">
@@ -68,51 +68,26 @@ export const EnvelopeModal: React.FC<EnvelopeModalProps> = ({ onOpen, guestName 
             )}
           </motion.div>
 
-          {/* 3D Envelope Container */}
-          <div className="perspective-1000 relative w-full max-w-xs aspect-[4/3] my-4 cursor-pointer" onClick={!isOpen ? handleOpenEnvelope : undefined}>
-            <div className="relative w-full h-full rounded-2xl bg-gradient-to-br from-cream-100 to-cream-200 shadow-2xl border-2 border-gold-500/50 p-6 flex flex-col items-center justify-between text-center overflow-hidden transition-transform duration-500 hover:scale-[1.02]">
-              
-              {/* Gold Foil Border Accents */}
-              <div className="absolute inset-2 border border-gold-500/30 rounded-xl pointer-events-none" />
-              <div className="absolute top-3 left-3 w-4 h-4 border-t-2 border-l-2 border-gold-500 pointer-events-none" />
-              <div className="absolute top-3 right-3 w-4 h-4 border-t-2 border-r-2 border-gold-500 pointer-events-none" />
-              <div className="absolute bottom-3 left-3 w-4 h-4 border-b-2 border-l-2 border-gold-500 pointer-events-none" />
-              <div className="absolute bottom-3 right-3 w-4 h-4 border-b-2 border-r-2 border-gold-500 pointer-events-none" />
+          {/* Photorealistic 3D Envelope Interactive Display */}
+          <div
+            className="relative w-full max-w-xs aspect-square my-2 cursor-pointer group flex items-center justify-center"
+            onClick={!isOpen ? handleOpenEnvelope : undefined}
+          >
+            {/* Outer Gold Glow Effect */}
+            <div className="absolute inset-4 rounded-3xl bg-gold-500/20 blur-xl group-hover:bg-gold-500/30 transition-all" />
 
-              {/* Top Bismillah Calligraphy Placeholder / Motif */}
-              <div className="font-serif text-gold-700 text-xs tracking-widest pt-2">
-                بِسْمِ ٱللَّٰهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ
-              </div>
-
-              {/* Center Monogram Wax Seal */}
-              <motion.div
-                animate={isOpen ? { scale: [1, 1.2, 0], rotate: 180, opacity: 0 } : { scale: [1, 1.04, 1] }}
-                transition={{ repeat: isOpen ? 0 : Infinity, duration: 2.5, ease: 'easeInOut' }}
-                className="w-16 h-16 rounded-full bg-gradient-to-br from-gold-400 via-gold-500 to-gold-700 shadow-gold-glow border-2 border-gold-200 flex items-center justify-center text-burgundy-950 font-serif font-bold text-xl shadow-lg relative my-2"
-              >
-                <div className="absolute inset-1 rounded-full border border-gold-200/50" />
-                <Heart className="w-6 h-6 text-burgundy-950 fill-burgundy-950/20" />
-              </motion.div>
-
-              {/* Envelope Text */}
-              <div className="space-y-1 pb-2">
-                <p className="text-xs font-serif text-burgundy-900 tracking-widest uppercase font-semibold">
-                  Kad Jemputan Digital
-                </p>
-                <p className="text-[10px] text-slate-500 tracking-wider">
-                  Sila tekan untuk membuka kad
-                </p>
-              </div>
-
-              {/* 3D Flap Unfold Motion Overlay */}
-              <motion.div
-                initial={{ rotateX: 0 }}
-                animate={isOpen ? { rotateX: -180, opacity: 0 } : { rotateX: 0 }}
-                transition={{ duration: 0.8, ease: [0.4, 0, 0.2, 1] }}
-                style={{ transformOrigin: 'top center' }}
-                className="absolute top-0 left-0 right-0 h-1/2 bg-gradient-to-b from-gold-300 to-cream-100 border-b border-gold-500/40 clip-triangle pointer-events-none"
+            {/* Photorealistic Closed & Open Velvet Envelope Assets */}
+            <motion.div
+              animate={isOpen ? { scale: [1, 1.05, 1.15], opacity: 0 } : { scale: [1, 1.02, 1] }}
+              transition={{ repeat: isOpen ? 0 : Infinity, duration: 3, ease: 'easeInOut' }}
+              className="relative w-full h-full flex items-center justify-center"
+            >
+              <img
+                src={isOpen ? "/assets/envelope-open.png" : "/assets/envelope-closed.png"}
+                alt="Sampul Perkahwinan Velvet Burgundy"
+                className="w-full h-full object-contain drop-shadow-2xl transition-all duration-700"
               />
-            </div>
+            </motion.div>
           </div>
 
           {/* Open Button */}
@@ -124,7 +99,7 @@ export const EnvelopeModal: React.FC<EnvelopeModalProps> = ({ onOpen, guestName 
             whileTap={{ scale: 0.97 }}
             onClick={handleOpenEnvelope}
             disabled={isOpen}
-            className="mt-6 px-8 py-3.5 rounded-full bg-gradient-to-r from-gold-400 via-gold-500 to-gold-600 text-burgundy-950 font-semibold tracking-wider text-sm shadow-gold-glow flex items-center gap-2.5 transition-all focus:outline-none focus:ring-2 focus:ring-gold-300"
+            className="mt-4 px-8 py-3.5 rounded-full bg-gradient-to-r from-gold-400 via-gold-500 to-gold-600 text-burgundy-950 font-semibold tracking-wider text-sm shadow-gold-glow flex items-center gap-2.5 transition-all focus:outline-none focus:ring-2 focus:ring-gold-300"
           >
             <Sparkles className="w-4 h-4 text-burgundy-950" />
             <span>{isOpen ? 'Membuka Kad...' : 'Buka Sampul'}</span>
@@ -132,7 +107,7 @@ export const EnvelopeModal: React.FC<EnvelopeModalProps> = ({ onOpen, guestName 
           </motion.button>
           
           <p className="text-[11px] text-gold-300/60 mt-3 flex items-center gap-1">
-            <span>🎵 Lagu latar akan dimainkan secara automatik</span>
+            <span>🎵 Tekan untuk memainkan lagu latar &amp; membuka kad</span>
           </p>
         </div>
       </motion.div>
