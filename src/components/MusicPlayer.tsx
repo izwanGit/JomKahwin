@@ -9,8 +9,9 @@ export const MusicPlayer: React.FC<MusicPlayerProps> = ({ autoPlay = false }) =>
   const [isPlaying, setIsPlaying] = useState(false);
   const audioRef = useRef<HTMLAudioElement | null>(null);
 
-  // Royalty-free acoustic wedding song stream
-  const audioUrl = "https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf07a.mp3?filename=romantic-wedding-acoustic-guitar-112702.mp3";
+  // Custom local audio file (placed in /public/song.mp3) with online fallback stream
+  const audioUrl = "/song.mp3";
+  const fallbackUrl = "https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf07a.mp3?filename=romantic-wedding-acoustic-guitar-112702.mp3";
 
   useEffect(() => {
     if (autoPlay && audioRef.current) {
@@ -39,7 +40,19 @@ export const MusicPlayer: React.FC<MusicPlayerProps> = ({ autoPlay = false }) =>
 
   return (
     <div className="fixed bottom-6 right-6 z-40">
-      <audio ref={audioRef} src={audioUrl} loop preload="auto" />
+      <audio
+        ref={audioRef}
+        src={audioUrl}
+        loop
+        preload="auto"
+        onError={(e) => {
+          const target = e.currentTarget;
+          if (target.src !== fallbackUrl) {
+            target.src = fallbackUrl;
+            if (isPlaying) target.play().catch(() => {});
+          }
+        }}
+      />
       
       <button
         onClick={togglePlay}
