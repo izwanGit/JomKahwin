@@ -83,7 +83,7 @@ export const EnvelopeModal: React.FC<EnvelopeModalProps> = ({ onOpen, guestName 
               className="relative w-full h-full flex items-center justify-center"
             >
               <img
-                src={isOpen ? "/assets/envelope-open.png" : "/assets/envelope-closed.png"}
+                src={isOpen ? "/assets/envelope-open-v3.png" : "/assets/envelope-closed-v3.png"}
                 alt="Sampul Perkahwinan Velvet Burgundy"
                 className="w-full h-full object-contain drop-shadow-2xl transition-all duration-700"
               />
