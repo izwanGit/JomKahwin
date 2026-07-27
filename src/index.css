@@ -9,6 +9,15 @@
   }
 }
 
+/* 3D Perspective & Clip Path Utilities */
+.perspective-1000 {
+  perspective: 1000px;
+}
+
+.clip-triangle {
+  clip-path: polygon(0 0, 50% 100%, 100% 0);
+}
+
 /* Custom Gold Gradient Utilities */
 .text-gold-gradient {
   background: linear-gradient(135deg, #FFFDF0 0%, #D4AF37 50%, #976E07 100%);
