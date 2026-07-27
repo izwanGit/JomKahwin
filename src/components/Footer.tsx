@@ -1,0 +1,50 @@
+import React from 'react';
+import { Share2, Heart } from 'lucide-react';
+
+export const Footer: React.FC = () => {
+  const shareText = "Assalamualaikum! Anda dijemput ke Majlis Perkahwinan Fatimah Az-Zahra & Sahrin bin Ahmad pada Sabtu, 24 Oktober 2026. Klik pautan untuk maklumat lanjut dan pengesahan kehadiran: " + window.location.href;
+
+  const handleShare = () => {
+    if (navigator.share) {
+      navigator.share({
+        title: 'Walimatulurus Fatimah ❤️ Sahrin',
+        text: 'Kad Jemputan Digital Majlis Perkahwinan Fatimah & Sahrin',
+        url: window.location.href,
+      }).catch(() => {});
+    } else {
+      window.open(`https://wa.me/?text=${encodeURIComponent(shareText)}`, '_blank');
+    }
+  };
+
+  return (
+    <footer className="py-12 px-4 text-center bg-emerald-950 text-white relative overflow-hidden border-t border-gold-500/30">
+      <div className="max-w-md mx-auto space-y-6 relative z-10">
+        
+        {/* Share Button */}
+        <button
+          onClick={handleShare}
+          className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-emerald-900 border border-gold-400/40 text-gold-300 text-xs font-semibold hover:bg-emerald-800 transition-colors shadow-emerald-glow"
+        >
+          <Share2 className="w-4 h-4 text-gold-400" />
+          <span>Kongsi Kad Jemputan via WhatsApp</span>
+        </button>
+
+        <div className="space-y-1">
+          <h3 className="font-serif text-2xl font-bold text-gold-300">
+            Fatimah <span className="text-gold-500 font-normal">&amp;</span> Sahrin
+          </h3>
+          <p className="text-xs text-emerald-200/80 font-serif italic">
+            #FatimahSahrin #Walimatulurus #JomKahwin
+          </p>
+        </div>
+
+        <div className="flex items-center justify-center gap-1 text-[11px] text-emerald-400/60 pt-4 border-t border-emerald-900">
+          <span>Direka khas dengan</span>
+          <Heart className="w-3 h-3 text-gold-500 fill-gold-500" />
+          <span>secara digital</span>
+        </div>
+
+      </div>
+    </footer>
+  );
+};
