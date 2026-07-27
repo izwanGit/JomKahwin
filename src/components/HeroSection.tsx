@@ -59,7 +59,7 @@ export const HeroSection: React.FC = () => {
           transition={{ delay: 0.4, duration: 0.8 }}
           className="py-4 space-y-2"
         >
-          <h1 className="text-4xl md:text-6xl font-serif font-bold text-emerald-950 tracking-tight leading-tight">
+          <h1 className="text-4xl md:text-6xl font-serif font-bold text-burgundy-950 tracking-tight leading-tight">
             Fatimah Az-Zahra
           </h1>
           
@@ -69,7 +69,7 @@ export const HeroSection: React.FC = () => {
             <span className="h-[1px] w-12 bg-gold-400" />
           </div>
 
-          <h1 className="text-4xl md:text-6xl font-serif font-bold text-emerald-950 tracking-tight leading-tight">
+          <h1 className="text-4xl md:text-6xl font-serif font-bold text-burgundy-950 tracking-tight leading-tight">
             Sahrin bin Ahmad
           </h1>
         </motion.div>
@@ -99,7 +99,7 @@ export const HeroSection: React.FC = () => {
           transition={{ delay: 0.8, duration: 0.8 }}
           className="mt-6 w-full max-w-md p-6 rounded-2xl bg-white/80 border border-gold-500/30 shadow-card-soft backdrop-blur-sm space-y-4"
         >
-          <div className="flex items-center justify-center gap-2 text-emerald-900 font-serif font-bold text-lg border-b border-gold-200 pb-3">
+          <div className="flex items-center justify-center gap-2 text-burgundy-900 font-serif font-bold text-lg border-b border-gold-200 pb-3">
             <Calendar className="w-5 h-5 text-gold-600" />
             <span>Sabtu, 24 Oktober 2026</span>
           </div>
