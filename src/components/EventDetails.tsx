@@ -46,8 +46,7 @@ export const EventDetails: React.FC = () => {
       >
         <div className="w-full rounded-xl overflow-hidden bg-cream-50">
           <iframe
-            width="100%"
-            height="260"
+            className="w-full h-[180px] sm:h-[350px]"
             style={{ border: 0, display: 'block' }}
             src="https://maps.google.com/maps?q=Dewan%20Seri%20Endon,%20Putrajaya&t=&z=15&ie=UTF8&iwloc=&output=embed"
             allowFullScreen
