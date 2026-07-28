@@ -22,60 +22,58 @@ export const IslamicArchCard: React.FC<IslamicArchCardProps> = ({ children }) =>
         border: '1px solid rgba(212,175,55,0.4)',
       }}
     >
-      {/* ── TOP ARCH (SVG) ── */}
-      <div 
-        className="w-full relative flex flex-col items-center justify-end z-10" 
-        style={{ paddingBottom: '35%' }}
-      >
-        <svg
-          className="absolute overflow-visible"
-          style={{ 
-            bottom: '-2px', // Overlap body by 2px to eliminate subpixel gap
-            left: '1px',    // Align x=0 to center of 2px left border
-            width: 'calc(100% - 2px)', 
-            height: 'calc(100% + 2px)' 
+      {/* ── BACKGROUND LAYER (Arch + Body) ── */}
+      <div className="absolute inset-0 flex flex-col z-0 pointer-events-none">
+        {/* TOP ARCH (SVG) */}
+        <div className="w-full relative" style={{ paddingBottom: '35%' }}>
+          <svg
+            className="absolute overflow-visible"
+            style={{ 
+              bottom: '-2px', // Overlap body by 2px to eliminate subpixel gap
+              left: '1px',    // Align x=0 to center of 2px left border
+              width: 'calc(100% - 2px)', 
+              height: 'calc(100% + 2px)' 
+            }}
+            viewBox="0 0 100 40"
+            preserveAspectRatio="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            {/* Fill path (closed shape) */}
+            <path
+              d="M 0,40 L 0,25 A 12 12 0 0 1 15,15 A 15 15 0 0 1 35,8 A 18 18 0 0 1 65,8 A 15 15 0 0 1 85,15 A 12 12 0 0 1 100,25 L 100,40 Z"
+              fill="rgba(255,254,250,1)"
+            />
+            {/* Stroke path (open shape, no Z, no bottom line!) */}
+            <path
+              d="M 0,40 L 0,25 A 12 12 0 0 1 15,15 A 15 15 0 0 1 35,8 A 18 18 0 0 1 65,8 A 15 15 0 0 1 85,15 A 12 12 0 0 1 100,25 L 100,40"
+              fill="none"
+              stroke="#D4AF37"
+              strokeWidth="2"
+              vectorEffect="non-scaling-stroke"
+            />
+          </svg>
+        </div>
+        {/* MAIN CARD BODY (Solid White) */}
+        <div
+          className="w-full flex-1"
+          style={{
+            background: 'rgba(255,254,250,1)',
+            borderLeft: '2px solid #D4AF37',
+            borderRight: '2px solid #D4AF37',
+            borderBottom: '2px solid #D4AF37',
+            borderRadius: '0 0 4px 4px',
           }}
-          viewBox="0 0 100 40"
-          preserveAspectRatio="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          {/*
-            Path tracing a polylobed (scalloped) Moorish arch:
-            - Starts at bottom left (0, 40)
-            - 5 distinct lobes connecting to the bottom right (100, 40)
-          */}
-          {/* Fill path (closed shape) */}
-          <path
-            d="M 0,40 L 0,25 A 12 12 0 0 1 15,15 A 15 15 0 0 1 35,8 A 18 18 0 0 1 65,8 A 15 15 0 0 1 85,15 A 12 12 0 0 1 100,25 L 100,40 Z"
-            fill="rgba(255,254,250,1)"
-          />
-          {/* Stroke path (open shape, no Z, no bottom line!) */}
-          <path
-            d="M 0,40 L 0,25 A 12 12 0 0 1 15,15 A 15 15 0 0 1 35,8 A 18 18 0 0 1 65,8 A 15 15 0 0 1 85,15 A 12 12 0 0 1 100,25 L 100,40"
-            fill="none"
-            stroke="#D4AF37"
-            strokeWidth="2"
-            vectorEffect="non-scaling-stroke"
-          />
-        </svg>
+        />
       </div>
 
-      {/* ── MAIN CARD BODY (White Cutout) ── */}
-      <div
-        className="w-full relative flex flex-col items-center z-0"
+      {/* ── FOREGROUND CONTENT LAYER ── */}
+      <div 
+        className="relative z-10 w-full flex flex-col items-center gap-[clamp(8px,1.5vh,20px)]"
         style={{
-          background: 'rgba(255,254,250,1)',
-          borderLeft: '2px solid #D4AF37',
-          borderRight: '2px solid #D4AF37',
-          borderBottom: '2px solid #D4AF37',
-          padding: '0 clamp(16px, 4vw, 56px) clamp(16px, 4vh, 56px)',
-          borderRadius: '0 0 4px 4px',
+          padding: 'clamp(32px, 12vw, 80px) clamp(16px, 4vw, 56px) clamp(24px, 6vh, 56px)',
         }}
       >
-        {/* Inner content wrapper */}
-        <div className="w-full flex flex-col items-center gap-[clamp(8px,1.5vh,20px)]">
-          {children}
-        </div>
+        {children}
       </div>
     </motion.div>
   );

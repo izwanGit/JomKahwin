@@ -66,7 +66,7 @@ export const HeroSection: React.FC = () => {
               fontSize: 'clamp(18px, 4vw, 36px)',
               color: '#B8860B',
               letterSpacing: '0.04em',
-              marginTop: 'clamp(-20px, -5vh, -50px)', // Pull up elegantly into the arch tip
+              marginTop: '0px',
             }}
           >
             بِسْمِ ٱللَّٰهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ
