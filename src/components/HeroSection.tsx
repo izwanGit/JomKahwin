@@ -26,19 +26,6 @@ export const HeroSection: React.FC = () => {
         }}
       />
 
-      {/* ── Luxury Botanical Frame — sits around the card ── */}
-      <div
-        style={{
-          position: 'absolute',
-          inset: 0,
-          pointerEvents: 'none',
-          zIndex: 15,
-          overflow: 'hidden',
-        }}
-      >
-        <BotanicalFrame />
-      </div>
-
       {/* ── Outer gold double-border frame lines ── */}
       <div
         aria-hidden="true"
@@ -52,8 +39,13 @@ export const HeroSection: React.FC = () => {
         }}
       />
 
-      {/* ── Floating Islamic Arch Card ── */}
-      <div className="relative z-10 w-full max-w-2xl mx-auto pt-[4vh]">
+      {/* ── Floating Islamic Arch Card Container ── */}
+      <div className="relative z-10 w-full max-w-xl mx-auto py-4">
+        {/* Botanical frame anchored directly around the card corners */}
+        <div className="absolute inset-0 pointer-events-none z-20 overflow-visible">
+          <BotanicalFrame />
+        </div>
+
         <IslamicArchCard>
           
           {/* Bismillah */}

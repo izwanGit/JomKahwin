@@ -20,10 +20,10 @@ export const BotanicalFrame: React.FC = () => {
         transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
         style={{
           position: 'absolute',
-          top: '-60px',
-          left: '-70px',
-          width: 'clamp(220px, 38vw, 440px)',
-          zIndex: 15,
+          top: '-35px',
+          left: '-35px',
+          width: 'clamp(140px, 36%, 260px)',
+          zIndex: 25,
           transformOrigin: 'top left',
           willChange: 'transform',
         }}
@@ -69,10 +69,10 @@ export const BotanicalFrame: React.FC = () => {
         transition={{ duration: 15, delay: 2, repeat: Infinity, ease: "easeInOut" }}
         style={{
           position: 'absolute',
-          top: '-45px',
-          right: '-55px',
-          width: 'clamp(160px, 28vw, 320px)',
-          zIndex: 15,
+          top: '-30px',
+          right: '-30px',
+          width: 'clamp(110px, 28%, 200px)',
+          zIndex: 25,
           transformOrigin: 'top right',
           pointerEvents: 'none',
         }}
@@ -118,10 +118,10 @@ export const BotanicalFrame: React.FC = () => {
         transition={{ duration: 14, delay: 1, repeat: Infinity, ease: "easeInOut" }}
         style={{
           position: 'absolute',
-          bottom: '-50px',
-          left: '-50px',
-          width: 'clamp(150px, 26vw, 300px)',
-          zIndex: 15,
+          bottom: '-30px',
+          left: '-30px',
+          width: 'clamp(100px, 25%, 180px)',
+          zIndex: 25,
           pointerEvents: 'none',
           transformOrigin: 'bottom left',
         }}
@@ -167,10 +167,10 @@ export const BotanicalFrame: React.FC = () => {
         transition={{ duration: 16, delay: 3, repeat: Infinity, ease: "easeInOut" }}
         style={{
           position: 'absolute',
-          bottom: '-65px',
-          right: '-65px',
-          width: 'clamp(190px, 34vw, 400px)',
-          zIndex: 15,
+          bottom: '-40px',
+          right: '-40px',
+          width: 'clamp(130px, 32%, 230px)',
+          zIndex: 25,
           pointerEvents: 'none',
           transformOrigin: 'bottom right',
         }}
