@@ -17,7 +17,7 @@ export const Footer: React.FC = () => {
   };
 
   return (
-    <footer className="pt-12 pb-28 md:pb-16 px-4 text-center bg-burgundy-950 text-white relative overflow-hidden border-t border-gold-500/30">
+    <footer className="pt-12 pb-40 md:pb-16 px-4 text-center bg-burgundy-950 text-white relative overflow-hidden border-t border-gold-500/30">
       <div className="max-w-md mx-auto space-y-6 relative z-10">
         
         {/* Share Button */}
