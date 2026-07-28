@@ -42,12 +42,12 @@ export const EventDetails: React.FC = () => {
         whileInView={{ opacity: 1, scale: 1 }}
         viewport={{ once: true }}
         transition={{ duration: 0.6, delay: 0.1 }}
-        className="w-full rounded-3xl overflow-hidden shadow-card-soft border border-gold-500/30 bg-white p-2"
+        className="w-full max-w-2xl mx-auto rounded-2xl overflow-hidden shadow-card-soft border border-gold-500/30 bg-white p-1.5"
       >
-        <div className="w-full rounded-2xl overflow-hidden bg-cream-50">
+        <div className="w-full rounded-xl overflow-hidden bg-cream-50">
           <iframe
             width="100%"
-            height="400"
+            height="260"
             style={{ border: 0, display: 'block' }}
             src="https://maps.google.com/maps?q=Dewan%20Seri%20Endon,%20Putrajaya&t=&z=15&ie=UTF8&iwloc=&output=embed"
             allowFullScreen
