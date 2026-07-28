@@ -64,20 +64,20 @@ export const EventDetails: React.FC = () => {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.6, delay: 0.2 }}
-        className="grid grid-cols-1 sm:grid-cols-3 gap-4"
+        className="grid grid-cols-3 gap-2 sm:gap-4"
       >
         <a
           href={wazeUrl}
           target="_blank"
           rel="noopener noreferrer"
-          className="group flex flex-col items-center justify-center p-6 rounded-2xl bg-white border border-gold-500/30 shadow-card-soft hover:shadow-gold-glow hover:border-gold-500 transition-all duration-300"
+          className="group flex flex-col items-center justify-center p-3 sm:p-6 rounded-2xl bg-white border border-gold-500/30 shadow-card-soft hover:shadow-gold-glow hover:border-gold-500 transition-all duration-300 text-center"
         >
-          <div className="w-12 h-12 rounded-full bg-burgundy-50 flex items-center justify-center text-burgundy-800 mb-3 group-hover:scale-110 transition-transform">
-            <Navigation className="w-6 h-6 text-burgundy-700" />
+          <div className="w-9 h-9 sm:w-12 sm:h-12 rounded-full bg-burgundy-50 flex items-center justify-center text-burgundy-800 mb-2 sm:mb-3 group-hover:scale-110 transition-transform">
+            <Navigation className="w-4 h-4 sm:w-6 sm:h-6 text-burgundy-700" />
           </div>
-          <span className="font-serif font-bold text-slate-800 text-sm">Waze</span>
-          <span className="text-[11px] text-slate-500 mt-1 flex items-center gap-1">
-            Pandu Navigasi <ExternalLink className="w-3 h-3 text-gold-600" />
+          <span className="font-serif font-bold text-slate-800 text-xs sm:text-sm">Waze</span>
+          <span className="text-[9px] sm:text-[11px] text-slate-500 mt-0.5 sm:mt-1 flex items-center gap-0.5 sm:gap-1">
+            Pandu Navigasi <ExternalLink className="w-2.5 h-2.5 sm:w-3 sm:h-3 text-gold-600" />
           </span>
         </a>
 
@@ -85,14 +85,14 @@ export const EventDetails: React.FC = () => {
           href={googleMapsUrl}
           target="_blank"
           rel="noopener noreferrer"
-          className="group flex flex-col items-center justify-center p-6 rounded-2xl bg-white border border-gold-500/30 shadow-card-soft hover:shadow-gold-glow hover:border-gold-500 transition-all duration-300"
+          className="group flex flex-col items-center justify-center p-3 sm:p-6 rounded-2xl bg-white border border-gold-500/30 shadow-card-soft hover:shadow-gold-glow hover:border-gold-500 transition-all duration-300 text-center"
         >
-          <div className="w-12 h-12 rounded-full bg-burgundy-50 flex items-center justify-center text-burgundy-800 mb-3 group-hover:scale-110 transition-transform">
-            <MapPin className="w-6 h-6 text-burgundy-700" />
+          <div className="w-9 h-9 sm:w-12 sm:h-12 rounded-full bg-burgundy-50 flex items-center justify-center text-burgundy-800 mb-2 sm:mb-3 group-hover:scale-110 transition-transform">
+            <MapPin className="w-4 h-4 sm:w-6 sm:h-6 text-burgundy-700" />
           </div>
-          <span className="font-serif font-bold text-slate-800 text-sm">Google Maps</span>
-          <span className="text-[11px] text-slate-500 mt-1 flex items-center gap-1">
-            Peta Lokasi <ExternalLink className="w-3 h-3 text-gold-600" />
+          <span className="font-serif font-bold text-slate-800 text-xs sm:text-sm">Google Maps</span>
+          <span className="text-[9px] sm:text-[11px] text-slate-500 mt-0.5 sm:mt-1 flex items-center gap-0.5 sm:gap-1">
+            Peta Lokasi <ExternalLink className="w-2.5 h-2.5 sm:w-3 sm:h-3 text-gold-600" />
           </span>
         </a>
 
@@ -100,14 +100,14 @@ export const EventDetails: React.FC = () => {
           href={googleCalendarUrl}
           target="_blank"
           rel="noopener noreferrer"
-          className="group flex flex-col items-center justify-center p-6 rounded-2xl bg-white border border-gold-500/30 shadow-card-soft hover:shadow-gold-glow hover:border-gold-500 transition-all duration-300"
+          className="group flex flex-col items-center justify-center p-3 sm:p-6 rounded-2xl bg-white border border-gold-500/30 shadow-card-soft hover:shadow-gold-glow hover:border-gold-500 transition-all duration-300 text-center"
         >
-          <div className="w-12 h-12 rounded-full bg-burgundy-50 flex items-center justify-center text-burgundy-800 mb-3 group-hover:scale-110 transition-transform">
-            <CalendarIcon className="w-6 h-6 text-burgundy-700" />
+          <div className="w-9 h-9 sm:w-12 sm:h-12 rounded-full bg-burgundy-50 flex items-center justify-center text-burgundy-800 mb-2 sm:mb-3 group-hover:scale-110 transition-transform">
+            <CalendarIcon className="w-4 h-4 sm:w-6 sm:h-6 text-burgundy-700" />
           </div>
-          <span className="font-serif font-bold text-slate-800 text-sm">Tambah Kalendar</span>
-          <span className="text-[11px] text-slate-500 mt-1 flex items-center gap-1">
-            Google Calendar <ExternalLink className="w-3 h-3 text-gold-600" />
+          <span className="font-serif font-bold text-slate-800 text-xs sm:text-sm truncate max-w-full px-1">Kalendar</span>
+          <span className="text-[9px] sm:text-[11px] text-slate-500 mt-0.5 sm:mt-1 flex items-center gap-0.5 sm:gap-1">
+            Tambah <ExternalLink className="w-2.5 h-2.5 sm:w-3 sm:h-3 text-gold-600" />
           </span>
         </a>
       </motion.div>
