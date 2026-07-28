@@ -2,6 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { Heart, Calendar, MapPin } from 'lucide-react';
 import { BotanicalFrame } from './BotanicalFrame';
+import { IslamicArchCard } from './IslamicArchCard';
 
 export const HeroSection: React.FC = () => {
   return (
@@ -50,150 +51,11 @@ export const HeroSection: React.FC = () => {
           zIndex: 6,
         }}
       />
-      <div
-        aria-hidden="true"
-        style={{
-          position: 'absolute',
-          inset: '32px',
-          border: '1px solid rgba(212,175,55,0.1)',
-          borderRadius: '22px',
-          pointerEvents: 'none',
-          zIndex: 6,
-        }}
-      />
 
-      {/* ── Floating invitation card — all text content lives here ── */}
-      <motion.div
-        initial={{ opacity: 0, y: 24 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 1.0, ease: [0.16, 1, 0.3, 1] }}
-        className="relative z-10 max-w-2xl w-full mx-auto"
-        style={{
-          background: 'rgba(255,254,250,0.88)',
-          backdropFilter: 'blur(8px)',
-          borderRadius: '28px',
-          boxShadow: '0 30px 80px rgba(40,5,11,0.08), 0 0 0 1px rgba(212,175,55,0.28)',
-          padding: 'clamp(24px, 6vw, 56px)',
-        }}
-      >
-        {/* Inner Islamic Geometric Frame */}
-        <div
-          style={{
-            border: '1px solid rgba(212,175,55,0.4)',
-            padding: 'clamp(24px, 5vw, 48px)',
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            gap: '20px',
-            position: 'relative',
-          }}
-        >
-          {/* Inner Dashed Frame */}
-          <div
-            aria-hidden="true"
-            style={{
-              position: 'absolute',
-              inset: '8px',
-              border: '1px dashed rgba(212,175,55,0.4)',
-              pointerEvents: 'none',
-              zIndex: 0,
-            }}
-          />
-
-          {/* Top Mihrab Arch Accent */}
-          <svg
-            aria-hidden="true"
-            style={{
-              position: 'absolute',
-              top: '-12px',
-              left: '50%',
-              transform: 'translateX(-50%)',
-              width: '80px',
-              height: '24px',
-              pointerEvents: 'none',
-              zIndex: 1,
-            }}
-            viewBox="0 0 80 24"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M 0 12 L 25 12 L 40 2 L 55 12 L 80 12"
-              stroke="#D4AF37"
-              strokeWidth="1.5"
-              strokeOpacity="0.8"
-              fill="rgba(255,254,250,1)"
-            />
-            <path
-              d="M 30 14 L 40 6 L 50 14"
-              stroke="#B8860B"
-              strokeWidth="1"
-              strokeOpacity="0.5"
-            />
-          </svg>
-
-          {/* Bottom Mihrab Arch Accent */}
-          <svg
-            aria-hidden="true"
-            style={{
-              position: 'absolute',
-              bottom: '-12px',
-              left: '50%',
-              transform: 'translateX(-50%) scale(1, -1)',
-              width: '80px',
-              height: '24px',
-              pointerEvents: 'none',
-              zIndex: 1,
-            }}
-            viewBox="0 0 80 24"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M 0 12 L 25 12 L 40 2 L 55 12 L 80 12"
-              stroke="#D4AF37"
-              strokeWidth="1.5"
-              strokeOpacity="0.8"
-              fill="rgba(255,254,250,1)"
-            />
-            <path
-              d="M 30 14 L 40 6 L 50 14"
-              stroke="#B8860B"
-              strokeWidth="1"
-              strokeOpacity="0.5"
-            />
-          </svg>
-
-          {/* 4 Corner Rub el Hizb (8-Pointed Star) Medallions */}
-          {(['tl','tr','bl','br'] as const).map((corner) => (
-            <div
-              key={corner}
-              aria-hidden="true"
-              style={{
-                position: 'absolute',
-                width: '32px',
-                height: '32px',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                backgroundColor: 'rgba(255,254,250,1)',
-                ...(corner === 'tl' ? { top: -16, left: -16 } : {}),
-                ...(corner === 'tr' ? { top: -16, right: -16 } : {}),
-                ...(corner === 'bl' ? { bottom: -16, left: -16 } : {}),
-                ...(corner === 'br' ? { bottom: -16, right: -16 } : {}),
-                zIndex: 2,
-              }}
-            >
-              <svg viewBox="0 0 32 32" fill="none" className="w-full h-full">
-                {/* 8-pointed star base */}
-                <rect x="6" y="6" width="20" height="20" stroke="#D4AF37" strokeWidth="1.5" strokeOpacity="0.8" fill="rgba(255,254,250,1)" />
-                <rect x="6" y="6" width="20" height="20" stroke="#D4AF37" strokeWidth="1.5" strokeOpacity="0.8" fill="rgba(255,254,250,1)" transform="rotate(45 16 16)" />
-                {/* Inner decorative dot */}
-                <circle cx="16" cy="16" r="3" fill="#B8860B" opacity="0.8" />
-              </svg>
-            </div>
-          ))}
-
+      {/* ── Floating Islamic Arch Card ── */}
+      <div className="relative z-10 w-full max-w-2xl mx-auto pt-[8vh]">
+        <IslamicArchCard>
+          
           {/* Bismillah */}
           <motion.div
             initial={{ opacity: 0, y: -12 }}
@@ -204,6 +66,7 @@ export const HeroSection: React.FC = () => {
               fontSize: 'clamp(22px, 5vw, 36px)',
               color: '#B8860B',
               letterSpacing: '0.04em',
+              marginTop: 'clamp(10px, 3vw, 24px)', // Push down slightly from the arch tip
             }}
           >
             بِسْمِ ٱللَّٰهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ
@@ -401,9 +264,9 @@ export const HeroSection: React.FC = () => {
               <span style={{ fontSize: '11px', color: 'rgba(40,5,11,0.45)' }}>Masa: 11:00 PAGI – 4:00 PETANG</span>
             </div>
           </motion.div>
-
-        </div>
-      </motion.div>
+          
+        </IslamicArchCard>
+      </div>
     </section>
   );
 };
