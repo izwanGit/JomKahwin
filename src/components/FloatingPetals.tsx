@@ -78,8 +78,6 @@ export const FloatingPetals: React.FC = () => {
         ctx.beginPath();
         ctx.fillStyle = p.color;
         ctx.arc(0, 0, p.size, 0, Math.PI * 2);
-        ctx.shadowColor = '#D4AF37';
-        ctx.shadowBlur = 6;
         ctx.fill();
       }
 

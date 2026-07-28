@@ -80,11 +80,6 @@ export const FloatingButterflies: React.FC = () => {
       const flutter = Math.sin(time * b.flutterSpeed + b.flutterOffset);
       const wingScaleX = Math.abs(flutter) * 0.85 + 0.15; // Min width 0.15 to max width 1.0
 
-      // Draw shadow
-      ctx.shadowColor = 'rgba(40,5,11,0.1)';
-      ctx.shadowBlur = 10;
-      ctx.shadowOffsetY = 15;
-
       // Draw wings
       ctx.fillStyle = b.color;
       
@@ -113,7 +108,6 @@ export const FloatingButterflies: React.FC = () => {
       ctx.restore();
 
       // Draw body
-      ctx.shadowColor = 'transparent'; // No shadow for body to keep it crisp
       ctx.fillStyle = 'rgba(40,5,11,0.6)'; // Dark burgundy body
       ctx.beginPath();
       ctx.ellipse(0, b.size * 0.3, b.size * 0.12, b.size * 0.7, 0, 0, Math.PI * 2);

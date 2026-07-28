@@ -25,6 +25,7 @@ export const BotanicalFrame: React.FC = () => {
           width: 'clamp(220px, 38vw, 440px)',
           zIndex: 15,
           transformOrigin: 'top left',
+          willChange: 'transform',
         }}
       >
         {/* Primary large bouquet */}
