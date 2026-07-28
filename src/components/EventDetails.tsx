@@ -36,6 +36,28 @@ export const EventDetails: React.FC = () => {
         </p>
       </motion.div>
 
+      {/* Map Viewer */}
+      <motion.div
+        initial={{ opacity: 0, scale: 0.95 }}
+        whileInView={{ opacity: 1, scale: 1 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.6, delay: 0.1 }}
+        className="w-full rounded-3xl overflow-hidden shadow-card-soft border border-gold-500/30 bg-white p-2"
+      >
+        <div className="w-full rounded-2xl overflow-hidden bg-cream-50">
+          <iframe
+            width="100%"
+            height="400"
+            style={{ border: 0, display: 'block' }}
+            src="https://maps.google.com/maps?q=Dewan%20Seri%20Endon,%20Putrajaya&t=&z=15&ie=UTF8&iwloc=&output=embed"
+            allowFullScreen
+            loading="lazy"
+            referrerPolicy="no-referrer-when-downgrade"
+            title="Peta Lokasi - Dewan Seri Endon"
+          />
+        </div>
+      </motion.div>
+
       {/* Navigation Buttons Card Grid */}
       <motion.div
         initial={{ opacity: 0, y: 30 }}

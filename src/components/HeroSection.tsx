@@ -262,29 +262,6 @@ export const HeroSection: React.FC = () => {
               </div>
               <span style={{ fontSize: '10px', color: 'rgba(40,5,11,0.45)' }}>Masa: 11:00 PAGI – 4:00 PETANG</span>
             </div>
-
-            {/* Real Map Viewer */}
-            <div 
-              style={{ 
-                marginTop: '16px', 
-                width: '100%', 
-                borderRadius: '12px', 
-                overflow: 'hidden', 
-                border: '1px solid rgba(212,175,55,0.2)',
-                boxShadow: 'inset 0 2px 8px rgba(40,5,11,0.04)'
-              }}
-            >
-              <iframe
-                width="100%"
-                height="220"
-                style={{ border: 0, display: 'block' }}
-                src="https://maps.google.com/maps?q=Dewan%20Seri%20Endon,%20Putrajaya&t=&z=15&ie=UTF8&iwloc=&output=embed"
-                allowFullScreen
-                loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
-                title="Google Maps - Dewan Seri Endon"
-              />
-            </div>
           </motion.div>
           
         </IslamicArchCard>
