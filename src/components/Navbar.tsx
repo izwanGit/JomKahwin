@@ -62,7 +62,7 @@ export const Navbar: React.FC = () => {
         initial={{ y: -80, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-        className="hidden md:flex fixed top-4 left-1/2 -translate-x-1/2 z-40 w-[92%] max-w-4xl items-center justify-between px-6 py-2.5 rounded-full backdrop-blur-xl bg-[#0C1A20]/85 border border-[#D4AF37]/35 shadow-[0_12px_32px_rgba(0,0,0,0.35)]"
+        className="hidden md:flex fixed top-4 left-1/2 -translate-x-1/2 z-40 w-[92%] max-w-4xl items-center justify-between px-6 py-2.5 rounded-full backdrop-blur-xl bg-[#28050B]/92 border border-[#D4AF37]/45 shadow-[0_12px_36px_rgba(40,5,11,0.35)]"
         style={{ willChange: 'transform' }}
       >
         {/* Brand / Monogram */}
@@ -70,21 +70,21 @@ export const Navbar: React.FC = () => {
           onClick={() => scrollToSection('utama')}
           className="flex items-center gap-2 text-left group focus:outline-none focus-visible:ring-2 focus-visible:ring-[#D4AF37] rounded-lg px-2 py-1 transition-all"
         >
-          <div className="w-7 h-7 rounded-full bg-[#D4AF37]/15 border border-[#D4AF37]/40 flex items-center justify-center text-[#D4AF37] group-hover:scale-110 transition-transform">
+          <div className="w-7.5 h-7.5 rounded-full bg-[#D4AF37]/15 border border-[#D4AF37]/50 flex items-center justify-center text-[#D4AF37] group-hover:scale-110 transition-transform">
             <Heart className="w-3.5 h-3.5 fill-[#D4AF37]/30 text-[#D4AF37]" />
           </div>
           <div>
             <span className="font-serif font-bold text-base text-[#FFFEFA] tracking-wide block leading-none">
               Alyea &amp; Amirul
             </span>
-            <span className="text-[10px] text-[#D4AF37]/80 tracking-[0.2em] uppercase font-semibold block mt-0.5">
+            <span className="text-[10px] text-[#D4AF37] tracking-[0.2em] uppercase font-semibold block mt-0.5">
               Walimatulurus
             </span>
           </div>
         </button>
 
         {/* Navigation Tabs */}
-        <div className="flex items-center gap-1 bg-[#06B6D4]/5 p-1 rounded-full border border-[#D4AF37]/15">
+        <div className="flex items-center gap-1 bg-[#FFFEFA]/5 p-1 rounded-full border border-[#D4AF37]/25">
           {navItems.map((item) => {
             const isActive = activeSection === item.id;
             const Icon = item.icon;
@@ -95,13 +95,13 @@ export const Navbar: React.FC = () => {
                 className={`relative px-4 py-1.5 rounded-full text-xs font-medium transition-all duration-300 flex items-center gap-1.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#D4AF37] ${
                   isActive
                     ? 'text-[#D4AF37] font-semibold'
-                    : 'text-[#FFFEFA]/70 hover:text-[#FFFEFA] hover:bg-[#FFFEFA]/5'
+                    : 'text-[#FFFEFA]/75 hover:text-[#FFFEFA] hover:bg-[#FFFEFA]/10'
                 }`}
               >
                 {isActive && (
                   <motion.div
                     layoutId="activeTabDesktop"
-                    className="absolute inset-0 bg-gradient-to-r from-[#D4AF37]/25 to-[#0E7490]/30 rounded-full border border-[#D4AF37]/45 shadow-[0_0_12px_rgba(212,175,55,0.2)]"
+                    className="absolute inset-0 bg-[#D4AF37]/20 rounded-full border border-[#D4AF37]/60 shadow-[0_0_12px_rgba(212,175,55,0.25)]"
                     transition={{ type: 'spring', stiffness: 380, damping: 30 }}
                   />
                 )}
@@ -115,7 +115,7 @@ export const Navbar: React.FC = () => {
         {/* Quick RSVP CTA Button */}
         <button
           onClick={() => scrollToSection('rsvp')}
-          className="px-4 py-1.5 rounded-full bg-gradient-to-r from-[#D4AF37] to-[#B8860B] text-[#0C1A20] font-semibold text-xs shadow-[0_4px_14px_rgba(212,175,55,0.35)] hover:scale-105 active:scale-95 transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#FFFEFA]"
+          className="px-4 py-1.5 rounded-full bg-gradient-to-r from-[#D4AF37] to-[#B8860B] text-[#28050B] font-bold text-xs shadow-[0_4px_14px_rgba(212,175,55,0.35)] hover:scale-105 active:scale-95 transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#FFFEFA]"
         >
           Hadir RSVP
         </button>
@@ -126,7 +126,7 @@ export const Navbar: React.FC = () => {
         initial={{ y: 80, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-        className="md:hidden fixed bottom-4 left-1/2 -translate-x-1/2 z-40 w-[92%] max-w-sm flex items-center justify-around px-3 py-2 rounded-full backdrop-blur-2xl bg-[#0C1A20]/90 border border-[#D4AF37]/40 shadow-[0_12px_36px_rgba(0,0,0,0.5)]"
+        className="md:hidden fixed bottom-4 left-1/2 -translate-x-1/2 z-40 w-[92%] max-w-sm flex items-center justify-around px-3 py-2 rounded-full backdrop-blur-2xl bg-[#28050B]/92 border border-[#D4AF37]/45 shadow-[0_12px_36px_rgba(40,5,11,0.45)]"
         style={{ willChange: 'transform' }}
       >
         {navItems.map((item) => {
@@ -144,7 +144,7 @@ export const Navbar: React.FC = () => {
               {isActive && (
                 <motion.div
                   layoutId="activeTabMobile"
-                  className="absolute inset-0 bg-[#D4AF37]/20 rounded-full border border-[#D4AF37]/50 shadow-[0_0_10px_rgba(212,175,55,0.25)]"
+                  className="absolute inset-0 bg-[#D4AF37]/25 rounded-full border border-[#D4AF37]/60 shadow-[0_0_10px_rgba(212,175,55,0.3)]"
                   transition={{ type: 'spring', stiffness: 400, damping: 32 }}
                 />
               )}

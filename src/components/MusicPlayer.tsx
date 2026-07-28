@@ -64,7 +64,7 @@ export const MusicPlayer: React.FC<MusicPlayerProps> = ({ autoPlay = false }) =>
       <button
         onClick={togglePlay}
         aria-label={isPlaying ? 'Hentikan Muzik' : 'Mainkan Muzik'}
-        className="group relative flex items-center gap-2.5 px-3.5 py-2.5 rounded-full bg-emerald-950/90 text-gold-300 border border-gold-500/40 shadow-emerald-glow backdrop-blur-md transition-all duration-300 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-gold-400"
+        className="group relative flex items-center gap-2.5 px-3.5 py-2.5 rounded-full bg-[#28050B]/92 text-gold-300 border border-[#D4AF37]/45 shadow-[0_8px_24px_rgba(40,5,11,0.3)] backdrop-blur-md transition-all duration-300 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-gold-400"
       >
         {isPlaying ? (
           <>
