@@ -57,12 +57,12 @@ export const Navbar: React.FC = () => {
 
   return (
     <nav aria-label="Navigasi Utama">
-      {/* ── DESKTOP & TABLET TOP FLOATING GLASS HEADER ── */}
+      {/* ── DESKTOP & TABLET BOTTOM FLOATING GLASS DOCK ── */}
       <motion.div
-        initial={{ y: -80, opacity: 0 }}
+        initial={{ y: 80, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-        className="hidden md:flex fixed top-3 left-1/2 -translate-x-1/2 z-40 w-[90%] max-w-3xl items-center justify-between px-4 py-1.5 rounded-full backdrop-blur-xl bg-[#28050B]/92 border border-[#D4AF37]/45 shadow-[0_8px_24px_rgba(40,5,11,0.35)]"
+        className="hidden md:flex fixed bottom-4 left-1/2 -translate-x-1/2 z-40 w-[90%] max-w-3xl items-center justify-between px-4 py-1.5 rounded-full backdrop-blur-xl bg-[#28050B]/92 border border-[#D4AF37]/45 shadow-[0_12px_36px_rgba(40,5,11,0.45)]"
         style={{ willChange: 'transform' }}
       >
         {/* Brand / Monogram */}
