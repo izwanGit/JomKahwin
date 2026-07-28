@@ -9,8 +9,15 @@ export const MusicPlayer: React.FC<MusicPlayerProps> = ({ autoPlay = false }) =>
   const [isPlaying, setIsPlaying] = useState(false);
   const audioRef = useRef<HTMLAudioElement | null>(null);
 
-  // Custom local audio file (placed in /public/song.mp3) with online fallback stream
-  const audioUrl = "/song.mp3";
+  // List of available songs to play randomly
+  const songs = [
+    "/song.mp3",
+    "/assets/Siti Nurhaliza - Bukan Cinta Biasa (Official Lyrics).mp3"
+  ];
+
+  // Select a random song once on initial load
+  const [audioUrl] = useState(() => songs[Math.floor(Math.random() * songs.length)]);
+  
   const fallbackUrl = "https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf07a.mp3?filename=romantic-wedding-acoustic-guitar-112702.mp3";
 
   useEffect(() => {
