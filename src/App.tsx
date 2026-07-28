@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { EnvelopeModal } from './components/EnvelopeModal';
 import { FloatingPetals } from './components/FloatingPetals';
+import { FloatingButterflies } from './components/FloatingButterflies';
 import { MusicPlayer } from './components/MusicPlayer';
 import { HeroSection } from './components/HeroSection';
 import { CountdownTimer } from './components/CountdownTimer';
@@ -59,6 +60,9 @@ export function App() {
 
       {/* 60fps Floating Petals & Gold Dust Canvas */}
       <FloatingPetals />
+
+      {/* Floating Alive Butterflies */}
+      <FloatingButterflies />
 
       {/* Floating Acoustic Music Player */}
       <MusicPlayer autoPlay={isAudioAutoPlay} />
