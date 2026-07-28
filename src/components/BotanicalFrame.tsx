@@ -11,15 +11,19 @@ export const BotanicalFrame: React.FC = () => {
   return (
     <>
       {/* ─────────────── TOP LEFT — Largest, richest arrangement ─────────────── */}
-      <div
+      <motion.div
         className="pointer-events-none fixed-botanical"
+        animate={{ 
+          rotate: [-8, -5, -8],
+          y: [0, 8, 0]
+        }}
+        transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
         style={{
           position: 'absolute',
           top: '-60px',
           left: '-70px',
           width: 'clamp(220px, 38vw, 440px)',
           zIndex: 15,
-          transform: 'rotate(-8deg)',
           transformOrigin: 'top left',
         }}
       >
@@ -53,10 +57,15 @@ export const BotanicalFrame: React.FC = () => {
             transform: 'rotate(30deg)',
           }}
         />
-      </div>
+      </motion.div>
 
       {/* ─────────────── TOP RIGHT — Medium, sweeping foliage ─────────────── */}
-      <div
+      <motion.div
+        animate={{ 
+          y: [0, 12, 0],
+          x: [0, -6, 0]
+        }}
+        transition={{ duration: 15, delay: 2, repeat: Infinity, ease: "easeInOut" }}
         style={{
           position: 'absolute',
           top: '-45px',
@@ -97,10 +106,15 @@ export const BotanicalFrame: React.FC = () => {
             transform: 'rotate(-20deg)',
           }}
         />
-      </div>
+      </motion.div>
 
       {/* ─────────────── BOTTOM LEFT — Asymmetric, upward stems ─────────────── */}
-      <div
+      <motion.div
+        animate={{ 
+          rotate: [0, 3, 0],
+          y: [0, -10, 0]
+        }}
+        transition={{ duration: 14, delay: 1, repeat: Infinity, ease: "easeInOut" }}
         style={{
           position: 'absolute',
           bottom: '-50px',
@@ -141,10 +155,15 @@ export const BotanicalFrame: React.FC = () => {
             transform: 'rotate(25deg)',
           }}
         />
-      </div>
+      </motion.div>
 
       {/* ─────────────── BOTTOM RIGHT — Richest, most layered arrangement ─────────────── */}
-      <div
+      <motion.div
+        animate={{ 
+          y: [0, -12, 0],
+          rotate: [0, -2, 0]
+        }}
+        transition={{ duration: 16, delay: 3, repeat: Infinity, ease: "easeInOut" }}
         style={{
           position: 'absolute',
           bottom: '-65px',
@@ -203,7 +222,7 @@ export const BotanicalFrame: React.FC = () => {
             transform: 'rotate(40deg)',
           }}
         />
-      </div>
+      </motion.div>
 
       {/* ─────────────── SUBTLE GOLD VINE LINES connecting corners ─────────────── */}
       <svg
