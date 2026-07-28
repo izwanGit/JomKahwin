@@ -7,7 +7,7 @@ import { IslamicArchCard } from './IslamicArchCard';
 export const HeroSection: React.FC = () => {
   return (
     <section
-      className="relative min-h-screen flex flex-col items-center justify-center text-center px-4 py-20 overflow-hidden"
+      className="relative min-h-[100svh] flex flex-col items-center justify-center text-center px-4 py-8 overflow-hidden"
       style={{ backgroundColor: '#FFFEFA' }}
     >
       {/* ── Cotton paper texture overlay ── */}
@@ -44,16 +44,16 @@ export const HeroSection: React.FC = () => {
         aria-hidden="true"
         style={{
           position: 'absolute',
-          inset: '24px',
+          inset: '16px',
           border: '1px solid rgba(212,175,55,0.18)',
-          borderRadius: '28px',
+          borderRadius: '20px',
           pointerEvents: 'none',
           zIndex: 6,
         }}
       />
 
       {/* ── Floating Islamic Arch Card ── */}
-      <div className="relative z-10 w-full max-w-2xl mx-auto pt-[8vh]">
+      <div className="relative z-10 w-full max-w-2xl mx-auto pt-[4vh]">
         <IslamicArchCard>
           
           {/* Bismillah */}
@@ -63,10 +63,10 @@ export const HeroSection: React.FC = () => {
             transition={{ delay: 0.2, duration: 0.8 }}
             style={{
               fontFamily: "'Amiri', serif",
-              fontSize: 'clamp(22px, 5vw, 36px)',
+              fontSize: 'clamp(18px, 4vw, 36px)',
               color: '#B8860B',
               letterSpacing: '0.04em',
-              marginTop: 'clamp(10px, 3vw, 24px)', // Push down slightly from the arch tip
+              marginTop: 'clamp(6px, 1.5vh, 24px)', // Push down slightly from the arch tip
             }}
           >
             بِسْمِ ٱللَّٰهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ
@@ -80,10 +80,10 @@ export const HeroSection: React.FC = () => {
             style={{
               fontFamily: "'Cormorant Garamond', serif",
               fontStyle: 'italic',
-              fontSize: 'clamp(11px, 1.8vw, 14px)',
+              fontSize: 'clamp(10px, 1.6vw, 14px)',
               color: 'rgba(40,5,11,0.75)',
               maxWidth: '420px',
-              lineHeight: 1.7,
+              lineHeight: 1.6,
               textAlign: 'center',
             }}
           >
@@ -91,10 +91,10 @@ export const HeroSection: React.FC = () => {
             <span
               style={{
                 display: 'block',
-                marginTop: '6px',
+                marginTop: '4px',
                 fontFamily: "'Plus Jakarta Sans', sans-serif",
                 fontStyle: 'normal',
-                fontSize: '10px',
+                fontSize: '9px',
                 color: '#976E07',
                 letterSpacing: '0.2em',
                 textTransform: 'uppercase',
@@ -108,7 +108,7 @@ export const HeroSection: React.FC = () => {
           {/* Gold divider */}
           <div
             style={{
-              width: '80px',
+              width: '60px',
               height: '1px',
               background: 'linear-gradient(90deg, transparent, rgba(212,175,55,0.6), transparent)',
             }}
@@ -124,7 +124,7 @@ export const HeroSection: React.FC = () => {
               style={{
                 display: 'block',
                 fontFamily: "'Cormorant Garamond', serif",
-                fontSize: 'clamp(11px, 1.8vw, 14px)',
+                fontSize: 'clamp(10px, 1.6vw, 14px)',
                 fontWeight: 700,
                 color: '#976E07',
                 letterSpacing: '0.35em',
@@ -136,12 +136,12 @@ export const HeroSection: React.FC = () => {
             <h2
               style={{
                 fontFamily: "'Plus Jakarta Sans', sans-serif",
-                fontSize: 'clamp(9px, 1.5vw, 11px)',
+                fontSize: 'clamp(8px, 1.4vw, 11px)',
                 color: 'rgba(40,5,11,0.65)',
                 letterSpacing: '0.25em',
                 textTransform: 'uppercase',
                 fontWeight: 500,
-                marginTop: '4px',
+                marginTop: '2px',
               }}
             >
               Majlis Kesyukuran &amp; Perkahwinan
@@ -153,12 +153,12 @@ export const HeroSection: React.FC = () => {
             initial={{ opacity: 0, y: 18 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.5, duration: 0.8 }}
-            style={{ paddingTop: '8px', paddingBottom: '8px' }}
+            style={{ paddingTop: '4px', paddingBottom: '4px' }}
           >
             <h1
               style={{
                 fontFamily: "'Cormorant Garamond', serif",
-                fontSize: 'clamp(36px, 8vw, 68px)',
+                fontSize: 'clamp(30px, 7vw, 68px)',
                 fontWeight: 700,
                 color: '#28050B',
                 letterSpacing: '-0.02em',
@@ -168,16 +168,16 @@ export const HeroSection: React.FC = () => {
               Alyea Dania
             </h1>
 
-            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '12px', margin: '12px 0' }}>
-              <span style={{ height: '1px', width: '48px', background: 'rgba(212,175,55,0.55)' }} />
-              <Heart size={18} style={{ color: '#D4AF37', fill: 'rgba(212,175,55,0.15)' }} />
-              <span style={{ height: '1px', width: '48px', background: 'rgba(212,175,55,0.55)' }} />
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px', margin: 'clamp(4px, 1vh, 12px) 0' }}>
+              <span style={{ height: '1px', width: '32px', background: 'rgba(212,175,55,0.55)' }} />
+              <Heart size={16} style={{ color: '#D4AF37', fill: 'rgba(212,175,55,0.15)' }} />
+              <span style={{ height: '1px', width: '32px', background: 'rgba(212,175,55,0.55)' }} />
             </div>
 
             <h1
               style={{
                 fontFamily: "'Cormorant Garamond', serif",
-                fontSize: 'clamp(36px, 8vw, 68px)',
+                fontSize: 'clamp(30px, 7vw, 68px)',
                 fontWeight: 700,
                 color: '#28050B',
                 letterSpacing: '-0.02em',
@@ -193,7 +193,7 @@ export const HeroSection: React.FC = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.7, duration: 0.8 }}
-            style={{ fontSize: 'clamp(11px, 1.8vw, 13px)', color: 'rgba(40,5,11,0.75)' }}
+            style={{ fontSize: 'clamp(10px, 1.6vw, 13px)', color: 'rgba(40,5,11,0.75)' }}
           >
             <p
               style={{
@@ -201,7 +201,7 @@ export const HeroSection: React.FC = () => {
                 fontStyle: 'italic',
                 color: '#8B1E31',
                 fontWeight: 500,
-                fontSize: 'clamp(12px, 2vw, 15px)',
+                fontSize: 'clamp(11px, 1.8vw, 15px)',
               }}
             >
               Dengan penuh rasa kesyukuran ke hadrat Allah SWT, kami menjemput:
@@ -212,12 +212,12 @@ export const HeroSection: React.FC = () => {
                 fontWeight: 700,
                 color: '#28050B',
                 letterSpacing: '0.02em',
-                marginTop: '4px',
+                marginTop: '2px',
               }}
             >
               Dato&apos;/Datin/Tuan/Puan/Encik/Cik Seisi Keluarga
             </p>
-            <p style={{ color: 'rgba(40,5,11,0.45)', fontSize: '11px', marginTop: '2px' }}>
+            <p style={{ color: 'rgba(40,5,11,0.45)', fontSize: '10px', marginTop: '2px' }}>
               Ke majlis perkahwinan anakanda kesayangan kami
             </p>
           </motion.div>
@@ -230,12 +230,11 @@ export const HeroSection: React.FC = () => {
             style={{
               width: '100%',
               maxWidth: '440px',
-              padding: 'clamp(16px, 3vw, 24px)',
+              padding: 'clamp(12px, 2vh, 24px)',
               borderRadius: '16px',
               background: 'rgba(250,249,246,0.9)',
               border: '1px solid rgba(212,175,55,0.3)',
               boxShadow: '0 4px 20px rgba(40,5,11,0.06)',
-              marginTop: '4px',
             }}
           >
             <div
@@ -243,25 +242,25 @@ export const HeroSection: React.FC = () => {
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                gap: '8px',
+                gap: '6px',
                 fontFamily: "'Cormorant Garamond', serif",
                 fontWeight: 700,
-                fontSize: 'clamp(15px, 2.5vw, 20px)',
+                fontSize: 'clamp(13px, 2vw, 20px)',
                 color: '#4A0E17',
-                paddingBottom: '12px',
+                paddingBottom: '8px',
                 borderBottom: '1px solid rgba(212,175,55,0.25)',
-                marginBottom: '12px',
+                marginBottom: '8px',
               }}
             >
-              <Calendar size={18} style={{ color: '#D4AF37' }} />
+              <Calendar size={16} style={{ color: '#D4AF37' }} />
               Sabtu, 24 Oktober 2026
             </div>
             <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '4px', color: 'rgba(40,5,11,0.7)' }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '6px', fontWeight: 600, color: '#28050B', fontSize: 'clamp(11px, 1.8vw, 13px)' }}>
-                <MapPin size={15} style={{ color: '#D4AF37', flexShrink: 0 }} />
+              <div style={{ display: 'flex', alignItems: 'center', gap: '4px', fontWeight: 600, color: '#28050B', fontSize: 'clamp(10px, 1.6vw, 13px)' }}>
+                <MapPin size={14} style={{ color: '#D4AF37', flexShrink: 0 }} />
                 <span>Dewan Seri Endon, Presint 10, Putrajaya</span>
               </div>
-              <span style={{ fontSize: '11px', color: 'rgba(40,5,11,0.45)' }}>Masa: 11:00 PAGI – 4:00 PETANG</span>
+              <span style={{ fontSize: '10px', color: 'rgba(40,5,11,0.45)' }}>Masa: 11:00 PAGI – 4:00 PETANG</span>
             </div>
           </motion.div>
           
