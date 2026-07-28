@@ -39,6 +39,7 @@ export const IslamicArchCard: React.FC<IslamicArchCardProps> = ({ children }) =>
             - Ogee curve down to right side (100, 20)
             - Straight down to bottom right (100, 30)
           */}
+          {/* Fill path (closed shape) */}
           <path
             d="
               M 0,30 
@@ -51,6 +52,19 @@ export const IslamicArchCard: React.FC<IslamicArchCardProps> = ({ children }) =>
               Z
             "
             fill="rgba(255,254,250,0.95)"
+          />
+          {/* Stroke path (open shape, no Z, no bottom line!) */}
+          <path
+            d="
+              M 0,30 
+              L 0,20 
+              C 0,10 15,15 25,10 
+              C 35,5 45,5 50,0 
+              C 55,5 65,5 75,10 
+              C 85,15 100,10 100,20 
+              L 100,30
+            "
+            fill="none"
             stroke="#D4AF37"
             strokeWidth="2"
             vectorEffect="non-scaling-stroke"
