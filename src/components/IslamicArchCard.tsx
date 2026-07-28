@@ -16,11 +16,17 @@ export const IslamicArchCard: React.FC<IslamicArchCardProps> = ({ children }) =>
     >
       {/* ── TOP ARCH (SVG) ── */}
       <div 
-        className="w-full relative flex flex-col items-center justify-end" 
-        style={{ paddingBottom: '30%', marginBottom: '-1px' }}
+        className="w-full relative flex flex-col items-center justify-end z-10" 
+        style={{ paddingBottom: '30%' }}
       >
         <svg
-          className="absolute bottom-0 left-0 w-full h-full overflow-visible"
+          className="absolute overflow-visible"
+          style={{ 
+            bottom: '-2px', // Overlap body by 2px to eliminate subpixel gap
+            left: '1px',    // Align x=0 to center of 2px left border
+            width: 'calc(100% - 2px)', 
+            height: 'calc(100% + 2px)' 
+          }}
           viewBox="0 0 100 30"
           preserveAspectRatio="none"
           xmlns="http://www.w3.org/2000/svg"
@@ -54,7 +60,7 @@ export const IslamicArchCard: React.FC<IslamicArchCardProps> = ({ children }) =>
 
       {/* ── MAIN CARD BODY ── */}
       <div
-        className="w-full relative flex flex-col items-center"
+        className="w-full relative flex flex-col items-center z-0"
         style={{
           background: 'rgba(255,254,250,0.95)',
           borderLeft: '2px solid #D4AF37',
