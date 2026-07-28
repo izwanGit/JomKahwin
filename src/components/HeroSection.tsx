@@ -76,12 +76,11 @@ export const HeroSection: React.FC = () => {
           padding: 'clamp(24px, 6vw, 56px)',
         }}
       >
-        {/* Inner gold foil border */}
+        {/* Inner Islamic Geometric Frame */}
         <div
           style={{
-            border: '1px solid rgba(212,175,55,0.32)',
-            borderRadius: '20px',
-            padding: 'clamp(20px, 5vw, 44px)',
+            border: '1px solid rgba(212,175,55,0.4)',
+            padding: 'clamp(24px, 5vw, 48px)',
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
@@ -89,21 +88,110 @@ export const HeroSection: React.FC = () => {
             position: 'relative',
           }}
         >
-          {/* Corner foil accents */}
+          {/* Inner Dashed Frame */}
+          <div
+            aria-hidden="true"
+            style={{
+              position: 'absolute',
+              inset: '8px',
+              border: '1px dashed rgba(212,175,55,0.4)',
+              pointerEvents: 'none',
+              zIndex: 0,
+            }}
+          />
+
+          {/* Top Mihrab Arch Accent */}
+          <svg
+            aria-hidden="true"
+            style={{
+              position: 'absolute',
+              top: '-12px',
+              left: '50%',
+              transform: 'translateX(-50%)',
+              width: '80px',
+              height: '24px',
+              pointerEvents: 'none',
+              zIndex: 1,
+            }}
+            viewBox="0 0 80 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M 0 12 L 25 12 L 40 2 L 55 12 L 80 12"
+              stroke="#D4AF37"
+              strokeWidth="1.5"
+              strokeOpacity="0.8"
+              fill="rgba(255,254,250,1)"
+            />
+            <path
+              d="M 30 14 L 40 6 L 50 14"
+              stroke="#B8860B"
+              strokeWidth="1"
+              strokeOpacity="0.5"
+            />
+          </svg>
+
+          {/* Bottom Mihrab Arch Accent */}
+          <svg
+            aria-hidden="true"
+            style={{
+              position: 'absolute',
+              bottom: '-12px',
+              left: '50%',
+              transform: 'translateX(-50%) scale(1, -1)',
+              width: '80px',
+              height: '24px',
+              pointerEvents: 'none',
+              zIndex: 1,
+            }}
+            viewBox="0 0 80 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M 0 12 L 25 12 L 40 2 L 55 12 L 80 12"
+              stroke="#D4AF37"
+              strokeWidth="1.5"
+              strokeOpacity="0.8"
+              fill="rgba(255,254,250,1)"
+            />
+            <path
+              d="M 30 14 L 40 6 L 50 14"
+              stroke="#B8860B"
+              strokeWidth="1"
+              strokeOpacity="0.5"
+            />
+          </svg>
+
+          {/* 4 Corner Rub el Hizb (8-Pointed Star) Medallions */}
           {(['tl','tr','bl','br'] as const).map((corner) => (
             <div
               key={corner}
               aria-hidden="true"
               style={{
                 position: 'absolute',
-                width: '14px',
-                height: '14px',
-                ...(corner === 'tl' ? { top: 6, left: 6, borderTop: '1px solid rgba(212,175,55,0.55)', borderLeft: '1px solid rgba(212,175,55,0.55)' } : {}),
-                ...(corner === 'tr' ? { top: 6, right: 6, borderTop: '1px solid rgba(212,175,55,0.55)', borderRight: '1px solid rgba(212,175,55,0.55)' } : {}),
-                ...(corner === 'bl' ? { bottom: 6, left: 6, borderBottom: '1px solid rgba(212,175,55,0.55)', borderLeft: '1px solid rgba(212,175,55,0.55)' } : {}),
-                ...(corner === 'br' ? { bottom: 6, right: 6, borderBottom: '1px solid rgba(212,175,55,0.55)', borderRight: '1px solid rgba(212,175,55,0.55)' } : {}),
+                width: '32px',
+                height: '32px',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                backgroundColor: 'rgba(255,254,250,1)',
+                ...(corner === 'tl' ? { top: -16, left: -16 } : {}),
+                ...(corner === 'tr' ? { top: -16, right: -16 } : {}),
+                ...(corner === 'bl' ? { bottom: -16, left: -16 } : {}),
+                ...(corner === 'br' ? { bottom: -16, right: -16 } : {}),
+                zIndex: 2,
               }}
-            />
+            >
+              <svg viewBox="0 0 32 32" fill="none" className="w-full h-full">
+                {/* 8-pointed star base */}
+                <rect x="6" y="6" width="20" height="20" stroke="#D4AF37" strokeWidth="1.5" strokeOpacity="0.8" fill="rgba(255,254,250,1)" />
+                <rect x="6" y="6" width="20" height="20" stroke="#D4AF37" strokeWidth="1.5" strokeOpacity="0.8" fill="rgba(255,254,250,1)" transform="rotate(45 16 16)" />
+                {/* Inner decorative dot */}
+                <circle cx="16" cy="16" r="3" fill="#B8860B" opacity="0.8" />
+              </svg>
+            </div>
           ))}
 
           {/* Bismillah */}
