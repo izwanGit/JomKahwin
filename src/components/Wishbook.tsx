@@ -9,7 +9,7 @@ interface WishbookProps {
 
 export const Wishbook: React.FC<WishbookProps> = ({ wishes }) => {
   return (
-    <section className="py-16 px-4 max-w-3xl mx-auto space-y-8">
+    <section id="ucapan" className="py-16 px-4 max-w-3xl mx-auto space-y-8">
       <div className="text-center space-y-2">
         <span className="text-gold-600 font-serif text-xs md:text-sm tracking-[0.25em] uppercase font-semibold block">
           Buku Ucapan Tetamu

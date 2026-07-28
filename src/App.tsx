@@ -3,6 +3,7 @@ import { EnvelopeModal } from './components/EnvelopeModal';
 import { FloatingPetals } from './components/FloatingPetals';
 import { FloatingButterflies } from './components/FloatingButterflies';
 import { MusicPlayer } from './components/MusicPlayer';
+import { Navbar } from './components/Navbar';
 import { HeroSection } from './components/HeroSection';
 import { CountdownTimer } from './components/CountdownTimer';
 import { EventDetails } from './components/EventDetails';
@@ -57,6 +58,9 @@ export function App() {
     <div className="min-h-screen bg-cream-100 text-slate-800 relative selection:bg-gold-500 selection:text-white">
       {/* 3D Interactive Opening Envelope */}
       <EnvelopeModal onOpen={handleEnvelopeOpen} guestName={guestName} />
+
+      {/* Flagship Responsive Floating Navigation Bar */}
+      <Navbar />
 
       {/* 60fps Floating Petals & Gold Dust Canvas */}
       <FloatingPetals />

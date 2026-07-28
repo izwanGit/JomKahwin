@@ -7,6 +7,7 @@ import { IslamicArchCard } from './IslamicArchCard';
 export const HeroSection: React.FC = () => {
   return (
     <section
+      id="utama"
       className="relative min-h-[100svh] flex flex-col items-center justify-center text-center px-4 py-8 overflow-hidden"
       style={{ backgroundColor: '#FFFEFA' }}
     >
