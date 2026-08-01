@@ -8,6 +8,7 @@ import { ThreePageStoryCard } from './components/ThreePageStoryCard';
 import { CountdownTimer } from './components/CountdownTimer';
 import { EventDetails } from './components/EventDetails';
 import { ScheduleTimeline } from './components/ScheduleTimeline';
+import { GallerySection } from './components/GallerySection';
 import { RsvpForm } from './components/RsvpForm';
 import { Wishbook } from './components/Wishbook';
 import { SalamKautModal } from './components/SalamKautModal';
@@ -79,6 +80,7 @@ export function App() {
         <CountdownTimer />
         <EventDetails />
         <ScheduleTimeline />
+        <GallerySection />
         <RsvpForm onAddWish={handleAddWish} />
         <Wishbook wishes={wishes} />
         <SalamKautModal />
