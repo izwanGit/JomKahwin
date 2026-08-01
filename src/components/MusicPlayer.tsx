@@ -21,7 +21,7 @@ export const MusicPlayer: React.FC<MusicPlayerProps> = ({ autoPlay = false }) =>
   const fallbackUrl = "https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf07a.mp3?filename=romantic-wedding-acoustic-guitar-112702.mp3";
 
   useEffect(() => {
-    if (autoPlay && audioRef.current) {
+    if (autoPlay && audioRef.current && !document.hidden) {
       audioRef.current
         .play()
         .then(() => setIsPlaying(true))
@@ -31,6 +31,30 @@ export const MusicPlayer: React.FC<MusicPlayerProps> = ({ autoPlay = false }) =>
         });
     }
   }, [autoPlay]);
+
+  useEffect(() => {
+    const pauseForBackground = () => {
+      const audio = audioRef.current;
+      if (!audio || audio.paused) return;
+
+      audio.pause();
+      setIsPlaying(false);
+    };
+
+    const handleVisibilityChange = () => {
+      if (document.hidden) pauseForBackground();
+    };
+
+    // `visibilitychange` handles app/tab switching; `pagehide` also covers
+    // Safari placing the page into its back-forward cache or suspending it.
+    document.addEventListener('visibilitychange', handleVisibilityChange);
+    window.addEventListener('pagehide', pauseForBackground);
+
+    return () => {
+      document.removeEventListener('visibilitychange', handleVisibilityChange);
+      window.removeEventListener('pagehide', pauseForBackground);
+    };
+  }, []);
 
   const togglePlay = () => {
     if (!audioRef.current) return;
@@ -52,6 +76,8 @@ export const MusicPlayer: React.FC<MusicPlayerProps> = ({ autoPlay = false }) =>
         src={audioUrl}
         loop
         preload="auto"
+        onPlay={() => setIsPlaying(true)}
+        onPause={() => setIsPlaying(false)}
         onError={(e) => {
           const target = e.currentTarget;
           if (target.src !== fallbackUrl) {
