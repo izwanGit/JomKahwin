@@ -46,9 +46,9 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ isOpened = true }) => 
 
       {/* ── Floating Islamic Arch Card Container ── */}
       <motion.div
-        initial={{ opacity: 0, scale: 0.82, y: 25 }}
-        animate={isOpened ? { opacity: 1, scale: 1, y: 0 } : { opacity: 0, scale: 0.82, y: 25 }}
-        transition={{ duration: 1.0, ease: [0.16, 1, 0.3, 1] }}
+        initial={{ opacity: 0, scale: 0.95, y: 18 }}
+        animate={isOpened ? { opacity: 1, scale: 1, y: 0 } : { opacity: 0, scale: 0.95, y: 18 }}
+        transition={{ duration: 1.1, ease: [0.16, 1, 0.3, 1] }}
         className="relative z-10 w-full max-w-xl mx-auto py-4"
       >
         {/* Botanical frame anchored directly around the card corners */}
@@ -60,9 +60,9 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ isOpened = true }) => 
           
           {/* Bismillah */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.65, y: -15 }}
-            animate={isOpened ? { opacity: 1, scale: 1, y: 0 } : { opacity: 0, scale: 0.65, y: -15 }}
-            transition={{ delay: 0.15, duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
+            initial={{ opacity: 0, scale: 0.94, y: -10 }}
+            animate={isOpened ? { opacity: 1, scale: 1, y: 0 } : { opacity: 0, scale: 0.94, y: -10 }}
+            transition={{ delay: 0.15, duration: 1.0, ease: [0.16, 1, 0.3, 1] }}
             style={{
               fontFamily: "'Amiri', serif",
               fontSize: 'clamp(18px, 4vw, 36px)',
@@ -76,9 +76,9 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ isOpened = true }) => 
 
           {/* Quran verse */}
           <motion.p
-            initial={{ opacity: 0, scale: 0.75, y: 15 }}
-            animate={isOpened ? { opacity: 1, scale: 1, y: 0 } : { opacity: 0, scale: 0.75, y: 15 }}
-            transition={{ delay: 0.3, duration: 0.85, ease: [0.16, 1, 0.3, 1] }}
+            initial={{ opacity: 0, scale: 0.96, y: 10 }}
+            animate={isOpened ? { opacity: 1, scale: 1, y: 0 } : { opacity: 0, scale: 0.96, y: 10 }}
+            transition={{ delay: 0.3, duration: 0.95, ease: [0.16, 1, 0.3, 1] }}
             style={{
               fontFamily: "'Cormorant Garamond', serif",
               fontStyle: 'italic',
@@ -118,9 +118,9 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ isOpened = true }) => 
 
           {/* Walimatulurus heading */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.75, y: 15 }}
-            animate={isOpened ? { opacity: 1, scale: 1, y: 0 } : { opacity: 0, scale: 0.75, y: 15 }}
-            transition={{ delay: 0.45, duration: 0.85, ease: [0.16, 1, 0.3, 1] }}
+            initial={{ opacity: 0, scale: 0.95, y: 12 }}
+            animate={isOpened ? { opacity: 1, scale: 1, y: 0 } : { opacity: 0, scale: 0.95, y: 12 }}
+            transition={{ delay: 0.45, duration: 0.95, ease: [0.16, 1, 0.3, 1] }}
           >
             <span
               style={{
@@ -152,9 +152,9 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ isOpened = true }) => 
 
           {/* Couple Names */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.65, y: 20 }}
-            animate={isOpened ? { opacity: 1, scale: 1, y: 0 } : { opacity: 0, scale: 0.65, y: 20 }}
-            transition={{ delay: 0.6, duration: 0.95, ease: [0.16, 1, 0.3, 1] }}
+            initial={{ opacity: 0, scale: 0.93, y: 14 }}
+            animate={isOpened ? { opacity: 1, scale: 1, y: 0 } : { opacity: 0, scale: 0.93, y: 14 }}
+            transition={{ delay: 0.6, duration: 1.1, ease: [0.16, 1, 0.3, 1] }}
             style={{ paddingTop: '4px', paddingBottom: '4px' }}
           >
             <h1
@@ -194,9 +194,9 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ isOpened = true }) => 
 
           {/* Invitation text */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.75, y: 15 }}
-            animate={isOpened ? { opacity: 1, scale: 1, y: 0 } : { opacity: 0, scale: 0.75, y: 15 }}
-            transition={{ delay: 0.75, duration: 0.85, ease: [0.16, 1, 0.3, 1] }}
+            initial={{ opacity: 0, scale: 0.96, y: 10 }}
+            animate={isOpened ? { opacity: 1, scale: 1, y: 0 } : { opacity: 0, scale: 0.96, y: 10 }}
+            transition={{ delay: 0.75, duration: 0.95, ease: [0.16, 1, 0.3, 1] }}
             style={{ fontSize: 'clamp(10px, 1.6vw, 13px)', color: 'rgba(40,5,11,0.75)' }}
           >
             <p
@@ -228,9 +228,9 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ isOpened = true }) => 
 
           {/* Date & Venue card */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.75, y: 22 }}
-            animate={isOpened ? { opacity: 1, scale: 1, y: 0 } : { opacity: 0, scale: 0.75, y: 22 }}
-            transition={{ delay: 0.9, duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
+            initial={{ opacity: 0, scale: 0.95, y: 16 }}
+            animate={isOpened ? { opacity: 1, scale: 1, y: 0 } : { opacity: 0, scale: 0.95, y: 16 }}
+            transition={{ delay: 0.9, duration: 1.0, ease: [0.16, 1, 0.3, 1] }}
             style={{
               width: '100%',
               maxWidth: '440px',
