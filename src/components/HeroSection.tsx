@@ -151,11 +151,12 @@ export const HeroSection: React.FC = () => {
             <h1
               style={{
                 fontFamily: "'Cormorant Garamond', serif",
-                fontSize: 'clamp(30px, 7vw, 68px)',
+                fontSize: 'clamp(22px, 6.5vw, 64px)',
                 fontWeight: 700,
                 color: '#28050B',
                 letterSpacing: '-0.02em',
                 lineHeight: 1.05,
+                whiteSpace: 'nowrap',
               }}
             >
               Alyea Dania
@@ -170,11 +171,12 @@ export const HeroSection: React.FC = () => {
             <h1
               style={{
                 fontFamily: "'Cormorant Garamond', serif",
-                fontSize: 'clamp(30px, 7vw, 68px)',
+                fontSize: 'clamp(22px, 6.5vw, 64px)',
                 fontWeight: 700,
                 color: '#28050B',
                 letterSpacing: '-0.02em',
                 lineHeight: 1.05,
+                whiteSpace: 'nowrap',
               }}
             >
               Amirul Iqhwan
