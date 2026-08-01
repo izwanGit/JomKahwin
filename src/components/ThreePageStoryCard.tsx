@@ -158,8 +158,8 @@ export const ThreePageStoryCard: React.FC<ThreePageStoryCardProps> = ({ isOpened
         </div>
 
         <IslamicArchCard>
-          {/* Stage for cinematic page swaps */}
-          <div className="relative w-full flex flex-col items-center justify-center min-h-[460px] sm:min-h-[520px]">
+          {/* Stage locked to exact uniform height across all 3 pages */}
+          <div className="relative w-full h-[490px] sm:h-[550px] overflow-hidden flex items-center justify-center">
             <AnimatePresence mode="wait">
 
               {/* ═══════════════════════════════════════════════════
@@ -173,14 +173,14 @@ export const ThreePageStoryCard: React.FC<ThreePageStoryCardProps> = ({ isOpened
                   initial="enter"
                   animate="center"
                   exit="exit"
-                  className="w-full flex flex-col items-center justify-center gap-[clamp(8px,1.5vh,20px)] will-change-transform"
+                  className="absolute inset-0 flex flex-col items-center justify-center gap-[clamp(6px,1.2vh,16px)] px-2 will-change-transform"
                 >
                   {/* Bismillah */}
                   <motion.div
                     variants={childReveal}
                     style={{
                       fontFamily: "'Amiri', serif",
-                      fontSize: 'clamp(18px, 4vw, 36px)',
+                      fontSize: 'clamp(18px, 3.8vw, 34px)',
                       color: '#B8860B',
                       letterSpacing: '0.04em',
                     }}
@@ -194,10 +194,10 @@ export const ThreePageStoryCard: React.FC<ThreePageStoryCardProps> = ({ isOpened
                     style={{
                       fontFamily: "'Cormorant Garamond', serif",
                       fontStyle: 'italic',
-                      fontSize: 'clamp(10px, 1.6vw, 14px)',
+                      fontSize: 'clamp(10px, 1.5vw, 13px)',
                       color: 'rgba(40,5,11,0.75)',
-                      maxWidth: '420px',
-                      lineHeight: 1.6,
+                      maxWidth: '400px',
+                      lineHeight: 1.5,
                       textAlign: 'center',
                     }}
                   >
@@ -205,7 +205,7 @@ export const ThreePageStoryCard: React.FC<ThreePageStoryCardProps> = ({ isOpened
                     <span
                       style={{
                         display: 'block',
-                        marginTop: '4px',
+                        marginTop: '3px',
                         fontFamily: "'Plus Jakarta Sans', sans-serif",
                         fontStyle: 'normal',
                         fontSize: '9px',
@@ -223,7 +223,7 @@ export const ThreePageStoryCard: React.FC<ThreePageStoryCardProps> = ({ isOpened
                   <motion.div
                     variants={childReveal}
                     style={{
-                      width: '60px',
+                      width: '50px',
                       height: '1px',
                       background: 'linear-gradient(90deg, transparent, rgba(212,175,55,0.6), transparent)',
                     }}
@@ -235,7 +235,7 @@ export const ThreePageStoryCard: React.FC<ThreePageStoryCardProps> = ({ isOpened
                       style={{
                         display: 'block',
                         fontFamily: "'Cormorant Garamond', serif",
-                        fontSize: 'clamp(10px, 1.6vw, 14px)',
+                        fontSize: 'clamp(10px, 1.5vw, 13px)',
                         fontWeight: 700,
                         color: '#976E07',
                         letterSpacing: '0.35em',
@@ -247,7 +247,7 @@ export const ThreePageStoryCard: React.FC<ThreePageStoryCardProps> = ({ isOpened
                     <h2
                       style={{
                         fontFamily: "'Plus Jakarta Sans', sans-serif",
-                        fontSize: 'clamp(8px, 1.4vw, 11px)',
+                        fontSize: 'clamp(8px, 1.3vw, 10px)',
                         color: 'rgba(40,5,11,0.65)',
                         letterSpacing: '0.25em',
                         textTransform: 'uppercase',
@@ -262,12 +262,12 @@ export const ThreePageStoryCard: React.FC<ThreePageStoryCardProps> = ({ isOpened
                   {/* Couple Names */}
                   <motion.div
                     variants={childReveal}
-                    style={{ paddingTop: '4px', paddingBottom: '4px' }}
+                    style={{ paddingTop: '2px', paddingBottom: '2px' }}
                   >
                     <h1
                       style={{
                         fontFamily: "'Cormorant Garamond', serif",
-                        fontSize: 'clamp(22px, 6.5vw, 64px)',
+                        fontSize: 'clamp(22px, 6vw, 56px)',
                         fontWeight: 700,
                         color: '#28050B',
                         letterSpacing: '-0.02em',
@@ -278,16 +278,16 @@ export const ThreePageStoryCard: React.FC<ThreePageStoryCardProps> = ({ isOpened
                       Alyea Dania
                     </h1>
 
-                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px', margin: 'clamp(4px, 1vh, 12px) 0' }}>
-                      <span style={{ height: '1px', width: '32px', background: 'rgba(212,175,55,0.55)' }} />
-                      <Heart size={16} style={{ color: '#D4AF37', fill: 'rgba(212,175,55,0.15)' }} />
-                      <span style={{ height: '1px', width: '32px', background: 'rgba(212,175,55,0.55)' }} />
+                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px', margin: 'clamp(3px, 0.8vh, 8px) 0' }}>
+                      <span style={{ height: '1px', width: '28px', background: 'rgba(212,175,55,0.55)' }} />
+                      <Heart size={14} style={{ color: '#D4AF37', fill: 'rgba(212,175,55,0.15)' }} />
+                      <span style={{ height: '1px', width: '28px', background: 'rgba(212,175,55,0.55)' }} />
                     </div>
 
                     <h1
                       style={{
                         fontFamily: "'Cormorant Garamond', serif",
-                        fontSize: 'clamp(22px, 6.5vw, 64px)',
+                        fontSize: 'clamp(22px, 6vw, 56px)',
                         fontWeight: 700,
                         color: '#28050B',
                         letterSpacing: '-0.02em',
@@ -302,7 +302,7 @@ export const ThreePageStoryCard: React.FC<ThreePageStoryCardProps> = ({ isOpened
                   {/* Invitation text */}
                   <motion.div
                     variants={childReveal}
-                    style={{ fontSize: 'clamp(10px, 1.6vw, 13px)', color: 'rgba(40,5,11,0.75)' }}
+                    style={{ fontSize: 'clamp(10px, 1.5vw, 12px)', color: 'rgba(40,5,11,0.75)' }}
                   >
                     <p
                       style={{
@@ -310,7 +310,7 @@ export const ThreePageStoryCard: React.FC<ThreePageStoryCardProps> = ({ isOpened
                         fontStyle: 'italic',
                         color: '#8B1E31',
                         fontWeight: 500,
-                        fontSize: 'clamp(11px, 1.8vw, 15px)',
+                        fontSize: 'clamp(11px, 1.7vw, 14px)',
                       }}
                     >
                       Dengan penuh rasa kesyukuran ke hadrat Allah SWT, kami menjemput:
@@ -321,12 +321,12 @@ export const ThreePageStoryCard: React.FC<ThreePageStoryCardProps> = ({ isOpened
                         fontWeight: 700,
                         color: '#28050B',
                         letterSpacing: '0.02em',
-                        marginTop: '2px',
+                        marginTop: '1px',
                       }}
                     >
                       Dato&apos;/Datin/Tuan/Puan/Encik/Cik Seisi Keluarga
                     </p>
-                    <p style={{ color: 'rgba(40,5,11,0.45)', fontSize: '10px', marginTop: '2px' }}>
+                    <p style={{ color: 'rgba(40,5,11,0.45)', fontSize: '9px', marginTop: '1px' }}>
                       Ke majlis perkahwinan anakanda kesayangan kami
                     </p>
                   </motion.div>
@@ -336,12 +336,12 @@ export const ThreePageStoryCard: React.FC<ThreePageStoryCardProps> = ({ isOpened
                     variants={childReveal}
                     style={{
                       width: '100%',
-                      maxWidth: '440px',
-                      padding: 'clamp(12px, 2vh, 24px)',
-                      borderRadius: '16px',
+                      maxWidth: '420px',
+                      padding: 'clamp(10px, 1.8vh, 18px)',
+                      borderRadius: '14px',
                       background: 'rgba(250,249,246,0.9)',
                       border: '1px solid rgba(212,175,55,0.3)',
-                      boxShadow: '0 4px 20px rgba(40,5,11,0.06)',
+                      boxShadow: '0 4px 18px rgba(40,5,11,0.05)',
                     }}
                   >
                     <div
@@ -352,22 +352,22 @@ export const ThreePageStoryCard: React.FC<ThreePageStoryCardProps> = ({ isOpened
                         gap: '6px',
                         fontFamily: "'Cormorant Garamond', serif",
                         fontWeight: 700,
-                        fontSize: 'clamp(13px, 2vw, 20px)',
+                        fontSize: 'clamp(13px, 1.8vw, 18px)',
                         color: '#4A0E17',
-                        paddingBottom: '8px',
+                        paddingBottom: '6px',
                         borderBottom: '1px solid rgba(212,175,55,0.25)',
-                        marginBottom: '8px',
+                        marginBottom: '6px',
                       }}
                     >
-                      <Calendar size={16} style={{ color: '#D4AF37' }} />
+                      <Calendar size={15} style={{ color: '#D4AF37' }} />
                       Sabtu, 24 Oktober 2026
                     </div>
-                    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '4px', color: 'rgba(40,5,11,0.7)' }}>
-                      <div style={{ display: 'flex', alignItems: 'center', gap: '4px', fontWeight: 600, color: '#28050B', fontSize: 'clamp(10px, 1.6vw, 13px)' }}>
-                        <MapPin size={14} style={{ color: '#D4AF37', flexShrink: 0 }} />
+                    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '3px', color: 'rgba(40,5,11,0.7)' }}>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '4px', fontWeight: 600, color: '#28050B', fontSize: 'clamp(10px, 1.5vw, 12px)' }}>
+                        <MapPin size={13} style={{ color: '#D4AF37', flexShrink: 0 }} />
                         <span>Dewan Seri Endon, Presint 10, Putrajaya</span>
                       </div>
-                      <span style={{ fontSize: '10px', color: 'rgba(40,5,11,0.45)' }}>Masa: 11:00 PAGI – 4:00 PETANG</span>
+                      <span style={{ fontSize: '9.5px', color: 'rgba(40,5,11,0.45)' }}>Masa: 11:00 PAGI – 4:00 PETANG</span>
                     </div>
                   </motion.div>
                 </motion.div>
@@ -384,7 +384,7 @@ export const ThreePageStoryCard: React.FC<ThreePageStoryCardProps> = ({ isOpened
                   initial="enter"
                   animate="center"
                   exit="exit"
-                  className="w-full flex flex-col items-center justify-center gap-[clamp(10px,2vh,24px)] will-change-transform"
+                  className="absolute inset-0 flex flex-col items-center justify-center gap-[clamp(8px,1.5vh,20px)] px-2 will-change-transform"
                 >
                   {/* Section label */}
                   <motion.span
@@ -412,7 +412,7 @@ export const ThreePageStoryCard: React.FC<ThreePageStoryCardProps> = ({ isOpened
                   />
 
                   {/* Parents' names */}
-                  <motion.div variants={childReveal} className="text-center space-y-1">
+                  <motion.div variants={childReveal} className="text-center space-y-0.5">
                     <p
                       style={{
                         fontFamily: "'Cormorant Garamond', serif",
@@ -457,7 +457,7 @@ export const ThreePageStoryCard: React.FC<ThreePageStoryCardProps> = ({ isOpened
                       color: '#8B1E31',
                       fontWeight: 500,
                       maxWidth: '380px',
-                      lineHeight: 1.6,
+                      lineHeight: 1.5,
                       textAlign: 'center',
                     }}
                   >
@@ -469,7 +469,7 @@ export const ThreePageStoryCard: React.FC<ThreePageStoryCardProps> = ({ isOpened
                     <p
                       style={{
                         fontFamily: "'Cormorant Garamond', serif",
-                        fontSize: 'clamp(18px, 4.5vw, 36px)',
+                        fontSize: 'clamp(18px, 4.5vw, 34px)',
                         fontWeight: 700,
                         color: '#28050B',
                         letterSpacing: '-0.01em',
@@ -486,11 +486,11 @@ export const ThreePageStoryCard: React.FC<ThreePageStoryCardProps> = ({ isOpened
                     style={{
                       width: '100%',
                       maxWidth: '400px',
-                      padding: 'clamp(16px, 2.5vh, 28px)',
+                      padding: 'clamp(14px, 2vh, 24px)',
                       borderRadius: '16px',
                       background: 'rgba(250,249,246,0.92)',
                       border: '1px solid rgba(212,175,55,0.3)',
-                      boxShadow: '0 4px 24px rgba(40,5,11,0.06)',
+                      boxShadow: '0 4px 20px rgba(40,5,11,0.05)',
                     }}
                   >
                     {/* Date */}
@@ -502,9 +502,9 @@ export const ThreePageStoryCard: React.FC<ThreePageStoryCardProps> = ({ isOpened
                         gap: '6px',
                         fontFamily: "'Cormorant Garamond', serif",
                         fontWeight: 700,
-                        fontSize: 'clamp(14px, 2.2vw, 20px)',
+                        fontSize: 'clamp(14px, 2vw, 19px)',
                         color: '#4A0E17',
-                        marginBottom: '12px',
+                        marginBottom: '10px',
                       }}
                     >
                       <Calendar size={16} style={{ color: '#D4AF37' }} />
@@ -512,12 +512,12 @@ export const ThreePageStoryCard: React.FC<ThreePageStoryCardProps> = ({ isOpened
                     </div>
 
                     {/* Time details */}
-                    <div style={{ display: 'flex', flexDirection: 'column', gap: '6px', borderTop: '1px solid rgba(212,175,55,0.2)', paddingTop: '12px' }}>
-                      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '6px', fontSize: 'clamp(10px, 1.5vw, 12px)', color: '#28050B' }}>
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '5px', borderTop: '1px solid rgba(212,175,55,0.2)', paddingTop: '10px' }}>
+                      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '6px', fontSize: 'clamp(10px, 1.4vw, 12px)', color: '#28050B' }}>
                         <Clock size={13} style={{ color: '#D4AF37', flexShrink: 0 }} />
                         <span style={{ fontWeight: 600 }}>11:00 Pagi – 4:00 Petang</span>
                       </div>
-                      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '6px', fontSize: 'clamp(10px, 1.5vw, 12px)', color: 'rgba(40,5,11,0.6)' }}>
+                      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '6px', fontSize: 'clamp(10px, 1.4vw, 12px)', color: 'rgba(40,5,11,0.6)' }}>
                         <Heart size={11} style={{ color: '#D4AF37' }} />
                         <span style={{ fontStyle: 'italic' }}>Ketibaan Pengantin: 12:30 Tengah Hari</span>
                       </div>
@@ -530,15 +530,15 @@ export const ThreePageStoryCard: React.FC<ThreePageStoryCardProps> = ({ isOpened
                         alignItems: 'center',
                         justifyContent: 'center',
                         gap: '5px',
-                        marginTop: '12px',
-                        paddingTop: '10px',
+                        marginTop: '10px',
+                        paddingTop: '8px',
                         borderTop: '1px solid rgba(212,175,55,0.2)',
                         fontWeight: 600,
-                        fontSize: 'clamp(10px, 1.5vw, 13px)',
+                        fontSize: 'clamp(10px, 1.4vw, 12px)',
                         color: '#28050B',
                       }}
                     >
-                      <MapPin size={14} style={{ color: '#D4AF37', flexShrink: 0 }} />
+                      <MapPin size={13} style={{ color: '#D4AF37', flexShrink: 0 }} />
                       <span>Dewan Seri Endon, Presint 10, Putrajaya</span>
                     </div>
                   </motion.div>
@@ -556,7 +556,7 @@ export const ThreePageStoryCard: React.FC<ThreePageStoryCardProps> = ({ isOpened
                   initial="enter"
                   animate="center"
                   exit="exit"
-                  className="w-full flex flex-col items-center justify-center gap-[clamp(10px,2vh,24px)] will-change-transform"
+                  className="absolute inset-0 flex flex-col items-center justify-center gap-[clamp(8px,1.5vh,20px)] px-2 will-change-transform"
                 >
                   {/* Section label */}
                   <motion.span
