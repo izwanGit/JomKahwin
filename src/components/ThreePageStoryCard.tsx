@@ -37,41 +37,30 @@ const PAGE_DWELL_MS: Record<number, number> = {
  * is kept to 8px max (not 20px+) and duration is long enough
  * that the GPU has time to composite without frame drops.
  * The `will-change` hint is applied in the className.
- */
-const cinematicTransition = {
-  duration: 1.6,
-  ease: [0.22, 0.68, 0.35, 1.0] as [number, number, number, number], // cinematic ease-out
-};
-
 const pageVariants = {
   enter: {
     opacity: 0,
-    scale: 1.08,
-    filter: 'blur(12px)',
+    scale: 1.05,
+    filter: 'blur(8px)',
   },
   center: {
     opacity: 1,
     scale: 1,
     filter: 'blur(0px)',
+    transition: {
+      duration: 1.4,
+      ease: [0.22, 0.68, 0.35, 1.0] as [number, number, number, number],
+      staggerChildren: 0.18,
+      delayChildren: 0.1,
+    },
   },
   exit: {
     opacity: 0,
-    scale: 1.06,
-    filter: 'blur(10px)',
-  },
-};
-
-/*
- * ─── STAGGERED CHILD REVEAL ───
- * Each text element inside a page fades in one-by-one
- * with a gentle upward drift + scale, like titles appearing
- * in a cinematic wedding film opening sequence.
- */
-const staggerContainer = {
-  center: {
+    scale: 1.04,
+    filter: 'blur(8px)',
     transition: {
-      staggerChildren: 0.25,
-      delayChildren: 0.3,
+      duration: 1.0,
+      ease: [0.4, 0, 1, 1] as [number, number, number, number],
     },
   },
 };
@@ -79,7 +68,7 @@ const staggerContainer = {
 const childReveal = {
   enter: {
     opacity: 0,
-    y: 18,
+    y: 14,
     scale: 0.97,
     filter: 'blur(4px)',
   },
@@ -99,7 +88,7 @@ const childReveal = {
     scale: 0.98,
     filter: 'blur(4px)',
     transition: {
-      duration: 0.8,
+      duration: 0.6,
       ease: [0.4, 0, 1, 1] as [number, number, number, number],
     },
   },
@@ -170,8 +159,8 @@ export const ThreePageStoryCard: React.FC<ThreePageStoryCardProps> = ({ isOpened
         </div>
 
         <IslamicArchCard>
-          {/* Fixed-height stage for cinematic page swaps */}
-          <div className="relative w-full overflow-hidden" style={{ minHeight: 'clamp(420px, 60vh, 560px)' }}>
+          {/* Stage for cinematic page swaps */}
+          <div className="relative w-full flex flex-col items-center justify-center min-h-[460px] sm:min-h-[520px]">
             <AnimatePresence mode="wait">
 
               {/* ═══════════════════════════════════════════════════
@@ -181,12 +170,11 @@ export const ThreePageStoryCard: React.FC<ThreePageStoryCardProps> = ({ isOpened
               {currentPage === 1 && (
                 <motion.div
                   key="page1"
-                  variants={{ ...pageVariants, ...staggerContainer }}
+                  variants={pageVariants}
                   initial="enter"
                   animate="center"
                   exit="exit"
-                  transition={cinematicTransition}
-                  className="absolute inset-0 flex flex-col items-center justify-center gap-[clamp(8px,1.5vh,20px)] will-change-transform"
+                  className="w-full flex flex-col items-center justify-center gap-[clamp(8px,1.5vh,20px)] will-change-transform"
                 >
                   {/* Bismillah */}
                   <motion.div
@@ -393,12 +381,11 @@ export const ThreePageStoryCard: React.FC<ThreePageStoryCardProps> = ({ isOpened
               {currentPage === 2 && (
                 <motion.div
                   key="page2"
-                  variants={{ ...pageVariants, ...staggerContainer }}
+                  variants={pageVariants}
                   initial="enter"
                   animate="center"
                   exit="exit"
-                  transition={cinematicTransition}
-                  className="absolute inset-0 flex flex-col items-center justify-center gap-[clamp(10px,2vh,24px)] will-change-transform"
+                  className="w-full flex flex-col items-center justify-center gap-[clamp(10px,2vh,24px)] will-change-transform"
                 >
                   {/* Section label */}
                   <motion.span
@@ -566,12 +553,11 @@ export const ThreePageStoryCard: React.FC<ThreePageStoryCardProps> = ({ isOpened
               {currentPage === 3 && (
                 <motion.div
                   key="page3"
-                  variants={{ ...pageVariants, ...staggerContainer }}
+                  variants={pageVariants}
                   initial="enter"
                   animate="center"
                   exit="exit"
-                  transition={cinematicTransition}
-                  className="absolute inset-0 flex flex-col items-center justify-center gap-[clamp(10px,2vh,24px)] will-change-transform"
+                  className="w-full flex flex-col items-center justify-center gap-[clamp(10px,2vh,24px)] will-change-transform"
                 >
                   {/* Section label */}
                   <motion.span
