@@ -4,16 +4,84 @@ import { motion } from 'framer-motion';
 /**
  * BotanicalFrame
  *
- * Ultra-luxury layered burgundy rose frame.
- * Arranges the 3 small floral accent blooms (floral-accent-1, 2, 3) as subtle, 3D sub-layer
- * extensions tucked neatly behind the outer foliage of the main corner bouquets.
+ * Renders the 4 main corner bouquets plus the 3 small floral accent blooms:
+ * - /assets/border left-top.png
+ * - /assets/border right-top.png
+ * - /assets/border left bottom.png
+ * - /assets/border right-bottom.png
+ * - /assets/floral-accent-1.png
+ * - /assets/floral-accent-2.png
+ * - /assets/floral-accent-3.png
  *
- * Ensures all small flowers are visible while keeping inner card text 100% clear.
+ * Small flowers are positioned closer toward the card center, nestled into clean whitespace gaps
+ * beside section dividers and card margins so they enhance the design without touching any text.
  */
 export const BotanicalFrame: React.FC = () => {
   return (
     <>
-      {/* ─────────────── TOP LEFT ─────────────── */}
+      {/* ─────────────── SMALL ACCENT FLOWERS (Nestled into whitespace gaps) ─────────────── */}
+
+      {/* Accent 1: Upper-left inner margin (beside Quran quote gap) */}
+      <motion.img
+        src="/assets/floral-accent-1.png"
+        alt=""
+        aria-hidden="true"
+        initial={{ opacity: 0, scale: 0.8 }}
+        animate={{ opacity: 0.85, scale: 1 }}
+        transition={{ duration: 1.2, delay: 0.3 }}
+        style={{
+          position: 'absolute',
+          top: '22%',
+          left: '6%',
+          width: 'clamp(22px, 5%, 32px)',
+          transform: 'rotate(-15deg)',
+          filter: 'drop-shadow(0 4px 8px rgba(40,5,11,0.18))',
+          pointerEvents: 'none',
+          zIndex: 22,
+        }}
+      />
+
+      {/* Accent 2: Mid-right inner margin (beside Walimatulurus header gap) */}
+      <motion.img
+        src="/assets/floral-accent-2.png"
+        alt=""
+        aria-hidden="true"
+        initial={{ opacity: 0, scale: 0.8 }}
+        animate={{ opacity: 0.85, scale: 1 }}
+        transition={{ duration: 1.2, delay: 0.45 }}
+        style={{
+          position: 'absolute',
+          top: '36%',
+          right: '5%',
+          width: 'clamp(22px, 5%, 32px)',
+          transform: 'rotate(18deg)',
+          filter: 'drop-shadow(0 4px 8px rgba(40,5,11,0.18))',
+          pointerEvents: 'none',
+          zIndex: 22,
+        }}
+      />
+
+      {/* Accent 3: Lower-left inner margin (above date box gap) */}
+      <motion.img
+        src="/assets/floral-accent-3.png"
+        alt=""
+        aria-hidden="true"
+        initial={{ opacity: 0, scale: 0.8 }}
+        animate={{ opacity: 0.85, scale: 1 }}
+        transition={{ duration: 1.2, delay: 0.6 }}
+        style={{
+          position: 'absolute',
+          bottom: '22%',
+          left: '7%',
+          width: 'clamp(22px, 5%, 32px)',
+          transform: 'rotate(-20deg)',
+          filter: 'drop-shadow(0 4px 8px rgba(40,5,11,0.18))',
+          pointerEvents: 'none',
+          zIndex: 22,
+        }}
+      />
+
+      {/* ─────────────── TOP LEFT CORNER BOUQUET ─────────────── */}
       <motion.div
         className="pointer-events-none fixed-botanical"
         animate={{
@@ -31,25 +99,6 @@ export const BotanicalFrame: React.FC = () => {
           willChange: 'transform',
         }}
       >
-        {/* Small floral accent 1 tucked neatly behind outer foliage */}
-        <motion.img
-          src="/assets/floral-accent-1.png"
-          alt=""
-          aria-hidden="true"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 0.8 }}
-          transition={{ duration: 1.0, delay: 0.3 }}
-          style={{
-            position: 'absolute',
-            top: '35%',
-            left: '-15%',
-            width: '24%',
-            transform: 'rotate(-25deg)',
-            filter: 'drop-shadow(0 4px 10px rgba(40,5,11,0.2))',
-            zIndex: 22,
-          }}
-        />
-        {/* Main top-left corner bouquet */}
         <motion.img
           src="/assets/border left-top.png"
           alt=""
@@ -66,7 +115,7 @@ export const BotanicalFrame: React.FC = () => {
         />
       </motion.div>
 
-      {/* ─────────────── TOP RIGHT (Moved UP higher) ─────────────── */}
+      {/* ─────────────── TOP RIGHT CORNER BOUQUET ─────────────── */}
       <motion.div
         animate={{
           y: [0, 4, 0],
@@ -83,25 +132,6 @@ export const BotanicalFrame: React.FC = () => {
           pointerEvents: 'none',
         }}
       >
-        {/* Small floral accent 2 tucked neatly behind outer top-right foliage */}
-        <motion.img
-          src="/assets/floral-accent-2.png"
-          alt=""
-          aria-hidden="true"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 0.8 }}
-          transition={{ duration: 1.0, delay: 0.4 }}
-          style={{
-            position: 'absolute',
-            top: '30%',
-            right: '-14%',
-            width: '24%',
-            transform: 'rotate(20deg)',
-            filter: 'drop-shadow(0 4px 10px rgba(40,5,11,0.2))',
-            zIndex: 22,
-          }}
-        />
-        {/* Main top-right corner bouquet */}
         <motion.img
           src="/assets/border right-top.png"
           alt=""
@@ -118,7 +148,7 @@ export const BotanicalFrame: React.FC = () => {
         />
       </motion.div>
 
-      {/* ─────────────── BOTTOM LEFT ─────────────── */}
+      {/* ─────────────── BOTTOM LEFT CORNER BOUQUET ─────────────── */}
       <motion.div
         animate={{
           rotate: [0, 1, 0],
@@ -135,25 +165,6 @@ export const BotanicalFrame: React.FC = () => {
           transformOrigin: 'bottom left',
         }}
       >
-        {/* Small floral accent 3 tucked neatly behind bottom-left outer foliage */}
-        <motion.img
-          src="/assets/floral-accent-3.png"
-          alt=""
-          aria-hidden="true"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 0.8 }}
-          transition={{ duration: 1.0, delay: 0.5 }}
-          style={{
-            position: 'absolute',
-            bottom: '30%',
-            left: '-15%',
-            width: '24%',
-            transform: 'rotate(-20deg)',
-            filter: 'drop-shadow(0 4px 10px rgba(40,5,11,0.2))',
-            zIndex: 22,
-          }}
-        />
-        {/* Main bottom-left corner bouquet */}
         <motion.img
           src="/assets/border left bottom.png"
           alt=""
@@ -170,7 +181,7 @@ export const BotanicalFrame: React.FC = () => {
         />
       </motion.div>
 
-      {/* ─────────────── BOTTOM RIGHT ─────────────── */}
+      {/* ─────────────── BOTTOM RIGHT CORNER BOUQUET ─────────────── */}
       <motion.div
         animate={{
           y: [0, -4, 0],
@@ -187,7 +198,6 @@ export const BotanicalFrame: React.FC = () => {
           transformOrigin: 'bottom right',
         }}
       >
-        {/* Main bottom-right corner bouquet */}
         <motion.img
           src="/assets/border right-bottom.png"
           alt=""
