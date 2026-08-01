@@ -51,9 +51,9 @@ export const HeroSection: React.FC = () => {
           
           {/* Bismillah */}
           <motion.div
-            initial={{ opacity: 0, y: -12 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2, duration: 0.8 }}
+            initial={{ opacity: 0, scale: 0.7, y: -10 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            transition={{ delay: 0.2, duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
             style={{
               fontFamily: "'Amiri', serif",
               fontSize: 'clamp(18px, 4vw, 36px)',
@@ -67,9 +67,9 @@ export const HeroSection: React.FC = () => {
 
           {/* Quran verse */}
           <motion.p
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.3, duration: 0.8 }}
+            initial={{ opacity: 0, scale: 0.85 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ delay: 0.35, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
             style={{
               fontFamily: "'Cormorant Garamond', serif",
               fontStyle: 'italic',
@@ -109,9 +109,9 @@ export const HeroSection: React.FC = () => {
 
           {/* Walimatulurus heading */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
+            initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: 0.4, duration: 0.6 }}
+            transition={{ delay: 0.45, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
           >
             <span
               style={{
@@ -143,9 +143,9 @@ export const HeroSection: React.FC = () => {
 
           {/* Couple Names */}
           <motion.div
-            initial={{ opacity: 0, y: 18 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.5, duration: 0.8 }}
+            initial={{ opacity: 0, scale: 0.75 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ delay: 0.6, duration: 1.0, ease: [0.16, 1, 0.3, 1] }}
             style={{ paddingTop: '4px', paddingBottom: '4px' }}
           >
             <h1
@@ -185,9 +185,9 @@ export const HeroSection: React.FC = () => {
 
           {/* Invitation text */}
           <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.7, duration: 0.8 }}
+            initial={{ opacity: 0, scale: 0.85 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ delay: 0.75, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
             style={{ fontSize: 'clamp(10px, 1.6vw, 13px)', color: 'rgba(40,5,11,0.75)' }}
           >
             <p
@@ -219,9 +219,9 @@ export const HeroSection: React.FC = () => {
 
           {/* Date & Venue card */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.9, duration: 0.8 }}
+            initial={{ opacity: 0, scale: 0.88, y: 15 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            transition={{ delay: 0.9, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
             style={{
               width: '100%',
               maxWidth: '440px',

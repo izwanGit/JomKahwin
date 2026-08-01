@@ -49,14 +49,20 @@ export const ScheduleTimeline: React.FC = () => {
 
   return (
     <section id="tentatif" className="py-16 px-4 max-w-3xl mx-auto space-y-8">
-      <div className="text-center space-y-2">
+      <motion.div
+        initial={{ opacity: 0, scale: 0.85, y: 15 }}
+        whileInView={{ opacity: 1, scale: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+        className="text-center space-y-2"
+      >
         <span className="text-gold-600 font-serif text-xs md:text-sm tracking-[0.25em] uppercase font-semibold block">
           Tentatif Majlis
         </span>
         <h2 className="text-3xl md:text-4xl font-serif font-bold text-emerald-950">
           Atur Cara Majlis
         </h2>
-      </div>
+      </motion.div>
 
       <div className="relative pl-6 md:pl-8 border-l-2 border-gold-300/60 space-y-8 ml-4 md:ml-12">
         {scheduleItems.map((item, idx) => (

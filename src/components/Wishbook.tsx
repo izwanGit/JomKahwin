@@ -10,7 +10,13 @@ interface WishbookProps {
 export const Wishbook: React.FC<WishbookProps> = ({ wishes }) => {
   return (
     <section id="ucapan" className="py-16 px-4 max-w-3xl mx-auto space-y-8">
-      <div className="text-center space-y-2">
+      <motion.div
+        initial={{ opacity: 0, scale: 0.85, y: 15 }}
+        whileInView={{ opacity: 1, scale: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+        className="text-center space-y-2"
+      >
         <span className="text-gold-600 font-serif text-xs md:text-sm tracking-[0.25em] uppercase font-semibold block">
           Buku Ucapan Tetamu
         </span>
@@ -20,7 +26,7 @@ export const Wishbook: React.FC<WishbookProps> = ({ wishes }) => {
         <p className="text-xs text-slate-500 max-w-xs mx-auto">
           Koleksi ucapan dan doa ikhlas daripada rakan-rakan dan sanak saudara
         </p>
-      </div>
+      </motion.div>
 
       <div className="space-y-4 max-h-[450px] overflow-y-auto pr-2 custom-scrollbar">
         {wishes.length === 0 ? (
