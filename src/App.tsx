@@ -4,7 +4,7 @@ import { FloatingPetals } from './components/FloatingPetals';
 import { FloatingButterflies } from './components/FloatingButterflies';
 import { MusicPlayer } from './components/MusicPlayer';
 import { Navbar } from './components/Navbar';
-import { HeroSection } from './components/HeroSection';
+import { ThreePageStoryCard } from './components/ThreePageStoryCard';
 import { CountdownTimer } from './components/CountdownTimer';
 import { EventDetails } from './components/EventDetails';
 import { ScheduleTimeline } from './components/ScheduleTimeline';
@@ -75,7 +75,7 @@ export function App() {
 
       {/* Main Page Layout */}
       <main className="relative z-10 space-y-8 pb-12">
-        <HeroSection isOpened={isEnvelopeOpen} />
+        <ThreePageStoryCard isOpened={isEnvelopeOpen} />
         <CountdownTimer />
         <EventDetails />
         <ScheduleTimeline />
