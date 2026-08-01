@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { Heart, Calendar, MapPin, Phone, QrCode, Clock, Play, Pause, ChevronLeft, ChevronRight } from 'lucide-react';
+import { motion, AnimatePresence, type PanInfo } from 'framer-motion';
+import { Heart, Calendar, MapPin, Phone, QrCode, Clock, Play, Pause, ChevronLeft, ChevronRight, CheckCircle2 } from 'lucide-react';
 import { BotanicalFrame } from './BotanicalFrame';
 import { IslamicArchCard } from './IslamicArchCard';
 
@@ -11,12 +11,14 @@ interface ThreePageStoryCardProps {
 export const ThreePageStoryCard: React.FC<ThreePageStoryCardProps> = ({ isOpened = true }) => {
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [isPlaying, setIsPlaying] = useState<boolean>(true);
+  const [direction, setDirection] = useState<number>(1);
 
-  // Auto-transition timer (5 seconds per page) once envelope is opened
+  // Auto-transition timer (5.5s per page)
   useEffect(() => {
     if (!isOpened || !isPlaying) return;
 
     const timer = setInterval(() => {
+      setDirection(1);
       setCurrentPage((prev) => (prev % 3) + 1);
     }, 5500);
 
@@ -25,20 +27,51 @@ export const ThreePageStoryCard: React.FC<ThreePageStoryCardProps> = ({ isOpened
 
   const handleNext = () => {
     setIsPlaying(false);
+    setDirection(1);
     setCurrentPage((prev) => (prev % 3) + 1);
   };
 
   const handlePrev = () => {
     setIsPlaying(false);
+    setDirection(-1);
     setCurrentPage((prev) => (prev === 1 ? 3 : prev - 1));
   };
 
-  // Hardware-accelerated GPU 60fps variants with zero filter-blur layout thrashing
-  const pageVariants = {
-    initial: { opacity: 0, scale: 0.96, y: 12 },
-    animate: { opacity: 1, scale: 1, y: 0 },
-    exit: { opacity: 0, scale: 0.97, y: -10 },
+  const handleDragEnd = (_: unknown, info: PanInfo) => {
+    if (info.offset.x < -40) {
+      handleNext();
+    } else if (info.offset.x > 40) {
+      handlePrev();
+    }
   };
+
+  const scrollToRsvp = () => {
+    const rsvpElement = document.getElementById('rsvp');
+    if (rsvpElement) {
+      rsvpElement.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
+  // Directional slide variants
+  const pageVariants = {
+    initial: (dir: number) => ({
+      opacity: 0,
+      x: dir > 0 ? 40 : -40,
+      scale: 0.96,
+    }),
+    animate: {
+      opacity: 1,
+      x: 0,
+      scale: 1,
+    },
+    exit: (dir: number) => ({
+      opacity: 0,
+      x: dir > 0 ? -40 : 40,
+      scale: 0.96,
+    }),
+  };
+
+  const googleCalendarUrl = 'https://calendar.google.com/calendar/render?action=TEMPLATE&text=Walimatulurus+Alyea+%26+Amirul&dates=20261024T030000Z/20261024T080000Z&details=Majlis+Perkahwinan+Alyea+Dania+%26+Amirul+Iqhwan.&location=Dewan+Seri+Endon,+Presint+10,+Putrajaya';
 
   return (
     <section
@@ -90,45 +123,59 @@ export const ThreePageStoryCard: React.FC<ThreePageStoryCardProps> = ({ isOpened
         <IslamicArchCard>
           <div className="min-h-[460px] sm:min-h-[500px] flex flex-col justify-between items-center w-full relative">
 
-            {/* TOP PAGE INDICATORS (Pill dots like Instagram Story) */}
-            <div className="w-full flex items-center justify-center gap-2 mb-2 z-20">
-              {[1, 2, 3].map((page) => (
-                <button
-                  key={page}
-                  onClick={() => {
-                    setIsPlaying(false);
-                    setCurrentPage(page);
-                  }}
-                  className={`h-1.5 rounded-full transition-all duration-500 ${
-                    currentPage === page
-                      ? 'w-8 bg-[#D4AF37] shadow-sm'
-                      : 'w-2 bg-[#D4AF37]/25 hover:bg-[#D4AF37]/50'
-                  }`}
-                  aria-label={`Buka Halaman ${page}`}
-                />
-              ))}
+            {/* TOP STORY PROGRESS BARS (Instagram/WhatsApp Story Style) */}
+            <div className="w-full flex items-center justify-center gap-1.5 mb-2 z-20 px-4">
+              {[1, 2, 3].map((page) => {
+                const isActive = currentPage === page;
+                const isPast = currentPage > page;
+                return (
+                  <button
+                    key={page}
+                    onClick={() => {
+                      setIsPlaying(false);
+                      setDirection(page > currentPage ? 1 : -1);
+                      setCurrentPage(page);
+                    }}
+                    className="flex-1 h-1.5 rounded-full bg-[#D4AF37]/20 overflow-hidden relative focus:outline-none"
+                    aria-label={`Ke Halaman ${page}`}
+                  >
+                    <div
+                      className={`h-full bg-[#D4AF37] transition-all ${
+                        isPast ? 'w-full' : isActive && isPlaying ? 'w-full duration-[5500ms] ease-linear' : isActive ? 'w-full' : 'w-0'
+                      }`}
+                    />
+                  </button>
+                );
+              })}
             </div>
 
-            {/* PAGE CONTENT SWITCHER */}
-            <div className="w-full flex-1 flex flex-col items-center justify-center relative">
-              <AnimatePresence mode="wait">
+            {/* PAGE CONTENT SWITCHER (With Touch Drag Swipe Support) */}
+            <motion.div
+              drag="x"
+              dragConstraints={{ left: 0, right: 0 }}
+              dragElastic={0.2}
+              onDragEnd={handleDragEnd}
+              className="w-full flex-1 flex flex-col items-center justify-center relative touch-pan-y cursor-grab active:cursor-grabbing"
+            >
+              <AnimatePresence mode="wait" custom={direction}>
                 
                 {/* ── PAGE 1: HERO MONOGRAM & MAJLIS TITLE ── */}
                 {currentPage === 1 && (
                   <motion.div
                     key="page1"
+                    custom={direction}
                     variants={pageVariants}
                     initial="initial"
                     animate="animate"
                     exit="exit"
-                    transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-                    className="w-full flex flex-col items-center justify-center space-y-4 py-2"
+                    transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+                    className="w-full flex flex-col items-center justify-center space-y-3.5 py-1"
                   >
                     {/* Bismillah */}
                     <div
                       style={{
                         fontFamily: "'Amiri', serif",
-                        fontSize: 'clamp(20px, 4.5vw, 38px)',
+                        fontSize: 'clamp(20px, 4.5vw, 36px)',
                         color: '#B8860B',
                         letterSpacing: '0.04em',
                       }}
@@ -152,7 +199,7 @@ export const ThreePageStoryCard: React.FC<ThreePageStoryCardProps> = ({ isOpened
                       <span
                         style={{
                           display: 'block',
-                          marginTop: '4px',
+                          marginTop: '3px',
                           fontFamily: "'Plus Jakarta Sans', sans-serif",
                           fontStyle: 'normal',
                           fontSize: '9px',
@@ -166,7 +213,12 @@ export const ThreePageStoryCard: React.FC<ThreePageStoryCardProps> = ({ isOpened
                       </span>
                     </p>
 
-                    <div style={{ width: '50px', height: '1px', background: 'linear-gradient(90deg, transparent, rgba(212,175,55,0.6), transparent)' }} />
+                    {/* Gold Monogram AA Logo Emblem */}
+                    <div className="w-12 h-12 rounded-full border-2 border-[#D4AF37]/60 bg-gradient-to-b from-[#FAF9F6] to-[#F5E6AB]/30 flex items-center justify-center shadow-sm my-1">
+                      <span className="font-serif font-bold text-lg text-[#28050B] tracking-tighter">
+                        A<span className="text-[#D4AF37] font-normal">&amp;</span>A
+                      </span>
+                    </div>
 
                     {/* Heading */}
                     <div>
@@ -183,7 +235,7 @@ export const ThreePageStoryCard: React.FC<ThreePageStoryCardProps> = ({ isOpened
                       <h1
                         style={{
                           fontFamily: "'Cormorant Garamond', serif",
-                          fontSize: 'clamp(24px, 7vw, 60px)',
+                          fontSize: 'clamp(24px, 7vw, 56px)',
                           fontWeight: 700,
                           color: '#28050B',
                           letterSpacing: '-0.02em',
@@ -201,7 +253,7 @@ export const ThreePageStoryCard: React.FC<ThreePageStoryCardProps> = ({ isOpened
                       <h1
                         style={{
                           fontFamily: "'Cormorant Garamond', serif",
-                          fontSize: 'clamp(24px, 7vw, 60px)',
+                          fontSize: 'clamp(24px, 7vw, 56px)',
                           fontWeight: 700,
                           color: '#28050B',
                           letterSpacing: '-0.02em',
@@ -213,7 +265,7 @@ export const ThreePageStoryCard: React.FC<ThreePageStoryCardProps> = ({ isOpened
                       </h1>
                     </div>
 
-                    <span className="text-[10px] text-[#976E07] tracking-[0.2em] font-serif uppercase">
+                    <span className="text-[10px] text-[#976E07] tracking-[0.2em] font-serif uppercase font-semibold">
                       Sabtu • 24.10.2026
                     </span>
                   </motion.div>
@@ -223,14 +275,15 @@ export const ThreePageStoryCard: React.FC<ThreePageStoryCardProps> = ({ isOpened
                 {currentPage === 2 && (
                   <motion.div
                     key="page2"
+                    custom={direction}
                     variants={pageVariants}
                     initial="initial"
                     animate="animate"
                     exit="exit"
-                    transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-                    className="w-full flex flex-col items-center justify-center space-y-4 py-2"
+                    transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+                    className="w-full flex flex-col items-center justify-center space-y-4 py-1"
                   >
-                    <span className="text-[#976E07] font-serif text-xs tracking-[0.3em] uppercase block">
+                    <span className="text-[#976E07] font-serif text-xs tracking-[0.3em] uppercase block font-semibold">
                       Undangan Tulus Ikhlas
                     </span>
 
@@ -244,7 +297,7 @@ export const ThreePageStoryCard: React.FC<ThreePageStoryCardProps> = ({ isOpened
                       </p>
                     </div>
 
-                    <div className="px-6 py-2 rounded-xl bg-[#28050B]/5 border border-[#D4AF37]/30 text-center">
+                    <div className="px-6 py-2.5 rounded-xl bg-[#28050B]/5 border border-[#D4AF37]/35 text-center shadow-xs">
                       <p className="font-sans text-xs sm:text-sm font-bold text-[#28050B]">
                         Dato&apos; / Datin / Tuan / Puan / Encik / Cik Seisi Keluarga
                       </p>
@@ -255,7 +308,7 @@ export const ThreePageStoryCard: React.FC<ThreePageStoryCardProps> = ({ isOpened
                     </p>
 
                     {/* Date & Time Box */}
-                    <div className="w-full max-w-sm p-4 rounded-xl bg-white/90 border border-[#D4AF37]/35 shadow-sm space-y-2">
+                    <div className="w-full max-w-sm p-4 rounded-xl bg-white/90 border border-[#D4AF37]/35 shadow-sm space-y-2.5">
                       <div className="flex items-center justify-center gap-2 font-serif font-bold text-base text-[#4A0E17]">
                         <Calendar size={16} className="text-[#D4AF37]" />
                         <span>Sabtu, 24 Oktober 2026</span>
@@ -264,11 +317,22 @@ export const ThreePageStoryCard: React.FC<ThreePageStoryCardProps> = ({ isOpened
                         <Clock size={13} className="text-[#D4AF37]" />
                         <span>Masa: 11:00 PAGI – 4:00 PETANG</span>
                       </div>
-                      <div className="text-xs text-slate-700 font-medium flex items-center justify-center gap-1 pt-1 border-t border-[#D4AF37]/20">
+                      <div className="text-xs text-slate-700 font-medium flex items-center justify-center gap-1 pt-1.5 border-t border-[#D4AF37]/20">
                         <MapPin size={13} className="text-[#D4AF37] flex-shrink-0" />
                         <span>Dewan Seri Endon, Presint 10, Putrajaya</span>
                       </div>
                     </div>
+
+                    {/* Save to Calendar Button */}
+                    <a
+                      href={googleCalendarUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="px-4 py-1.5 rounded-full bg-[#28050B] text-[#FFFEFA] text-xs font-semibold flex items-center gap-1.5 border border-[#D4AF37]/40 shadow-sm hover:scale-105 transition-transform"
+                    >
+                      <Calendar size={13} className="text-[#D4AF37]" />
+                      <span>Simpan Ke Google Calendar</span>
+                    </a>
                   </motion.div>
                 )}
 
@@ -276,47 +340,48 @@ export const ThreePageStoryCard: React.FC<ThreePageStoryCardProps> = ({ isOpened
                 {currentPage === 3 && (
                   <motion.div
                     key="page3"
+                    custom={direction}
                     variants={pageVariants}
                     initial="initial"
                     animate="animate"
                     exit="exit"
-                    transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-                    className="w-full flex flex-col items-center justify-center space-y-4 py-2"
+                    transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+                    className="w-full flex flex-col items-center justify-center space-y-4 py-1"
                   >
-                    <span className="text-[#976E07] font-serif text-xs tracking-[0.3em] uppercase block">
+                    <span className="text-[#976E07] font-serif text-xs tracking-[0.3em] uppercase block font-semibold">
                       Titipan Doa &amp; Perhubungan
                     </span>
 
                     {/* Blessing Du'a */}
-                    <p className="font-serif italic text-xs sm:text-sm text-burgundy-950/80 max-w-md leading-relaxed">
+                    <p className="font-serif italic text-xs sm:text-sm text-burgundy-950/85 max-w-md leading-relaxed">
                       &ldquo;Ya Allah, berkatilah majlis perkahwinan ini. Limpahkanlah baraqah dan rahmat-Mu kepada kedua mempelai ini, kurniakanlah zuriat yang soleh dan solehah, serta kekalkanlah jodoh mereka hingga ke syurga.&rdquo;
                     </p>
 
                     {/* Contact Persons */}
                     <div className="w-full max-w-sm space-y-1.5 text-left">
                       <p className="text-[10px] text-[#976E07] tracking-[0.2em] font-semibold uppercase text-center mb-1">
-                        Hubungi Untuk Pertanyaan:
+                        Hubungi Pihak Keluarga:
                       </p>
                       <div className="grid grid-cols-2 gap-2 text-xs">
-                        <a href="tel:60123456789" className="p-2 rounded-lg bg-white/80 border border-[#D4AF37]/30 flex items-center justify-between hover:border-[#D4AF37] transition-all">
+                        <a href="https://wa.me/60123456789" target="_blank" rel="noopener noreferrer" className="p-2 rounded-lg bg-white/80 border border-[#D4AF37]/30 flex items-center justify-between hover:border-[#D4AF37] transition-all">
                           <div>
                             <p className="font-bold text-burgundy-950">Hj. Ahmad (Abah)</p>
                             <p className="text-[10px] text-slate-500">012-3456789</p>
                           </div>
-                          <Phone size={12} className="text-[#D4AF37]" />
+                          <Phone size={13} className="text-[#D4AF37]" />
                         </a>
-                        <a href="tel:60198765432" className="p-2 rounded-lg bg-white/80 border border-[#D4AF37]/30 flex items-center justify-between hover:border-[#D4AF37] transition-all">
+                        <a href="https://wa.me/60198765432" target="_blank" rel="noopener noreferrer" className="p-2 rounded-lg bg-white/80 border border-[#D4AF37]/30 flex items-center justify-between hover:border-[#D4AF37] transition-all">
                           <div>
                             <p className="font-bold text-burgundy-950">Hjh. Aminah (Ma)</p>
                             <p className="text-[10px] text-slate-500">019-8765432</p>
                           </div>
-                          <Phone size={12} className="text-[#D4AF37]" />
+                          <Phone size={13} className="text-[#D4AF37]" />
                         </a>
                       </div>
                     </div>
 
-                    {/* Quick GPS Buttons */}
-                    <div className="flex items-center gap-2 pt-1">
+                    {/* Direct Quick Action Buttons */}
+                    <div className="flex items-center gap-2 pt-1 flex-wrap justify-center">
                       <a
                         href="https://waze.com/ul?q=Dewan%20Seri%20Endon%20Putrajaya"
                         target="_blank"
@@ -335,14 +400,21 @@ export const ThreePageStoryCard: React.FC<ThreePageStoryCardProps> = ({ isOpened
                         <QrCode size={12} />
                         <span>Google Maps</span>
                       </a>
+                      <button
+                        onClick={scrollToRsvp}
+                        className="px-3.5 py-1.5 rounded-full bg-gradient-to-r from-burgundy-900 to-burgundy-950 text-gold-300 text-[11px] font-bold flex items-center gap-1 border border-gold-500/50 shadow-sm hover:scale-105 transition-transform"
+                      >
+                        <CheckCircle2 size={12} className="text-gold-400" />
+                        <span>Pengesahan RSVP</span>
+                      </button>
                     </div>
                   </motion.div>
                 )}
 
               </AnimatePresence>
-            </div>
+            </motion.div>
 
-            {/* BOTTOM E-CARD CONTROLS (Next/Prev + Slideshow Play/Pause) */}
+            {/* BOTTOM E-CARD CONTROLS */}
             <div className="w-full flex items-center justify-between px-2 pt-3 border-t border-[#D4AF37]/25 text-[11px] z-20">
               <button
                 onClick={handlePrev}
@@ -354,7 +426,7 @@ export const ThreePageStoryCard: React.FC<ThreePageStoryCardProps> = ({ isOpened
 
               <button
                 onClick={() => setIsPlaying(!isPlaying)}
-                className="flex items-center gap-1 text-slate-500 hover:text-burgundy-950 text-[10px] px-2 py-0.5 rounded-full bg-white/70 border border-[#D4AF37]/30 transition-all"
+                className="flex items-center gap-1 text-slate-500 hover:text-burgundy-950 text-[10px] px-2.5 py-0.5 rounded-full bg-white/70 border border-[#D4AF37]/30 transition-all"
                 title={isPlaying ? 'Jeda Pertukaran Halaman' : 'Mainkan Pertukaran Halaman Auto'}
               >
                 {isPlaying ? <Pause size={10} className="text-[#D4AF37]" /> : <Play size={10} className="text-[#D4AF37]" />}
@@ -376,3 +448,4 @@ export const ThreePageStoryCard: React.FC<ThreePageStoryCardProps> = ({ isOpened
     </section>
   );
 };
+
