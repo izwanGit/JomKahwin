@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
-import { motion, AnimatePresence, type PanInfo } from 'framer-motion';
-import { Heart, Calendar, MapPin, Phone, QrCode, Clock, Play, Pause, ChevronLeft, ChevronRight, CheckCircle2 } from 'lucide-react';
+import React, { useState, useEffect, useCallback } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Heart, Calendar, MapPin, Phone, Clock } from 'lucide-react';
 import { BotanicalFrame } from './BotanicalFrame';
 import { IslamicArchCard } from './IslamicArchCard';
 
@@ -8,78 +8,127 @@ interface ThreePageStoryCardProps {
   isOpened?: boolean;
 }
 
+/*
+ * ─── CINEMATIC TIMING CONSTANTS ───
+ * These control the pacing of the entire story experience.
+ * Each page has its own "dwell time" — the duration a guest
+ * sees that page before the cinematic transition begins.
+ */
+const PAGE_DWELL_MS: Record<number, number> = {
+  1: 8000,  // Page 1 (Cover) — longer, let the music settle in
+  2: 9000,  // Page 2 (Invitation) — more text to absorb
+  3: 10000, // Page 3 (Doa & Contact) — final page, linger before looping
+};
+
+/*
+ * ─── CINEMATIC TRANSITION VARIANTS ───
+ * Inspired by Final Cut Pro "Blur Dissolve" and "Push Zoom" transitions.
+ *
+ * The outgoing page: gently scales UP (camera pulling away)
+ * while simultaneously blurring and fading to white.
+ *
+ * The incoming page: starts scaled UP and blurred (out of focus),
+ * then settles DOWN to 1.0 and sharpens (camera focusing in).
+ *
+ * Combined with staggered child element reveals, this creates
+ * the romantic, cinematic feel of a wedding film.
+ *
+ * NOTE: We use `filter` for blur. On low-end devices the blur
+ * is kept to 8px max (not 20px+) and duration is long enough
+ * that the GPU has time to composite without frame drops.
+ * The `will-change` hint is applied in the className.
+ */
+const cinematicTransition = {
+  duration: 1.6,
+  ease: [0.22, 0.68, 0.35, 1.0] as [number, number, number, number], // cinematic ease-out
+};
+
+const pageVariants = {
+  enter: {
+    opacity: 0,
+    scale: 1.08,
+    filter: 'blur(12px)',
+  },
+  center: {
+    opacity: 1,
+    scale: 1,
+    filter: 'blur(0px)',
+  },
+  exit: {
+    opacity: 0,
+    scale: 1.06,
+    filter: 'blur(10px)',
+  },
+};
+
+/*
+ * ─── STAGGERED CHILD REVEAL ───
+ * Each text element inside a page fades in one-by-one
+ * with a gentle upward drift + scale, like titles appearing
+ * in a cinematic wedding film opening sequence.
+ */
+const staggerContainer = {
+  center: {
+    transition: {
+      staggerChildren: 0.25,
+      delayChildren: 0.3,
+    },
+  },
+};
+
+const childReveal = {
+  enter: {
+    opacity: 0,
+    y: 18,
+    scale: 0.97,
+    filter: 'blur(4px)',
+  },
+  center: {
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    filter: 'blur(0px)',
+    transition: {
+      duration: 1.2,
+      ease: [0.16, 1, 0.3, 1] as [number, number, number, number],
+    },
+  },
+  exit: {
+    opacity: 0,
+    y: -8,
+    scale: 0.98,
+    filter: 'blur(4px)',
+    transition: {
+      duration: 0.8,
+      ease: [0.4, 0, 1, 1] as [number, number, number, number],
+    },
+  },
+};
+
 export const ThreePageStoryCard: React.FC<ThreePageStoryCardProps> = ({ isOpened = true }) => {
   const [currentPage, setCurrentPage] = useState<number>(1);
-  const [isPlaying, setIsPlaying] = useState<boolean>(true);
-  const [direction, setDirection] = useState<number>(1);
 
-  // Auto-transition timer (5.5s per page)
-  useEffect(() => {
-    if (!isOpened || !isPlaying) return;
-
-    const timer = setInterval(() => {
-      setDirection(1);
-      setCurrentPage((prev) => (prev % 3) + 1);
-    }, 5500);
-
-    return () => clearInterval(timer);
-  }, [isOpened, isPlaying]);
-
-  const handleNext = () => {
-    setIsPlaying(false);
-    setDirection(1);
+  const advancePage = useCallback(() => {
     setCurrentPage((prev) => (prev % 3) + 1);
-  };
+  }, []);
 
-  const handlePrev = () => {
-    setIsPlaying(false);
-    setDirection(-1);
-    setCurrentPage((prev) => (prev === 1 ? 3 : prev - 1));
-  };
+  // Auto-advance timer — starts after envelope opens
+  useEffect(() => {
+    if (!isOpened) return;
 
-  const handleDragEnd = (_: unknown, info: PanInfo) => {
-    if (info.offset.x < -40) {
-      handleNext();
-    } else if (info.offset.x > 40) {
-      handlePrev();
-    }
-  };
+    const dwellTime = PAGE_DWELL_MS[currentPage] ?? 8000;
+    const timer = setTimeout(advancePage, dwellTime);
 
-  const scrollToRsvp = () => {
-    const rsvpElement = document.getElementById('rsvp');
-    if (rsvpElement) {
-      rsvpElement.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
-
-  // Directional slide variants
-  const pageVariants = {
-    initial: (dir: number) => ({
-      opacity: 0,
-      x: dir > 0 ? 40 : -40,
-      scale: 0.96,
-    }),
-    animate: {
-      opacity: 1,
-      x: 0,
-      scale: 1,
-    },
-    exit: (dir: number) => ({
-      opacity: 0,
-      x: dir > 0 ? -40 : 40,
-      scale: 0.96,
-    }),
-  };
-
-  const googleCalendarUrl = 'https://calendar.google.com/calendar/render?action=TEMPLATE&text=Walimatulurus+Alyea+%26+Amirul&dates=20261024T030000Z/20261024T080000Z&details=Majlis+Perkahwinan+Alyea+Dania+%26+Amirul+Iqhwan.&location=Dewan+Seri+Endon,+Presint+10,+Putrajaya';
+    return () => clearTimeout(timer);
+  }, [isOpened, currentPage, advancePage]);
 
   return (
     <section
       id="utama"
-      className="relative min-h-[100svh] flex flex-col items-center justify-center text-center px-3 py-6 sm:py-10 overflow-hidden"
+      className="relative min-h-[100svh] flex flex-col items-center justify-center text-center px-4 py-8 overflow-hidden"
       style={{ backgroundColor: '#FFFEFA' }}
     >
-      {/* Cotton paper texture overlay */}
+      {/* ── Cotton paper texture overlay ── */}
       <div
         aria-hidden="true"
         style={{
@@ -95,7 +144,7 @@ export const ThreePageStoryCard: React.FC<ThreePageStoryCardProps> = ({ isOpened
         }}
       />
 
-      {/* Outer gold double-border frame lines */}
+      {/* ── Outer gold double-border frame lines ── */}
       <div
         aria-hidden="true"
         style={{
@@ -108,12 +157,12 @@ export const ThreePageStoryCard: React.FC<ThreePageStoryCardProps> = ({ isOpened
         }}
       />
 
-      {/* ── 3-PAGE STORY CARD CONTAINER ── */}
+      {/* ── CINEMATIC STORY CARD ── */}
       <motion.div
         initial={{ opacity: 0, scale: 0.95, y: 20 }}
         animate={isOpened ? { opacity: 1, scale: 1, y: 0 } : { opacity: 0, scale: 0.95, y: 20 }}
-        transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
-        className="relative z-10 w-full max-w-xl mx-auto py-2"
+        transition={{ duration: 2.0, ease: [0.16, 1, 0.3, 1] }}
+        className="relative z-10 w-full max-w-xl mx-auto py-4"
       >
         {/* Botanical frame anchored directly around the card corners */}
         <div className="absolute inset-0 pointer-events-none z-20 overflow-visible">
@@ -121,331 +170,579 @@ export const ThreePageStoryCard: React.FC<ThreePageStoryCardProps> = ({ isOpened
         </div>
 
         <IslamicArchCard>
-          <div className="min-h-[460px] sm:min-h-[500px] flex flex-col justify-between items-center w-full relative">
+          {/* Fixed-height stage for cinematic page swaps */}
+          <div className="relative w-full overflow-hidden" style={{ minHeight: 'clamp(420px, 60vh, 560px)' }}>
+            <AnimatePresence mode="wait">
 
-            {/* TOP STORY PROGRESS BARS (Instagram/WhatsApp Story Style) */}
-            <div className="w-full flex items-center justify-center gap-1.5 mb-2 z-20 px-4">
-              {[1, 2, 3].map((page) => {
-                const isActive = currentPage === page;
-                const isPast = currentPage > page;
-                return (
-                  <button
-                    key={page}
-                    onClick={() => {
-                      setIsPlaying(false);
-                      setDirection(page > currentPage ? 1 : -1);
-                      setCurrentPage(page);
-                    }}
-                    className="flex-1 h-1.5 rounded-full bg-[#D4AF37]/20 overflow-hidden relative focus:outline-none"
-                    aria-label={`Ke Halaman ${page}`}
-                  >
-                    <div
-                      className={`h-full bg-[#D4AF37] transition-all ${
-                        isPast ? 'w-full' : isActive && isPlaying ? 'w-full duration-[5500ms] ease-linear' : isActive ? 'w-full' : 'w-0'
-                      }`}
-                    />
-                  </button>
-                );
-              })}
-            </div>
-
-            {/* PAGE CONTENT SWITCHER (With Touch Drag Swipe Support) */}
-            <motion.div
-              drag="x"
-              dragConstraints={{ left: 0, right: 0 }}
-              dragElastic={0.2}
-              onDragEnd={handleDragEnd}
-              className="w-full flex-1 flex flex-col items-center justify-center relative touch-pan-y cursor-grab active:cursor-grabbing"
-            >
-              <AnimatePresence mode="wait" custom={direction}>
-                
-                {/* ── PAGE 1: HERO MONOGRAM & MAJLIS TITLE ── */}
-                {currentPage === 1 && (
+              {/* ═══════════════════════════════════════════════════
+                  PAGE 1 — COVER (Restored Original HeroSection)
+                  Bismillah → Quran → Walimatulurus → Names → Date
+                 ═══════════════════════════════════════════════════ */}
+              {currentPage === 1 && (
+                <motion.div
+                  key="page1"
+                  variants={{ ...pageVariants, ...staggerContainer }}
+                  initial="enter"
+                  animate="center"
+                  exit="exit"
+                  transition={cinematicTransition}
+                  className="absolute inset-0 flex flex-col items-center justify-center gap-[clamp(8px,1.5vh,20px)] will-change-transform"
+                >
+                  {/* Bismillah */}
                   <motion.div
-                    key="page1"
-                    custom={direction}
-                    variants={pageVariants}
-                    initial="initial"
-                    animate="animate"
-                    exit="exit"
-                    transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-                    className="w-full flex flex-col items-center justify-center space-y-3.5 py-1"
+                    variants={childReveal}
+                    style={{
+                      fontFamily: "'Amiri', serif",
+                      fontSize: 'clamp(18px, 4vw, 36px)',
+                      color: '#B8860B',
+                      letterSpacing: '0.04em',
+                    }}
                   >
-                    {/* Bismillah */}
-                    <div
+                    بِسْمِ ٱللَّٰهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ
+                  </motion.div>
+
+                  {/* Quran verse */}
+                  <motion.p
+                    variants={childReveal}
+                    style={{
+                      fontFamily: "'Cormorant Garamond', serif",
+                      fontStyle: 'italic',
+                      fontSize: 'clamp(10px, 1.6vw, 14px)',
+                      color: 'rgba(40,5,11,0.75)',
+                      maxWidth: '420px',
+                      lineHeight: 1.6,
+                      textAlign: 'center',
+                    }}
+                  >
+                    &ldquo;Dan di antara tanda-tanda kekuasaan-Nya ialah Dia menciptakan untukmu isteri-isteri dari jenismu sendiri, supaya kamu cenderung dan merasa tenteram kepadanya...&rdquo;
+                    <span
                       style={{
-                        fontFamily: "'Amiri', serif",
-                        fontSize: 'clamp(20px, 4.5vw, 36px)',
-                        color: '#B8860B',
-                        letterSpacing: '0.04em',
+                        display: 'block',
+                        marginTop: '4px',
+                        fontFamily: "'Plus Jakarta Sans', sans-serif",
+                        fontStyle: 'normal',
+                        fontSize: '9px',
+                        color: '#976E07',
+                        letterSpacing: '0.2em',
+                        textTransform: 'uppercase',
+                        fontWeight: 600,
                       }}
                     >
-                      بِسْمِ ٱللَّٰهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ
+                      (Surah Ar-Rum: 21)
+                    </span>
+                  </motion.p>
+
+                  {/* Gold divider */}
+                  <motion.div
+                    variants={childReveal}
+                    style={{
+                      width: '60px',
+                      height: '1px',
+                      background: 'linear-gradient(90deg, transparent, rgba(212,175,55,0.6), transparent)',
+                    }}
+                  />
+
+                  {/* Walimatulurus heading */}
+                  <motion.div variants={childReveal}>
+                    <span
+                      style={{
+                        display: 'block',
+                        fontFamily: "'Cormorant Garamond', serif",
+                        fontSize: 'clamp(10px, 1.6vw, 14px)',
+                        fontWeight: 700,
+                        color: '#976E07',
+                        letterSpacing: '0.35em',
+                        textTransform: 'uppercase',
+                      }}
+                    >
+                      Walimatulurus
+                    </span>
+                    <h2
+                      style={{
+                        fontFamily: "'Plus Jakarta Sans', sans-serif",
+                        fontSize: 'clamp(8px, 1.4vw, 11px)',
+                        color: 'rgba(40,5,11,0.65)',
+                        letterSpacing: '0.25em',
+                        textTransform: 'uppercase',
+                        fontWeight: 500,
+                        marginTop: '2px',
+                      }}
+                    >
+                      Majlis Kesyukuran &amp; Perkahwinan
+                    </h2>
+                  </motion.div>
+
+                  {/* Couple Names */}
+                  <motion.div
+                    variants={childReveal}
+                    style={{ paddingTop: '4px', paddingBottom: '4px' }}
+                  >
+                    <h1
+                      style={{
+                        fontFamily: "'Cormorant Garamond', serif",
+                        fontSize: 'clamp(22px, 6.5vw, 64px)',
+                        fontWeight: 700,
+                        color: '#28050B',
+                        letterSpacing: '-0.02em',
+                        lineHeight: 1.05,
+                        whiteSpace: 'nowrap',
+                      }}
+                    >
+                      Alyea Dania
+                    </h1>
+
+                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px', margin: 'clamp(4px, 1vh, 12px) 0' }}>
+                      <span style={{ height: '1px', width: '32px', background: 'rgba(212,175,55,0.55)' }} />
+                      <Heart size={16} style={{ color: '#D4AF37', fill: 'rgba(212,175,55,0.15)' }} />
+                      <span style={{ height: '1px', width: '32px', background: 'rgba(212,175,55,0.55)' }} />
                     </div>
 
-                    {/* Surah Ar-Rum Verse */}
+                    <h1
+                      style={{
+                        fontFamily: "'Cormorant Garamond', serif",
+                        fontSize: 'clamp(22px, 6.5vw, 64px)',
+                        fontWeight: 700,
+                        color: '#28050B',
+                        letterSpacing: '-0.02em',
+                        lineHeight: 1.05,
+                        whiteSpace: 'nowrap',
+                      }}
+                    >
+                      Amirul Iqhwan
+                    </h1>
+                  </motion.div>
+
+                  {/* Invitation text */}
+                  <motion.div
+                    variants={childReveal}
+                    style={{ fontSize: 'clamp(10px, 1.6vw, 13px)', color: 'rgba(40,5,11,0.75)' }}
+                  >
                     <p
                       style={{
                         fontFamily: "'Cormorant Garamond', serif",
                         fontStyle: 'italic',
-                        fontSize: 'clamp(11px, 1.7vw, 14px)',
-                        color: 'rgba(40,5,11,0.75)',
-                        maxWidth: '420px',
-                        lineHeight: 1.6,
-                        textAlign: 'center',
+                        color: '#8B1E31',
+                        fontWeight: 500,
+                        fontSize: 'clamp(11px, 1.8vw, 15px)',
                       }}
                     >
-                      &ldquo;Dan di antara tanda-tanda kekuasaan-Nya ialah Dia menciptakan untukmu isteri-isteri dari jenismu sendiri, supaya kamu cenderung dan merasa tenteram kepadanya...&rdquo;
-                      <span
-                        style={{
-                          display: 'block',
-                          marginTop: '3px',
-                          fontFamily: "'Plus Jakarta Sans', sans-serif",
-                          fontStyle: 'normal',
-                          fontSize: '9px',
-                          color: '#976E07',
-                          letterSpacing: '0.2em',
-                          textTransform: 'uppercase',
-                          fontWeight: 600,
-                        }}
-                      >
-                        (Surah Ar-Rum: 21)
-                      </span>
+                      Dengan penuh rasa kesyukuran ke hadrat Allah SWT, kami menjemput:
                     </p>
-
-                    {/* Gold Monogram AA Logo Emblem */}
-                    <div className="w-12 h-12 rounded-full border-2 border-[#D4AF37]/60 bg-gradient-to-b from-[#FAF9F6] to-[#F5E6AB]/30 flex items-center justify-center shadow-sm my-1">
-                      <span className="font-serif font-bold text-lg text-[#28050B] tracking-tighter">
-                        A<span className="text-[#D4AF37] font-normal">&amp;</span>A
-                      </span>
-                    </div>
-
-                    {/* Heading */}
-                    <div>
-                      <span className="block font-serif text-[11px] sm:text-xs font-bold text-[#976E07] tracking-[0.35em] uppercase">
-                        Walimatulurus
-                      </span>
-                      <h2 className="font-sans text-[9px] sm:text-[10px] text-burgundy-950/60 tracking-[0.25em] uppercase font-medium mt-0.5">
-                        Majlis Kesyukuran &amp; Perkahwinan
-                      </h2>
-                    </div>
-
-                    {/* Couple Names */}
-                    <div className="py-1">
-                      <h1
-                        style={{
-                          fontFamily: "'Cormorant Garamond', serif",
-                          fontSize: 'clamp(24px, 7vw, 56px)',
-                          fontWeight: 700,
-                          color: '#28050B',
-                          letterSpacing: '-0.02em',
-                          lineHeight: 1.05,
-                          whiteSpace: 'nowrap',
-                        }}
-                      >
-                        Alyea Dania
-                      </h1>
-                      <div className="flex items-center justify-center gap-2 my-1">
-                        <span className="h-[1px] w-8 bg-[#D4AF37]/50" />
-                        <Heart size={14} className="text-[#D4AF37] fill-[#D4AF37]/20" />
-                        <span className="h-[1px] w-8 bg-[#D4AF37]/50" />
-                      </div>
-                      <h1
-                        style={{
-                          fontFamily: "'Cormorant Garamond', serif",
-                          fontSize: 'clamp(24px, 7vw, 56px)',
-                          fontWeight: 700,
-                          color: '#28050B',
-                          letterSpacing: '-0.02em',
-                          lineHeight: 1.05,
-                          whiteSpace: 'nowrap',
-                        }}
-                      >
-                        Amirul Iqhwan
-                      </h1>
-                    </div>
-
-                    <span className="text-[10px] text-[#976E07] tracking-[0.2em] font-serif uppercase font-semibold">
-                      Sabtu • 24.10.2026
-                    </span>
+                    <p
+                      style={{
+                        fontFamily: "'Plus Jakarta Sans', sans-serif",
+                        fontWeight: 700,
+                        color: '#28050B',
+                        letterSpacing: '0.02em',
+                        marginTop: '2px',
+                      }}
+                    >
+                      Dato&apos;/Datin/Tuan/Puan/Encik/Cik Seisi Keluarga
+                    </p>
+                    <p style={{ color: 'rgba(40,5,11,0.45)', fontSize: '10px', marginTop: '2px' }}>
+                      Ke majlis perkahwinan anakanda kesayangan kami
+                    </p>
                   </motion.div>
-                )}
 
-                {/* ── PAGE 2: IBU BAPA, JEMPUTAN & BUTIRAN MAJLIS ── */}
-                {currentPage === 2 && (
+                  {/* Date & Venue card */}
                   <motion.div
-                    key="page2"
-                    custom={direction}
-                    variants={pageVariants}
-                    initial="initial"
-                    animate="animate"
-                    exit="exit"
-                    transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-                    className="w-full flex flex-col items-center justify-center space-y-4 py-1"
+                    variants={childReveal}
+                    style={{
+                      width: '100%',
+                      maxWidth: '440px',
+                      padding: 'clamp(12px, 2vh, 24px)',
+                      borderRadius: '16px',
+                      background: 'rgba(250,249,246,0.9)',
+                      border: '1px solid rgba(212,175,55,0.3)',
+                      boxShadow: '0 4px 20px rgba(40,5,11,0.06)',
+                    }}
                   >
-                    <span className="text-[#976E07] font-serif text-xs tracking-[0.3em] uppercase block font-semibold">
-                      Undangan Tulus Ikhlas
-                    </span>
-
-                    {/* Parents Name */}
-                    <div className="space-y-1 text-center">
-                      <p className="font-serif text-base sm:text-lg font-bold text-burgundy-950">
-                        Hj. Ahmad Bin Ibrahim &amp; Hjh. Aminah Binti Ali
-                      </p>
-                      <p className="text-[11px] text-slate-500 font-serif italic">
-                        Bersama sekeluarga dengan penuh rasa kesyukuran menjemput:
-                      </p>
+                    <div
+                      style={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        gap: '6px',
+                        fontFamily: "'Cormorant Garamond', serif",
+                        fontWeight: 700,
+                        fontSize: 'clamp(13px, 2vw, 20px)',
+                        color: '#4A0E17',
+                        paddingBottom: '8px',
+                        borderBottom: '1px solid rgba(212,175,55,0.25)',
+                        marginBottom: '8px',
+                      }}
+                    >
+                      <Calendar size={16} style={{ color: '#D4AF37' }} />
+                      Sabtu, 24 Oktober 2026
                     </div>
-
-                    <div className="px-6 py-2.5 rounded-xl bg-[#28050B]/5 border border-[#D4AF37]/35 text-center shadow-xs">
-                      <p className="font-sans text-xs sm:text-sm font-bold text-[#28050B]">
-                        Dato&apos; / Datin / Tuan / Puan / Encik / Cik Seisi Keluarga
-                      </p>
-                    </div>
-
-                    <p className="text-xs text-slate-600 font-serif italic max-w-sm">
-                      Ke Majlis Perkahwinan Anakanda Kesayangan Kami
-                    </p>
-
-                    {/* Date & Time Box */}
-                    <div className="w-full max-w-sm p-4 rounded-xl bg-white/90 border border-[#D4AF37]/35 shadow-sm space-y-2.5">
-                      <div className="flex items-center justify-center gap-2 font-serif font-bold text-base text-[#4A0E17]">
-                        <Calendar size={16} className="text-[#D4AF37]" />
-                        <span>Sabtu, 24 Oktober 2026</span>
-                      </div>
-                      <div className="text-xs text-slate-600 flex items-center justify-center gap-1">
-                        <Clock size={13} className="text-[#D4AF37]" />
-                        <span>Masa: 11:00 PAGI – 4:00 PETANG</span>
-                      </div>
-                      <div className="text-xs text-slate-700 font-medium flex items-center justify-center gap-1 pt-1.5 border-t border-[#D4AF37]/20">
-                        <MapPin size={13} className="text-[#D4AF37] flex-shrink-0" />
+                    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '4px', color: 'rgba(40,5,11,0.7)' }}>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '4px', fontWeight: 600, color: '#28050B', fontSize: 'clamp(10px, 1.6vw, 13px)' }}>
+                        <MapPin size={14} style={{ color: '#D4AF37', flexShrink: 0 }} />
                         <span>Dewan Seri Endon, Presint 10, Putrajaya</span>
                       </div>
+                      <span style={{ fontSize: '10px', color: 'rgba(40,5,11,0.45)' }}>Masa: 11:00 PAGI – 4:00 PETANG</span>
+                    </div>
+                  </motion.div>
+                </motion.div>
+              )}
+
+              {/* ═══════════════════════════════════════════════════
+                  PAGE 2 — FORMAL INVITATION (Kad Jemputan Rasmi)
+                  Parents → Formal Text → Date/Time/Venue Detail
+                 ═══════════════════════════════════════════════════ */}
+              {currentPage === 2 && (
+                <motion.div
+                  key="page2"
+                  variants={{ ...pageVariants, ...staggerContainer }}
+                  initial="enter"
+                  animate="center"
+                  exit="exit"
+                  transition={cinematicTransition}
+                  className="absolute inset-0 flex flex-col items-center justify-center gap-[clamp(10px,2vh,24px)] will-change-transform"
+                >
+                  {/* Section label */}
+                  <motion.span
+                    variants={childReveal}
+                    style={{
+                      fontFamily: "'Cormorant Garamond', serif",
+                      fontSize: 'clamp(9px, 1.4vw, 12px)',
+                      fontWeight: 700,
+                      color: '#976E07',
+                      letterSpacing: '0.35em',
+                      textTransform: 'uppercase',
+                    }}
+                  >
+                    Atur Cara Majlis
+                  </motion.span>
+
+                  {/* Gold ornamental divider */}
+                  <motion.div
+                    variants={childReveal}
+                    style={{
+                      width: '40px',
+                      height: '1px',
+                      background: 'linear-gradient(90deg, transparent, rgba(212,175,55,0.6), transparent)',
+                    }}
+                  />
+
+                  {/* Parents' names */}
+                  <motion.div variants={childReveal} className="text-center space-y-1">
+                    <p
+                      style={{
+                        fontFamily: "'Cormorant Garamond', serif",
+                        fontWeight: 700,
+                        fontSize: 'clamp(14px, 2.2vw, 20px)',
+                        color: '#28050B',
+                        lineHeight: 1.3,
+                      }}
+                    >
+                      Hj. Ahmad Bin Ibrahim
+                    </p>
+                    <p
+                      style={{
+                        fontFamily: "'Cormorant Garamond', serif",
+                        fontStyle: 'italic',
+                        fontSize: 'clamp(10px, 1.4vw, 12px)',
+                        color: 'rgba(40,5,11,0.5)',
+                      }}
+                    >
+                      &amp;
+                    </p>
+                    <p
+                      style={{
+                        fontFamily: "'Cormorant Garamond', serif",
+                        fontWeight: 700,
+                        fontSize: 'clamp(14px, 2.2vw, 20px)',
+                        color: '#28050B',
+                        lineHeight: 1.3,
+                      }}
+                    >
+                      Hjh. Aminah Binti Ali
+                    </p>
+                  </motion.div>
+
+                  {/* Formal invitation text */}
+                  <motion.p
+                    variants={childReveal}
+                    style={{
+                      fontFamily: "'Cormorant Garamond', serif",
+                      fontStyle: 'italic',
+                      fontSize: 'clamp(10px, 1.5vw, 13px)',
+                      color: '#8B1E31',
+                      fontWeight: 500,
+                      maxWidth: '380px',
+                      lineHeight: 1.6,
+                      textAlign: 'center',
+                    }}
+                  >
+                    Dengan segala hormatnya kami menjemput Dato&apos;/Datin/Tuan/Puan/Encik/Cik sekeluarga ke majlis perkahwinan puteri/putera kami
+                  </motion.p>
+
+                  {/* Couple names (smaller, supporting role on this page) */}
+                  <motion.div variants={childReveal} className="text-center">
+                    <p
+                      style={{
+                        fontFamily: "'Cormorant Garamond', serif",
+                        fontSize: 'clamp(18px, 4.5vw, 36px)',
+                        fontWeight: 700,
+                        color: '#28050B',
+                        letterSpacing: '-0.01em',
+                        lineHeight: 1.15,
+                      }}
+                    >
+                      Alyea Dania <span style={{ color: '#D4AF37', fontWeight: 400 }}>&amp;</span> Amirul Iqhwan
+                    </p>
+                  </motion.div>
+
+                  {/* Detailed event information card */}
+                  <motion.div
+                    variants={childReveal}
+                    style={{
+                      width: '100%',
+                      maxWidth: '400px',
+                      padding: 'clamp(16px, 2.5vh, 28px)',
+                      borderRadius: '16px',
+                      background: 'rgba(250,249,246,0.92)',
+                      border: '1px solid rgba(212,175,55,0.3)',
+                      boxShadow: '0 4px 24px rgba(40,5,11,0.06)',
+                    }}
+                  >
+                    {/* Date */}
+                    <div
+                      style={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        gap: '6px',
+                        fontFamily: "'Cormorant Garamond', serif",
+                        fontWeight: 700,
+                        fontSize: 'clamp(14px, 2.2vw, 20px)',
+                        color: '#4A0E17',
+                        marginBottom: '12px',
+                      }}
+                    >
+                      <Calendar size={16} style={{ color: '#D4AF37' }} />
+                      Sabtu, 24 Oktober 2026
                     </div>
 
-                    {/* Save to Calendar Button */}
-                    <a
-                      href={googleCalendarUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="px-4 py-1.5 rounded-full bg-[#28050B] text-[#FFFEFA] text-xs font-semibold flex items-center gap-1.5 border border-[#D4AF37]/40 shadow-sm hover:scale-105 transition-transform"
-                    >
-                      <Calendar size={13} className="text-[#D4AF37]" />
-                      <span>Simpan Ke Google Calendar</span>
-                    </a>
-                  </motion.div>
-                )}
-
-                {/* ── PAGE 3: DOA, HUBUNGI & QR LOKASI ── */}
-                {currentPage === 3 && (
-                  <motion.div
-                    key="page3"
-                    custom={direction}
-                    variants={pageVariants}
-                    initial="initial"
-                    animate="animate"
-                    exit="exit"
-                    transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-                    className="w-full flex flex-col items-center justify-center space-y-4 py-1"
-                  >
-                    <span className="text-[#976E07] font-serif text-xs tracking-[0.3em] uppercase block font-semibold">
-                      Titipan Doa &amp; Perhubungan
-                    </span>
-
-                    {/* Blessing Du'a */}
-                    <p className="font-serif italic text-xs sm:text-sm text-burgundy-950/85 max-w-md leading-relaxed">
-                      &ldquo;Ya Allah, berkatilah majlis perkahwinan ini. Limpahkanlah baraqah dan rahmat-Mu kepada kedua mempelai ini, kurniakanlah zuriat yang soleh dan solehah, serta kekalkanlah jodoh mereka hingga ke syurga.&rdquo;
-                    </p>
-
-                    {/* Contact Persons */}
-                    <div className="w-full max-w-sm space-y-1.5 text-left">
-                      <p className="text-[10px] text-[#976E07] tracking-[0.2em] font-semibold uppercase text-center mb-1">
-                        Hubungi Pihak Keluarga:
-                      </p>
-                      <div className="grid grid-cols-2 gap-2 text-xs">
-                        <a href="https://wa.me/60123456789" target="_blank" rel="noopener noreferrer" className="p-2 rounded-lg bg-white/80 border border-[#D4AF37]/30 flex items-center justify-between hover:border-[#D4AF37] transition-all">
-                          <div>
-                            <p className="font-bold text-burgundy-950">Hj. Ahmad (Abah)</p>
-                            <p className="text-[10px] text-slate-500">012-3456789</p>
-                          </div>
-                          <Phone size={13} className="text-[#D4AF37]" />
-                        </a>
-                        <a href="https://wa.me/60198765432" target="_blank" rel="noopener noreferrer" className="p-2 rounded-lg bg-white/80 border border-[#D4AF37]/30 flex items-center justify-between hover:border-[#D4AF37] transition-all">
-                          <div>
-                            <p className="font-bold text-burgundy-950">Hjh. Aminah (Ma)</p>
-                            <p className="text-[10px] text-slate-500">019-8765432</p>
-                          </div>
-                          <Phone size={13} className="text-[#D4AF37]" />
-                        </a>
+                    {/* Time details */}
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '6px', borderTop: '1px solid rgba(212,175,55,0.2)', paddingTop: '12px' }}>
+                      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '6px', fontSize: 'clamp(10px, 1.5vw, 12px)', color: '#28050B' }}>
+                        <Clock size={13} style={{ color: '#D4AF37', flexShrink: 0 }} />
+                        <span style={{ fontWeight: 600 }}>11:00 Pagi – 4:00 Petang</span>
+                      </div>
+                      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '6px', fontSize: 'clamp(10px, 1.5vw, 12px)', color: 'rgba(40,5,11,0.6)' }}>
+                        <Heart size={11} style={{ color: '#D4AF37' }} />
+                        <span style={{ fontStyle: 'italic' }}>Ketibaan Pengantin: 12:30 Tengah Hari</span>
                       </div>
                     </div>
 
-                    {/* Direct Quick Action Buttons */}
-                    <div className="flex items-center gap-2 pt-1 flex-wrap justify-center">
-                      <a
-                        href="https://waze.com/ul?q=Dewan%20Seri%20Endon%20Putrajaya"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="px-3 py-1.5 rounded-full bg-[#28050B] text-[#FFFEFA] text-[11px] font-semibold flex items-center gap-1 border border-[#D4AF37]/40 shadow-sm hover:scale-105 transition-transform"
-                      >
-                        <MapPin size={12} className="text-[#D4AF37]" />
-                        <span>Waze Lokasi</span>
-                      </a>
-                      <a
-                        href="https://maps.google.com/?q=Dewan+Seri+Endon+Presint+10+Putrajaya"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="px-3 py-1.5 rounded-full bg-[#D4AF37] text-burgundy-950 text-[11px] font-semibold flex items-center gap-1 shadow-sm hover:scale-105 transition-transform"
-                      >
-                        <QrCode size={12} />
-                        <span>Google Maps</span>
-                      </a>
-                      <button
-                        onClick={scrollToRsvp}
-                        className="px-3.5 py-1.5 rounded-full bg-gradient-to-r from-burgundy-900 to-burgundy-950 text-gold-300 text-[11px] font-bold flex items-center gap-1 border border-gold-500/50 shadow-sm hover:scale-105 transition-transform"
-                      >
-                        <CheckCircle2 size={12} className="text-gold-400" />
-                        <span>Pengesahan RSVP</span>
-                      </button>
+                    {/* Venue */}
+                    <div
+                      style={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        gap: '5px',
+                        marginTop: '12px',
+                        paddingTop: '10px',
+                        borderTop: '1px solid rgba(212,175,55,0.2)',
+                        fontWeight: 600,
+                        fontSize: 'clamp(10px, 1.5vw, 13px)',
+                        color: '#28050B',
+                      }}
+                    >
+                      <MapPin size={14} style={{ color: '#D4AF37', flexShrink: 0 }} />
+                      <span>Dewan Seri Endon, Presint 10, Putrajaya</span>
                     </div>
                   </motion.div>
-                )}
+                </motion.div>
+              )}
 
-              </AnimatePresence>
-            </motion.div>
+              {/* ═══════════════════════════════════════════════════
+                  PAGE 3 — DOA, HUBUNGI & LOKASI
+                  Blessing → Contact Family → GPS Quick Links
+                 ═══════════════════════════════════════════════════ */}
+              {currentPage === 3 && (
+                <motion.div
+                  key="page3"
+                  variants={{ ...pageVariants, ...staggerContainer }}
+                  initial="enter"
+                  animate="center"
+                  exit="exit"
+                  transition={cinematicTransition}
+                  className="absolute inset-0 flex flex-col items-center justify-center gap-[clamp(10px,2vh,24px)] will-change-transform"
+                >
+                  {/* Section label */}
+                  <motion.span
+                    variants={childReveal}
+                    style={{
+                      fontFamily: "'Cormorant Garamond', serif",
+                      fontSize: 'clamp(9px, 1.4vw, 12px)',
+                      fontWeight: 700,
+                      color: '#976E07',
+                      letterSpacing: '0.35em',
+                      textTransform: 'uppercase',
+                    }}
+                  >
+                    Titipan Doa &amp; Perhubungan
+                  </motion.span>
 
-            {/* BOTTOM E-CARD CONTROLS */}
-            <div className="w-full flex items-center justify-between px-2 pt-3 border-t border-[#D4AF37]/25 text-[11px] z-20">
-              <button
-                onClick={handlePrev}
-                className="flex items-center gap-1 text-[#976E07] hover:text-[#28050B] font-serif font-medium transition-colors focus:outline-none"
-              >
-                <ChevronLeft size={16} />
-                <span>Sebelumnya</span>
-              </button>
+                  {/* Gold ornamental divider */}
+                  <motion.div
+                    variants={childReveal}
+                    style={{
+                      width: '40px',
+                      height: '1px',
+                      background: 'linear-gradient(90deg, transparent, rgba(212,175,55,0.6), transparent)',
+                    }}
+                  />
 
-              <button
-                onClick={() => setIsPlaying(!isPlaying)}
-                className="flex items-center gap-1 text-slate-500 hover:text-burgundy-950 text-[10px] px-2.5 py-0.5 rounded-full bg-white/70 border border-[#D4AF37]/30 transition-all"
-                title={isPlaying ? 'Jeda Pertukaran Halaman' : 'Mainkan Pertukaran Halaman Auto'}
-              >
-                {isPlaying ? <Pause size={10} className="text-[#D4AF37]" /> : <Play size={10} className="text-[#D4AF37]" />}
-                <span>{isPlaying ? 'Auto-Slide' : 'Dihentikan'}</span>
-              </button>
+                  {/* Blessing du'a */}
+                  <motion.p
+                    variants={childReveal}
+                    style={{
+                      fontFamily: "'Cormorant Garamond', serif",
+                      fontStyle: 'italic',
+                      fontSize: 'clamp(11px, 1.6vw, 14px)',
+                      color: 'rgba(40,5,11,0.78)',
+                      maxWidth: '400px',
+                      lineHeight: 1.7,
+                      textAlign: 'center',
+                    }}
+                  >
+                    &ldquo;Ya Allah, berkatilah majlis perkahwinan ini. Limpahkanlah baraqah dan rahmat-Mu kepada kedua mempelai, kurniakanlah zuriat yang soleh dan solehah, serta kekalkanlah jodoh mereka hingga ke Jannah.&rdquo;
+                  </motion.p>
 
-              <button
-                onClick={handleNext}
-                className="flex items-center gap-1 text-[#976E07] hover:text-[#28050B] font-serif font-medium transition-colors focus:outline-none"
-              >
-                <span>Seterusnya</span>
-                <ChevronRight size={16} />
-              </button>
-            </div>
+                  {/* Contact persons */}
+                  <motion.div
+                    variants={childReveal}
+                    style={{ width: '100%', maxWidth: '380px' }}
+                  >
+                    <p
+                      style={{
+                        fontFamily: "'Plus Jakarta Sans', sans-serif",
+                        fontSize: '10px',
+                        color: '#976E07',
+                        letterSpacing: '0.2em',
+                        textTransform: 'uppercase',
+                        fontWeight: 600,
+                        textAlign: 'center',
+                        marginBottom: '8px',
+                      }}
+                    >
+                      Hubungi Pihak Keluarga
+                    </p>
+                    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '8px' }}>
+                      <a
+                        href="https://wa.me/60123456789"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        style={{
+                          padding: '10px 12px',
+                          borderRadius: '12px',
+                          background: 'rgba(255,254,250,0.9)',
+                          border: '1px solid rgba(212,175,55,0.3)',
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'space-between',
+                          textDecoration: 'none',
+                        }}
+                      >
+                        <div>
+                          <p style={{ fontFamily: "'Cormorant Garamond', serif", fontWeight: 700, fontSize: '13px', color: '#28050B' }}>
+                            Hj. Ahmad
+                          </p>
+                          <p style={{ fontSize: '10px', color: 'rgba(40,5,11,0.45)', marginTop: '1px' }}>
+                            Abah • 012-3456789
+                          </p>
+                        </div>
+                        <Phone size={13} style={{ color: '#D4AF37' }} />
+                      </a>
+                      <a
+                        href="https://wa.me/60198765432"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        style={{
+                          padding: '10px 12px',
+                          borderRadius: '12px',
+                          background: 'rgba(255,254,250,0.9)',
+                          border: '1px solid rgba(212,175,55,0.3)',
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'space-between',
+                          textDecoration: 'none',
+                        }}
+                      >
+                        <div>
+                          <p style={{ fontFamily: "'Cormorant Garamond', serif", fontWeight: 700, fontSize: '13px', color: '#28050B' }}>
+                            Hjh. Aminah
+                          </p>
+                          <p style={{ fontSize: '10px', color: 'rgba(40,5,11,0.45)', marginTop: '1px' }}>
+                            Ibu • 019-8765432
+                          </p>
+                        </div>
+                        <Phone size={13} style={{ color: '#D4AF37' }} />
+                      </a>
+                    </div>
+                  </motion.div>
 
+                  {/* GPS Quick Access */}
+                  <motion.div
+                    variants={childReveal}
+                    style={{ display: 'flex', alignItems: 'center', gap: '10px', flexWrap: 'wrap', justifyContent: 'center' }}
+                  >
+                    <a
+                      href="https://waze.com/ul?q=Dewan%20Seri%20Endon%20Putrajaya"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      style={{
+                        padding: '8px 16px',
+                        borderRadius: '999px',
+                        background: '#28050B',
+                        color: '#FFFEFA',
+                        fontSize: '11px',
+                        fontWeight: 600,
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: '5px',
+                        border: '1px solid rgba(212,175,55,0.4)',
+                        textDecoration: 'none',
+                        boxShadow: '0 2px 8px rgba(40,5,11,0.12)',
+                      }}
+                    >
+                      <MapPin size={12} style={{ color: '#D4AF37' }} />
+                      <span>Navigasi Waze</span>
+                    </a>
+                    <a
+                      href="https://maps.google.com/?q=Dewan+Seri+Endon+Presint+10+Putrajaya"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      style={{
+                        padding: '8px 16px',
+                        borderRadius: '999px',
+                        background: '#D4AF37',
+                        color: '#28050B',
+                        fontSize: '11px',
+                        fontWeight: 600,
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: '5px',
+                        textDecoration: 'none',
+                        boxShadow: '0 2px 8px rgba(212,175,55,0.25)',
+                      }}
+                    >
+                      <MapPin size={12} />
+                      <span>Google Maps</span>
+                    </a>
+                  </motion.div>
+                </motion.div>
+              )}
+
+            </AnimatePresence>
           </div>
         </IslamicArchCard>
       </motion.div>
     </section>
   );
 };
-
