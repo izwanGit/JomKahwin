@@ -2,7 +2,7 @@ import React from 'react';
 import { Share2, Heart } from 'lucide-react';
 
 export const Footer: React.FC = () => {
-  const shareText = "Assalamualaikum! Anda dijemput ke Majlis Perkahwinan Alyea Dania & Amirul Ikhwan pada Sabtu, 24 Oktober 2026. Klik pautan untuk maklumat lanjut dan pengesahan kehadiran: " + window.location.href;
+  const shareText = "Assalamualaikum! Anda dijemput ke Majlis Perkahwinan Alyea Dania & Amirul Iqhwan pada Sabtu, 24 Oktober 2026. Klik pautan untuk maklumat lanjut dan pengesahan kehadiran: " + window.location.href;
 
   const handleShare = () => {
     if (navigator.share) {

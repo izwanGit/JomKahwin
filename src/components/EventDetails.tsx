@@ -12,7 +12,7 @@ export const EventDetails: React.FC = () => {
 
   const wazeUrl = 'https://waze.com/ul?q=Dewan%20Seri%20Endon%20Putrajaya';
   const googleMapsUrl = 'https://maps.google.com/?q=Dewan+Seri+Endon+Presint+10+Putrajaya';
-  const googleCalendarUrl = 'https://calendar.google.com/calendar/render?action=TEMPLATE&text=Walimatulurus+Alyea+%26+Amirul&dates=20261024T030000Z/20261024T080000Z&details=Majlis+Perkahwinan+Alyea+Dania+%26+Amirul+Ikhwan.&location=Dewan+Seri+Endon,+Presint+10,+Putrajaya';
+  const googleCalendarUrl = 'https://calendar.google.com/calendar/render?action=TEMPLATE&text=Walimatulurus+Alyea+%26+Amirul&dates=20261024T030000Z/20261024T080000Z&details=Majlis+Perkahwinan+Alyea+Dania+%26+Amirul+Iqhwan.&location=Dewan+Seri+Endon,+Presint+10,+Putrajaya';
 
   return (
     <section id="lokasi" className="py-16 px-4 max-w-4xl mx-auto space-y-12">

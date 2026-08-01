@@ -177,7 +177,7 @@ export const HeroSection: React.FC = () => {
                 lineHeight: 1.05,
               }}
             >
-              Amirul Ikhwan
+              Amirul Iqhwan
             </h1>
           </motion.div>
 
