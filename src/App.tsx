@@ -74,7 +74,7 @@ export function App() {
       <MusicPlayer autoPlay={isAudioAutoPlay} />
 
       {/* Main Page Layout */}
-      <main className="relative z-10 space-y-8 pb-12">
+      <main className="relative z-10 space-y-8 pb-12 overflow-x-hidden w-full max-w-full">
         <ThreePageStoryCard isOpened={isEnvelopeOpen} />
         <CountdownTimer />
         <EventDetails />

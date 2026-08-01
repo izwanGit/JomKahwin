@@ -112,7 +112,7 @@ export const ThreePageStoryCard: React.FC<ThreePageStoryCardProps> = ({ isOpened
   return (
     <section
       id="utama"
-      className="relative min-h-[100svh] flex flex-col items-center justify-center text-center px-4 pt-10 pb-20 sm:py-12"
+      className="relative min-h-[100svh] flex flex-col items-center justify-center text-center px-4 pt-10 pb-20 sm:py-12 overflow-x-hidden w-full max-w-full"
       style={{ backgroundColor: '#FFFEFA' }}
     >
       {/* ── Cotton paper texture overlay ── */}
