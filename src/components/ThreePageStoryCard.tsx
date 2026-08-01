@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Heart, Calendar, MapPin, Phone, Clock } from 'lucide-react';
-import { BotanicalFrame } from './BotanicalFrame';
 import { IslamicArchCard } from './IslamicArchCard';
 
 interface ThreePageStoryCardProps {
@@ -113,7 +112,7 @@ export const ThreePageStoryCard: React.FC<ThreePageStoryCardProps> = ({ isOpened
   return (
     <section
       id="utama"
-      className="relative min-h-[100svh] flex flex-col items-center justify-center text-center px-4 py-8"
+      className="relative min-h-[100svh] flex flex-col items-center justify-center text-center px-4 pt-6 pb-24 sm:py-8"
       style={{ backgroundColor: '#FFFEFA' }}
     >
       {/* ── Cotton paper texture overlay ── */}
@@ -152,10 +151,6 @@ export const ThreePageStoryCard: React.FC<ThreePageStoryCardProps> = ({ isOpened
         transition={{ duration: 2.0, ease: [0.16, 1, 0.3, 1] }}
         className="relative z-10 w-full max-w-xl mx-auto py-4"
       >
-        {/* Botanical frame anchored to card corners */}
-        <div className="absolute inset-0 pointer-events-none z-30 overflow-visible">
-          <BotanicalFrame />
-        </div>
         <IslamicArchCard>
           {/* Stage locked to exact uniform height across all 3 pages */}
           <div className="relative w-full h-[490px] sm:h-[550px] overflow-hidden flex items-center justify-center">

@@ -3,11 +3,10 @@ import { motion } from 'framer-motion';
 
 /**
  * BotanicalFrame
- * Perfectly tuned corner floral framing for both mobile & desktop viewports.
- * Uses media query breakpoint logic / responsive clamp ranges so that:
- * - On Mobile (< 640px): Flowers are scaled UP to a clear, beautiful size (100px - 140px)
- *   and shifted outward slightly so they frame the card corners without overlapping text or navigation bar.
- * - On Desktop (>= 640px): Flowers sit comfortably at 130px - 170px.
+ *
+ * Flawless mobile & desktop corner botanical frame anchored directly to IslamicArchCard.
+ * Sized and offset so that corner flowers hug the card frame line perfectly on mobile phones
+ * without colliding with text, buttons, or the fixed bottom navigation dock.
  */
 export const BotanicalFrame: React.FC = () => {
   return (
@@ -22,9 +21,9 @@ export const BotanicalFrame: React.FC = () => {
         transition={{ duration: 12, repeat: Infinity, ease: 'easeInOut' }}
         style={{
           position: 'absolute',
-          top: 'clamp(-28px, -5vw, -36px)',
-          left: 'clamp(-28px, -5vw, -36px)',
-          width: 'clamp(105px, 28vw, 160px)',
+          top: 'clamp(-14px, -2vw, -24px)',
+          left: 'clamp(-14px, -2vw, -24px)',
+          width: 'clamp(85px, 22%, 145px)',
           zIndex: 25,
           transformOrigin: 'top left',
           willChange: 'transform',
@@ -40,9 +39,9 @@ export const BotanicalFrame: React.FC = () => {
           transition={{ duration: 1.0, delay: 0.3 }}
           style={{
             position: 'absolute',
-            bottom: '5%',
-            right: '-8%',
-            width: '30%',
+            bottom: '8%',
+            right: '-6%',
+            width: '28%',
             transform: 'rotate(18deg)',
             zIndex: 22,
           }}
@@ -59,7 +58,7 @@ export const BotanicalFrame: React.FC = () => {
             width: '100%',
             position: 'relative',
             zIndex: 25,
-            filter: 'drop-shadow(0 8px 20px rgba(40,5,11,0.22))',
+            filter: 'drop-shadow(0 6px 16px rgba(40,5,11,0.2))',
           }}
         />
       </motion.div>
@@ -73,9 +72,9 @@ export const BotanicalFrame: React.FC = () => {
         transition={{ duration: 15, delay: 2, repeat: Infinity, ease: 'easeInOut' }}
         style={{
           position: 'absolute',
-          top: 'clamp(-24px, -4vw, -30px)',
-          right: 'clamp(-24px, -4vw, -30px)',
-          width: 'clamp(90px, 24vw, 135px)',
+          top: 'clamp(-12px, -1.8vw, -20px)',
+          right: 'clamp(-12px, -1.8vw, -20px)',
+          width: 'clamp(72px, 18%, 125px)',
           zIndex: 25,
           transformOrigin: 'top right',
           pointerEvents: 'none',
@@ -91,9 +90,9 @@ export const BotanicalFrame: React.FC = () => {
           transition={{ duration: 1.0, delay: 0.4 }}
           style={{
             position: 'absolute',
-            bottom: '-5%',
-            left: '-10%',
-            width: '30%',
+            bottom: '-4%',
+            left: '-8%',
+            width: '28%',
             transform: 'rotate(-14deg)',
             zIndex: 22,
           }}
@@ -110,7 +109,7 @@ export const BotanicalFrame: React.FC = () => {
             width: '100%',
             position: 'relative',
             zIndex: 25,
-            filter: 'drop-shadow(0 6px 16px rgba(40,5,11,0.2))',
+            filter: 'drop-shadow(0 5px 14px rgba(40,5,11,0.18))',
           }}
         />
       </motion.div>
@@ -124,9 +123,9 @@ export const BotanicalFrame: React.FC = () => {
         transition={{ duration: 14, delay: 1, repeat: Infinity, ease: 'easeInOut' }}
         style={{
           position: 'absolute',
-          bottom: 'clamp(-24px, -4vw, -30px)',
-          left: 'clamp(-24px, -4vw, -30px)',
-          width: 'clamp(95px, 25vw, 140px)',
+          bottom: 'clamp(-12px, -1.8vw, -20px)',
+          left: 'clamp(-12px, -1.8vw, -20px)',
+          width: 'clamp(78px, 19%, 130px)',
           zIndex: 25,
           pointerEvents: 'none',
           transformOrigin: 'bottom left',
@@ -142,9 +141,9 @@ export const BotanicalFrame: React.FC = () => {
           transition={{ duration: 1.0, delay: 0.5 }}
           style={{
             position: 'absolute',
-            top: '-8%',
-            right: '-6%',
-            width: '30%',
+            top: '-6%',
+            right: '-5%',
+            width: '28%',
             transform: 'rotate(16deg)',
             zIndex: 22,
           }}
@@ -161,7 +160,7 @@ export const BotanicalFrame: React.FC = () => {
             width: '100%',
             position: 'relative',
             zIndex: 25,
-            filter: 'drop-shadow(0 6px 16px rgba(40,5,11,0.2))',
+            filter: 'drop-shadow(0 5px 14px rgba(40,5,11,0.18))',
           }}
         />
       </motion.div>
@@ -175,9 +174,9 @@ export const BotanicalFrame: React.FC = () => {
         transition={{ duration: 16, delay: 3, repeat: Infinity, ease: 'easeInOut' }}
         style={{
           position: 'absolute',
-          bottom: 'clamp(-28px, -4.5vw, -34px)',
-          right: 'clamp(-28px, -4.5vw, -34px)',
-          width: 'clamp(100px, 26vw, 145px)',
+          bottom: 'clamp(-14px, -2vw, -24px)',
+          right: 'clamp(-14px, -2vw, -24px)',
+          width: 'clamp(82px, 20%, 135px)',
           zIndex: 25,
           pointerEvents: 'none',
           transformOrigin: 'bottom right',
@@ -195,7 +194,7 @@ export const BotanicalFrame: React.FC = () => {
             width: '100%',
             position: 'relative',
             zIndex: 25,
-            filter: 'drop-shadow(0 8px 20px rgba(40,5,11,0.22))',
+            filter: 'drop-shadow(0 6px 16px rgba(40,5,11,0.2))',
           }}
         />
       </motion.div>

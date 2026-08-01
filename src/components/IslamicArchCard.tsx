@@ -1,5 +1,6 @@
 import React, { type ReactNode } from 'react';
 import { motion } from 'framer-motion';
+import { BotanicalFrame } from './BotanicalFrame';
 
 interface IslamicArchCardProps {
   children: ReactNode;
@@ -22,6 +23,11 @@ export const IslamicArchCard: React.FC<IslamicArchCardProps> = ({ children }) =>
         border: '1px solid rgba(212,175,55,0.4)',
       }}
     >
+      {/* ── Botanical frame anchored flush to the outer card border corners ── */}
+      <div className="absolute inset-0 pointer-events-none z-30 overflow-visible">
+        <BotanicalFrame />
+      </div>
+
       {/* Inner relative container to constrain absolute layers inside the padding */}
       <div className="relative w-full h-full">
         {/* ── BACKGROUND LAYER (Arch + Body) ── */}
@@ -30,11 +36,11 @@ export const IslamicArchCard: React.FC<IslamicArchCardProps> = ({ children }) =>
           <div className="w-full relative" style={{ paddingBottom: '35%' }}>
             <svg
               className="absolute overflow-visible"
-              style={{ 
+              style={{
                 bottom: '-2px', // Overlap body by 2px to eliminate subpixel gap
                 left: '1px',    // Align x=0 to center of 2px left border
-                width: 'calc(100% - 2px)', 
-                height: 'calc(100% + 2px)' 
+                width: 'calc(100% - 2px)',
+                height: 'calc(100% + 2px)',
               }}
               viewBox="0 0 100 40"
               preserveAspectRatio="none"
@@ -69,7 +75,7 @@ export const IslamicArchCard: React.FC<IslamicArchCardProps> = ({ children }) =>
         </div>
 
         {/* ── FOREGROUND CONTENT LAYER ── */}
-        <div 
+        <div
           className="relative z-10 w-full flex flex-col items-center gap-[clamp(8px,1.5vh,20px)]"
           style={{
             padding: 'clamp(32px, 12vw, 80px) clamp(16px, 4vw, 56px) clamp(24px, 6vh, 56px)',
