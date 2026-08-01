@@ -112,7 +112,7 @@ export const ThreePageStoryCard: React.FC<ThreePageStoryCardProps> = ({ isOpened
   return (
     <section
       id="utama"
-      className="relative min-h-[100svh] flex flex-col items-center justify-center text-center px-4 pt-6 pb-24 sm:py-8"
+      className="relative min-h-[100svh] flex flex-col items-center justify-center text-center px-4 pt-10 pb-20 sm:py-12"
       style={{ backgroundColor: '#FFFEFA' }}
     >
       {/* ── Cotton paper texture overlay ── */}
@@ -137,7 +137,7 @@ export const ThreePageStoryCard: React.FC<ThreePageStoryCardProps> = ({ isOpened
         initial={{ opacity: 0, scale: 0.95, y: 20 }}
         animate={isOpened ? { opacity: 1, scale: 1, y: 0 } : { opacity: 0, scale: 0.95, y: 20 }}
         transition={{ duration: 2.0, ease: [0.16, 1, 0.3, 1] }}
-        className="relative z-10 w-full max-w-xl mx-auto py-4"
+        className="relative z-10 w-full max-w-xl mx-auto py-2 -mt-2 sm:-mt-3"
       >
         <IslamicArchCard>
           {/* Stage locked to exact uniform height across all 3 pages */}
