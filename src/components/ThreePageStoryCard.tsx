@@ -131,18 +131,6 @@ export const ThreePageStoryCard: React.FC<ThreePageStoryCardProps> = ({ isOpened
         }}
       />
 
-      {/* ── Outer gold double-border frame lines ── */}
-      <div
-        aria-hidden="true"
-        style={{
-          position: 'absolute',
-          inset: '16px',
-          border: '1px solid rgba(212,175,55,0.18)',
-          borderRadius: '20px',
-          pointerEvents: 'none',
-          zIndex: 6,
-        }}
-      />
 
       {/* ── CINEMATIC STORY CARD ── */}
       <motion.div
