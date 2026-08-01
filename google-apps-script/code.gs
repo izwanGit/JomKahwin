@@ -5,6 +5,7 @@
  */
 
 var SHEET_NAME = "RSVP";
+var SPREADSHEET_ID = "1MWbcl5ju2YJg9JREoZlcp1rzxkVyKKP9X8dn2CyP7g0";
 var HEADERS = [
   "Tarikh Masa",
   "Nama Penuh",
@@ -45,9 +46,10 @@ function doPost(e) {
       throw new Error("Nama dan nombor telefon diperlukan.");
     }
 
-    var spreadsheet = SpreadsheetApp.getActiveSpreadsheet();
+    var spreadsheet = getSpreadsheet_();
     var sheet = spreadsheet.getSheetByName(SHEET_NAME) || spreadsheet.insertSheet(SHEET_NAME);
     ensureHeaders_(sheet);
+    sheet.getRange(1, 3, sheet.getMaxRows(), 1).setNumberFormat("@");
 
     var row = [new Date(), name, phone, attendance, pax, wishes];
     var existingRow = findPhoneRow_(sheet, phone);
@@ -82,7 +84,7 @@ function ensureHeaders_(sheet) {
 }
 
 function wishesResponse_(e) {
-  var spreadsheet = SpreadsheetApp.getActiveSpreadsheet();
+  var spreadsheet = getSpreadsheet_();
   var sheet = spreadsheet.getSheetByName(SHEET_NAME);
   var wishes = [];
 
@@ -121,8 +123,22 @@ function findPhoneRow_(sheet, phone) {
   return 0;
 }
 
+function getSpreadsheet_() {
+  return SpreadsheetApp.openById(SPREADSHEET_ID);
+}
+
 function normalizePhone_(value) {
-  return String(value || "").replace(/[^0-9+]/g, "").slice(0, 20);
+  var digits = String(value || "").replace(/\D/g, "");
+
+  // Store Malaysian numbers consistently. This also makes old spreadsheet
+  // values that lost their leading zero match new form submissions.
+  if (digits.indexOf("60") === 0) {
+    digits = "0" + digits.slice(2);
+  } else if (digits.indexOf("1") === 0 && (digits.length === 9 || digits.length === 10)) {
+    digits = "0" + digits;
+  }
+
+  return digits.slice(0, 12);
 }
 
 function cleanCell_(value, maxLength) {
