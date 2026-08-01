@@ -3,21 +3,21 @@ import { motion } from 'framer-motion';
 
 /**
  * BotanicalFrame
- * Ultra-luxury asymmetric botanical border composed from 4 unique corner arrangements.
- * All flowers are real photographs tinted to deep burgundy palette.
- * Designed to frame the invitation content without covering key text.
+ * Ultra-luxury asymmetric burgundy & gold botanical border composed from corner arrangements.
+ * Built using high-resolution burgundy rose bouquets and accent floral elements.
+ * Perfectly frames the invitation card without obscuring key text.
  */
 export const BotanicalFrame: React.FC = () => {
   return (
     <>
-      {/* ─────────────── TOP LEFT — Largest, richest arrangement ─────────────── */}
+      {/* ─────────────── TOP LEFT — Burgundy rose corner arrangement ─────────────── */}
       <motion.div
         className="pointer-events-none fixed-botanical"
-        animate={{ 
-          rotate: [-8, -5, -8],
-          y: [0, 8, 0]
+        animate={{
+          rotate: [-4, -1, -4],
+          y: [0, 6, 0],
         }}
-        transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
+        transition={{ duration: 12, repeat: Infinity, ease: 'easeInOut' }}
         style={{
           position: 'absolute',
           top: '-35px',
@@ -28,7 +28,7 @@ export const BotanicalFrame: React.FC = () => {
           willChange: 'transform',
         }}
       >
-        {/* Primary large bouquet */}
+        {/* Primary corner bouquet */}
         <motion.img
           src="/assets/floral-tl.png"
           alt=""
@@ -41,7 +41,7 @@ export const BotanicalFrame: React.FC = () => {
             filter: 'drop-shadow(0 12px 32px rgba(40,5,11,0.35)) drop-shadow(0 2px 8px rgba(40,5,11,0.2))',
           }}
         />
-        {/* Secondary accent flower — spills inward slightly */}
+        {/* Accent bloom */}
         <motion.img
           src="/assets/floral-accent-1.png"
           alt=""
@@ -60,13 +60,13 @@ export const BotanicalFrame: React.FC = () => {
         />
       </motion.div>
 
-      {/* ─────────────── TOP RIGHT — Medium, sweeping foliage ─────────────── */}
+      {/* ─────────────── TOP RIGHT — Sweeping burgundy foliage ─────────────── */}
       <motion.div
-        animate={{ 
-          y: [0, 12, 0],
-          x: [0, -6, 0]
+        animate={{
+          y: [0, 10, 0],
+          x: [0, -5, 0],
         }}
-        transition={{ duration: 15, delay: 2, repeat: Infinity, ease: "easeInOut" }}
+        transition={{ duration: 15, delay: 2, repeat: Infinity, ease: 'easeInOut' }}
         style={{
           position: 'absolute',
           top: '-30px',
@@ -90,7 +90,7 @@ export const BotanicalFrame: React.FC = () => {
             filter: 'drop-shadow(0 8px 24px rgba(40,5,11,0.3))',
           }}
         />
-        {/* Accent — tucked behind corner */}
+        {/* Accent element */}
         <motion.img
           src="/assets/floral-accent-2.png"
           alt=""
@@ -109,13 +109,13 @@ export const BotanicalFrame: React.FC = () => {
         />
       </motion.div>
 
-      {/* ─────────────── BOTTOM LEFT — Asymmetric, upward stems ─────────────── */}
+      {/* ─────────────── BOTTOM LEFT — Upward stems ─────────────── */}
       <motion.div
-        animate={{ 
+        animate={{
           rotate: [0, 3, 0],
-          y: [0, -10, 0]
+          y: [0, -8, 0],
         }}
-        transition={{ duration: 14, delay: 1, repeat: Infinity, ease: "easeInOut" }}
+        transition={{ duration: 14, delay: 1, repeat: Infinity, ease: 'easeInOut' }}
         style={{
           position: 'absolute',
           bottom: '-30px',
@@ -139,7 +139,7 @@ export const BotanicalFrame: React.FC = () => {
             filter: 'drop-shadow(0 8px 24px rgba(40,5,11,0.3))',
           }}
         />
-        {/* Small hanging accent */}
+        {/* Accent element */}
         <motion.img
           src="/assets/floral-accent-3.png"
           alt=""
@@ -158,13 +158,13 @@ export const BotanicalFrame: React.FC = () => {
         />
       </motion.div>
 
-      {/* ─────────────── BOTTOM RIGHT — Richest, most layered arrangement ─────────────── */}
+      {/* ─────────────── BOTTOM RIGHT — Rich layered bouquet ─────────────── */}
       <motion.div
-        animate={{ 
-          y: [0, -12, 0],
-          rotate: [0, -2, 0]
+        animate={{
+          y: [0, -10, 0],
+          rotate: [0, -2, 0],
         }}
-        transition={{ duration: 16, delay: 3, repeat: Infinity, ease: "easeInOut" }}
+        transition={{ duration: 16, delay: 3, repeat: Infinity, ease: 'easeInOut' }}
         style={{
           position: 'absolute',
           bottom: '-40px',
@@ -175,7 +175,7 @@ export const BotanicalFrame: React.FC = () => {
           transformOrigin: 'bottom right',
         }}
       >
-        {/* Main large bouquet — hero flower */}
+        {/* Main bouquet */}
         <motion.img
           src="/assets/floral-br.png"
           alt=""
@@ -189,7 +189,7 @@ export const BotanicalFrame: React.FC = () => {
             filter: 'drop-shadow(0 14px 36px rgba(40,5,11,0.4)) drop-shadow(0 3px 10px rgba(40,5,11,0.25))',
           }}
         />
-        {/* Secondary bloom — foreground layer */}
+        {/* Foreground bloom */}
         <motion.img
           src="/assets/floral-accent-1.png"
           alt=""
@@ -206,83 +206,7 @@ export const BotanicalFrame: React.FC = () => {
             transform: 'rotate(-15deg)',
           }}
         />
-        {/* Tiny accent — deepest foreground petal */}
-        <motion.img
-          src="/assets/floral-accent-2.png"
-          alt=""
-          aria-hidden="true"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 0.65 }}
-          transition={{ duration: 1.0, delay: 0.65 }}
-          style={{
-            position: 'absolute',
-            top: '-10%',
-            left: '20%',
-            width: '28%',
-            filter: 'drop-shadow(0 3px 8px rgba(40,5,11,0.2))',
-            transform: 'rotate(40deg)',
-          }}
-        />
       </motion.div>
-
-      {/* ─────────────── SUBTLE GOLD VINE LINES connecting corners ─────────────── */}
-      <svg
-        aria-hidden="true"
-        style={{
-          position: 'absolute',
-          inset: 0,
-          width: '100%',
-          height: '100%',
-          pointerEvents: 'none',
-          zIndex: 5,
-          overflow: 'visible',
-        }}
-      >
-        <defs>
-          <linearGradient id="vineGold" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stopColor="#D4AF37" stopOpacity="0" />
-            <stop offset="30%" stopColor="#D4AF37" stopOpacity="0.18" />
-            <stop offset="70%" stopColor="#B8860B" stopOpacity="0.15" />
-            <stop offset="100%" stopColor="#B8860B" stopOpacity="0" />
-          </linearGradient>
-        </defs>
-        {/* Top vine — TL to TR */}
-        <path
-          d="M 40 60 Q 25% 12, 50% 8 T calc(100% - 40px) 55"
-          stroke="url(#vineGold)"
-          strokeWidth="1.2"
-          fill="none"
-          strokeDasharray="6 10"
-          strokeLinecap="round"
-        />
-        {/* Right vine — TR down to BR */}
-        <path
-          d="M calc(100% - 55px) 55 Q calc(100% - 6px) 30% , calc(100% - 12px) 50% T calc(100% - 58px) calc(100% - 58px)"
-          stroke="url(#vineGold)"
-          strokeWidth="1"
-          fill="none"
-          strokeDasharray="5 12"
-          strokeLinecap="round"
-        />
-        {/* Bottom vine — BR to BL */}
-        <path
-          d="M calc(100% - 60px) calc(100% - 60px) Q 65% calc(100% - 10px), 45% calc(100% - 6px) T 45 calc(100% - 52px)"
-          stroke="url(#vineGold)"
-          strokeWidth="1"
-          fill="none"
-          strokeDasharray="6 9"
-          strokeLinecap="round"
-        />
-        {/* Left vine — BL up to TL */}
-        <path
-          d="M 45 calc(100% - 52px) Q 8px 65%, 6px 50% T 40 60"
-          stroke="url(#vineGold)"
-          strokeWidth="1"
-          fill="none"
-          strokeDasharray="5 11"
-          strokeLinecap="round"
-        />
-      </svg>
     </>
   );
 };
