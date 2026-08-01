@@ -37,9 +37,9 @@ export const IslamicArchCard: React.FC<IslamicArchCardProps> = ({ children }) =>
             <svg
               className="absolute overflow-visible"
               style={{
-                bottom: '-2px', // Overlap body by 2px to eliminate subpixel gap
-                left: '1px',    // Align x=0 to center of 2px left border
-                width: 'calc(100% - 2px)',
+                bottom: '-2px',
+                left: '0px',
+                width: '100%',
                 height: 'calc(100% + 2px)',
               }}
               viewBox="0 0 100 40"

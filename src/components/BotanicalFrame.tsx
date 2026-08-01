@@ -4,13 +4,8 @@ import { motion } from 'framer-motion';
 /**
  * BotanicalFrame
  *
- * Clean, high-resolution burgundy rose corner frame using the 4 main corner bouquets:
- * - /assets/border left-top.png
- * - /assets/border right-top.png
- * - /assets/border left bottom.png
- * - /assets/border right-bottom.png
- *
- * Zero text obstructions: Leaves the card center 100% clear for maximum readability.
+ * Mathematically balanced & symmetrical corner floral frame.
+ * Left and right flower width & offsets are perfectly matched so the card sits 100% centered.
  */
 export const BotanicalFrame: React.FC = () => {
   return (
@@ -25,9 +20,9 @@ export const BotanicalFrame: React.FC = () => {
         transition={{ duration: 12, repeat: Infinity, ease: 'easeInOut' }}
         style={{
           position: 'absolute',
-          top: 'clamp(-28px, -4vw, -42px)',
-          left: 'clamp(-28px, -4vw, -42px)',
-          width: 'clamp(145px, 34%, 230px)',
+          top: 'clamp(-24px, -3.5vw, -36px)',
+          left: 'clamp(-24px, -3.5vw, -36px)',
+          width: 'clamp(125px, 30%, 205px)',
           zIndex: 25,
           transformOrigin: 'top left',
           willChange: 'transform',
@@ -49,7 +44,7 @@ export const BotanicalFrame: React.FC = () => {
         />
       </motion.div>
 
-      {/* ─────────────── TOP RIGHT (Shifted UP) ─────────────── */}
+      {/* ─────────────── TOP RIGHT ─────────────── */}
       <motion.div
         animate={{
           y: [0, 4, 0],
@@ -58,9 +53,9 @@ export const BotanicalFrame: React.FC = () => {
         transition={{ duration: 15, delay: 2, repeat: Infinity, ease: 'easeInOut' }}
         style={{
           position: 'absolute',
-          top: 'clamp(-34px, -5vw, -50px)',
+          top: 'clamp(-24px, -3.5vw, -36px)',
           right: 'clamp(-24px, -3.5vw, -36px)',
-          width: 'clamp(125px, 30%, 200px)',
+          width: 'clamp(125px, 30%, 205px)',
           zIndex: 25,
           transformOrigin: 'top right',
           pointerEvents: 'none',
@@ -91,9 +86,9 @@ export const BotanicalFrame: React.FC = () => {
         transition={{ duration: 14, delay: 1, repeat: Infinity, ease: 'easeInOut' }}
         style={{
           position: 'absolute',
-          bottom: 'clamp(-26px, -3.8vw, -40px)',
-          left: 'clamp(-26px, -3.8vw, -40px)',
-          width: 'clamp(135px, 31%, 210px)',
+          bottom: 'clamp(-24px, -3.5vw, -36px)',
+          left: 'clamp(-24px, -3.5vw, -36px)',
+          width: 'clamp(125px, 30%, 205px)',
           zIndex: 25,
           pointerEvents: 'none',
           transformOrigin: 'bottom left',
@@ -124,9 +119,9 @@ export const BotanicalFrame: React.FC = () => {
         transition={{ duration: 16, delay: 3, repeat: Infinity, ease: 'easeInOut' }}
         style={{
           position: 'absolute',
-          bottom: 'clamp(-28px, -4vw, -42px)',
-          right: 'clamp(-28px, -4vw, -42px)',
-          width: 'clamp(140px, 32%, 220px)',
+          bottom: 'clamp(-24px, -3.5vw, -36px)',
+          right: 'clamp(-24px, -3.5vw, -36px)',
+          width: 'clamp(125px, 30%, 205px)',
           zIndex: 25,
           pointerEvents: 'none',
           transformOrigin: 'bottom right',
