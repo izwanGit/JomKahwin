@@ -166,7 +166,7 @@ export const ThreePageStoryCard: React.FC<ThreePageStoryCardProps> = ({ isOpened
                   PAGE 1 — COVER (Restored Original HeroSection)
                   Bismillah → Quran → Walimatulurus → Names → Date
                  ═══════════════════════════════════════════════════ */}
-              {currentPage === 1 && (
+              {isOpened && currentPage === 1 && (
                 <motion.div
                   key="page1"
                   variants={pageVariants}
@@ -464,20 +464,45 @@ export const ThreePageStoryCard: React.FC<ThreePageStoryCardProps> = ({ isOpened
                     Dengan segala hormatnya kami menjemput Dato&apos;/Datin/Tuan/Puan/Encik/Cik sekeluarga ke majlis perkahwinan puteri/putera kami
                   </motion.p>
 
-                  {/* Couple names (smaller, supporting role on this page) */}
-                  <motion.div variants={childReveal} className="text-center">
-                    <p
+                  {/* Couple full formal names on Page 2 */}
+                  <motion.div variants={childReveal} className="text-center space-y-0.5 py-1">
+                    <h3
                       style={{
                         fontFamily: "'Cormorant Garamond', serif",
-                        fontSize: 'clamp(18px, 4.5vw, 34px)',
+                        fontSize: 'clamp(14px, 3.2vw, 22px)',
                         fontWeight: 700,
                         color: '#28050B',
                         letterSpacing: '-0.01em',
-                        lineHeight: 1.15,
+                        lineHeight: 1.2,
+                        whiteSpace: 'nowrap',
                       }}
                     >
-                      Alyea Dania <span style={{ color: '#D4AF37', fontWeight: 400 }}>&amp;</span> Amirul Iqhwan
+                      Alyea Dania Binti Daini Dzulkarnain
+                    </h3>
+                    <p
+                      style={{
+                        fontFamily: "'Cormorant Garamond', serif",
+                        fontStyle: 'italic',
+                        fontSize: 'clamp(11px, 1.8vw, 15px)',
+                        color: '#D4AF37',
+                        fontWeight: 600,
+                      }}
+                    >
+                      &amp;
                     </p>
+                    <h3
+                      style={{
+                        fontFamily: "'Cormorant Garamond', serif",
+                        fontSize: 'clamp(14px, 3.2vw, 22px)',
+                        fontWeight: 700,
+                        color: '#28050B',
+                        letterSpacing: '-0.01em',
+                        lineHeight: 1.2,
+                        whiteSpace: 'nowrap',
+                      }}
+                    >
+                      Amirul Iqhwan Bin Ahmad
+                    </h3>
                   </motion.div>
 
                   {/* Detailed event information card */}

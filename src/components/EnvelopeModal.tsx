@@ -31,7 +31,7 @@ export const EnvelopeModal: React.FC<EnvelopeModalProps> = ({ onOpen, guestName 
     setTimeout(() => {
       onOpen();
       setIsDismissed(true);
-    }, 1600);
+    }, 1000);
   };
 
   if (isDismissed) return null;
