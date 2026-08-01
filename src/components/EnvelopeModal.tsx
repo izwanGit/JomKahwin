@@ -95,19 +95,19 @@ export const EnvelopeModal: React.FC<EnvelopeModalProps> = ({ onOpen, guestName 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.4, duration: 0.6 }}
-            whileHover={{ scale: 1.03 }}
-            whileTap={{ scale: 0.97 }}
+            whileHover={{ scale: 1.04 }}
+            whileTap={{ scale: 0.96 }}
             onClick={handleOpenEnvelope}
             disabled={isOpen}
-            className="mt-4 px-8 py-3.5 rounded-full bg-gradient-to-r from-gold-400 via-gold-500 to-gold-600 text-burgundy-950 font-semibold tracking-wider text-sm shadow-gold-glow flex items-center gap-2.5 transition-all focus:outline-none focus:ring-2 focus:ring-gold-300"
+            className="mt-4 px-8 py-3.5 rounded-full bg-gradient-to-r from-gold-400 via-gold-500 to-gold-600 text-burgundy-950 font-bold tracking-widest uppercase text-xs shadow-gold-glow flex items-center gap-2.5 transition-all focus:outline-none focus:ring-2 focus:ring-gold-300"
           >
             <Sparkles className="w-4 h-4 text-burgundy-950" />
-            <span>{isOpen ? 'Membuka Kad...' : 'Buka Sampul'}</span>
-            <Volume2 className="w-4 h-4 text-burgundy-950/70 ml-1" />
+            <span>{isOpen ? 'Membuka Kad...' : 'Buka Jemputan'}</span>
+            <Volume2 className="w-4 h-4 text-burgundy-950/80 ml-1 animate-pulse" />
           </motion.button>
           
-          <p className="text-[11px] text-gold-300/60 mt-3 flex items-center gap-1">
-            <span>🎵 Tekan untuk memainkan lagu latar &amp; membuka kad</span>
+          <p className="text-[11px] text-gold-300/70 mt-3 flex items-center gap-1 font-serif italic">
+            <span>🎵 Tekan untuk memainkan lagu &amp; membuka kad jemputan</span>
           </p>
         </div>
       </motion.div>
