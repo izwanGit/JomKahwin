@@ -16,6 +16,7 @@ import type { WishMessage } from './types';
 
 export function App() {
   const [isAudioAutoPlay, setIsAudioAutoPlay] = useState(false);
+  const [isEnvelopeOpen, setIsEnvelopeOpen] = useState(false);
 
   // Parse guest name from URL query parameter if present (?to=Dato+Razak)
   const queryParams = new URLSearchParams(window.location.search);
@@ -48,6 +49,7 @@ export function App() {
 
   const handleEnvelopeOpen = () => {
     setIsAudioAutoPlay(true);
+    setIsEnvelopeOpen(true);
   };
 
   const handleAddWish = (newWish: WishMessage) => {
@@ -73,7 +75,7 @@ export function App() {
 
       {/* Main Page Layout */}
       <main className="relative z-10 space-y-8 pb-12">
-        <HeroSection />
+        <HeroSection isOpened={isEnvelopeOpen} />
         <CountdownTimer />
         <EventDetails />
         <ScheduleTimeline />
