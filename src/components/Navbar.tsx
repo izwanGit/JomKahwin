@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { Home, MapPin, Calendar, Camera, CheckCircle2, MessageCircle, Heart } from 'lucide-react';
+import { Home, MapPin, Calendar, CheckCircle2, MessageCircle, Heart } from 'lucide-react';
 
 interface NavItem {
   id: string;
@@ -15,7 +15,6 @@ export const Navbar: React.FC = () => {
     { id: 'utama', label: 'Utama', icon: Home },
     { id: 'lokasi', label: 'Lokasi', icon: MapPin },
     { id: 'tentatif', label: 'Tentatif', icon: Calendar },
-    { id: 'galeri', label: 'Galeri', icon: Camera },
     { id: 'rsvp', label: 'RSVP', icon: CheckCircle2 },
     { id: 'ucapan', label: 'Ucapan', icon: MessageCircle },
   ];
