@@ -20,12 +20,14 @@ export const RsvpForm: React.FC<RsvpFormProps> = ({ onAddWish, webhookUrl }) => 
 
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [submitError, setSubmitError] = useState('');
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!formData.name.trim()) return;
+    if (!formData.name.trim() || !formData.phone.trim()) return;
 
     setIsSubmitting(true);
+    setSubmitError('');
 
     // Build Payload
     const payload = {
@@ -34,16 +36,20 @@ export const RsvpForm: React.FC<RsvpFormProps> = ({ onAddWish, webhookUrl }) => 
     };
 
     try {
-      if (webhookUrl) {
-        await fetch(webhookUrl, {
-          method: 'POST',
-          mode: 'no-cors',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(payload),
-        });
+      if (!webhookUrl) {
+        throw new Error('Pautan RSVP belum disambungkan.');
       }
+
+      await fetch(webhookUrl, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'text/plain;charset=UTF-8' },
+        body: JSON.stringify(payload),
+      });
     } catch {
-      // Fallback gracefully
+      setSubmitError('Borang belum berjaya dihantar. Sila semak internet anda dan cuba sekali lagi.');
+      setIsSubmitting(false);
+      return;
     }
 
     // Add wish to live local feed
@@ -208,6 +214,12 @@ export const RsvpForm: React.FC<RsvpFormProps> = ({ onAddWish, webhookUrl }) => 
                 className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-gold-500 focus:ring-2 focus:ring-gold-200 text-sm outline-none transition-all resize-none"
               />
             </div>
+
+            {submitError && (
+              <p className="rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-xs font-medium text-red-700">
+                {submitError}
+              </p>
+            )}
 
             {/* Submit Button */}
             <button

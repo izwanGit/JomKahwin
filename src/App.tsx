@@ -15,6 +15,8 @@ import { Footer } from './components/Footer';
 import type { WishMessage } from './types';
 
 export function App() {
+  const defaultRsvpWebhookUrl =
+    'https://script.google.com/macros/s/AKfycby3LEl3e0GklItH0PVcqQY8X2AXsY_dBcrRkCqDv3xFlEvLrpFbnS582HTYnG5hNuZdrw/exec';
   const [isAudioAutoPlay, setIsAudioAutoPlay] = useState(false);
   const [isEnvelopeOpen, setIsEnvelopeOpen] = useState(false);
 
@@ -56,6 +58,9 @@ export function App() {
     setWishes((prev) => [newWish, ...prev]);
   };
 
+  const rsvpWebhookUrl =
+    (import.meta.env.VITE_RSVP_WEBHOOK_URL as string | undefined) || defaultRsvpWebhookUrl;
+
   return (
     <div className="min-h-screen bg-cream-100 text-slate-800 relative selection:bg-gold-500 selection:text-white">
       {/* 3D Interactive Opening Envelope */}
@@ -79,7 +84,7 @@ export function App() {
         <CountdownTimer />
         <EventDetails />
         <ScheduleTimeline />
-        <RsvpForm onAddWish={handleAddWish} />
+        <RsvpForm onAddWish={handleAddWish} webhookUrl={rsvpWebhookUrl} />
         <Wishbook wishes={wishes} />
         <SalamKautModal />
       </main>
