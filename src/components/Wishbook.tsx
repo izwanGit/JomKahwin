@@ -5,9 +5,11 @@ import type { WishMessage } from '../types';
 
 interface WishbookProps {
   wishes: WishMessage[];
+  isLoading?: boolean;
+  loadError?: string;
 }
 
-export const Wishbook: React.FC<WishbookProps> = ({ wishes }) => {
+export const Wishbook: React.FC<WishbookProps> = ({ wishes, isLoading = false, loadError = '' }) => {
   return (
     <section id="ucapan" className="py-16 px-4 max-w-3xl mx-auto space-y-8">
       <motion.div
@@ -29,7 +31,15 @@ export const Wishbook: React.FC<WishbookProps> = ({ wishes }) => {
       </motion.div>
 
       <div className="space-y-4 max-h-[450px] overflow-y-auto pr-2 custom-scrollbar">
-        {wishes.length === 0 ? (
+        {isLoading ? (
+          <div className="text-center py-8 text-slate-400 text-xs italic">
+            Sedang memuatkan titipan ucapan...
+          </div>
+        ) : loadError ? (
+          <div className="text-center py-8 text-red-500 text-xs italic">
+            {loadError}
+          </div>
+        ) : wishes.length === 0 ? (
           <div className="text-center py-8 text-slate-400 text-xs italic">
             Belum ada ucapan. Jadilah yang pertama menitipkan doa!
           </div>

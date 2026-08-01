@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { EnvelopeModal } from './components/EnvelopeModal';
 import { FloatingPetals } from './components/FloatingPetals';
 import { FloatingButterflies } from './components/FloatingButterflies';
@@ -19,35 +19,13 @@ export function App() {
     'https://script.google.com/macros/s/AKfycby3LEl3e0GklItH0PVcqQY8X2AXsY_dBcrRkCqDv3xFlEvLrpFbnS582HTYnG5hNuZdrw/exec';
   const [isAudioAutoPlay, setIsAudioAutoPlay] = useState(false);
   const [isEnvelopeOpen, setIsEnvelopeOpen] = useState(false);
+  const [wishes, setWishes] = useState<WishMessage[]>([]);
+  const [isWishbookLoading, setIsWishbookLoading] = useState(true);
+  const [wishbookError, setWishbookError] = useState('');
 
   // Parse guest name from URL query parameter if present (?to=Dato+Razak)
   const queryParams = new URLSearchParams(window.location.search);
   const guestName = queryParams.get('to') || queryParams.get('nama') || undefined;
-
-  // Initial guestbook wishes
-  const [wishes, setWishes] = useState<WishMessage[]>([
-    {
-      id: '1',
-      name: 'Dr. Hakimi & Keluarga',
-      message: 'Tahniah Alyea & Amirul! Semoga mahligai yang dibina sentiasa diberkati Allah SWT hingga ke anak cucu.',
-      createdAt: 'Semalam',
-      attendance: 'hadir',
-    },
-    {
-      id: '2',
-      name: 'Siti Sarah (Rakan UPM)',
-      message: 'Barakallahulakuma wa baraka alaika wa jamaa bainakuma fii khair! Cantik sangat pasangan pengantin.',
-      createdAt: '2 jam yang lalu',
-      attendance: 'hadir',
-    },
-    {
-      id: '3',
-      name: 'Amirul & Isteri',
-      message: 'Selamat Pengantin Baru bro Amirul & Alyea! Semoga kekal bahagia hingga ke syurga.',
-      createdAt: '30 minit yang lalu',
-      attendance: 'hadir',
-    },
-  ]);
 
   const handleEnvelopeOpen = () => {
     setIsAudioAutoPlay(true);
@@ -60,6 +38,52 @@ export function App() {
 
   const rsvpWebhookUrl =
     (import.meta.env.VITE_RSVP_WEBHOOK_URL as string | undefined) || defaultRsvpWebhookUrl;
+
+  useEffect(() => {
+    if (!rsvpWebhookUrl) {
+      setWishbookError('Sumber ucapan belum disambungkan.');
+      setIsWishbookLoading(false);
+      return;
+    }
+
+    const callbackName = `jomkahwinWishbook_${Date.now()}`;
+    const script = document.createElement('script');
+    const callbackStore = window as unknown as Record<string, unknown>;
+
+    const cleanup = () => {
+      delete callbackStore[callbackName];
+      script.remove();
+    };
+
+    const fail = () => {
+      cleanup();
+      setWishbookError('Ucapan belum dapat dimuatkan sekarang. Cuba semula sebentar lagi.');
+      setIsWishbookLoading(false);
+    };
+
+    callbackStore[callbackName] = (payload: unknown) => {
+      const data = payload as { wishes?: WishMessage[]; result?: string };
+
+      if (data.result === 'success' && Array.isArray(data.wishes)) {
+        setWishes(data.wishes);
+        setWishbookError('');
+      } else {
+        setWishbookError('Ucapan belum dapat dimuatkan sekarang. Cuba semula sebentar lagi.');
+      }
+
+      setIsWishbookLoading(false);
+      cleanup();
+    };
+
+    script.src = `${rsvpWebhookUrl}?action=wishes&callback=${callbackName}`;
+    script.async = true;
+    script.onerror = fail;
+    document.body.appendChild(script);
+
+    return () => {
+      cleanup();
+    };
+  }, [rsvpWebhookUrl]);
 
   return (
     <div className="min-h-screen bg-cream-100 text-slate-800 relative selection:bg-gold-500 selection:text-white">
@@ -85,7 +109,7 @@ export function App() {
         <EventDetails />
         <ScheduleTimeline />
         <RsvpForm onAddWish={handleAddWish} webhookUrl={rsvpWebhookUrl} />
-        <Wishbook wishes={wishes} />
+        <Wishbook wishes={wishes} isLoading={isWishbookLoading} loadError={wishbookError} />
         <SalamKautModal />
       </main>
 

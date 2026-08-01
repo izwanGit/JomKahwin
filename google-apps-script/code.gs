@@ -14,7 +14,13 @@ var HEADERS = [
   "Ucapan & Doa"
 ];
 
-function doGet() {
+function doGet(e) {
+  var action = e && e.parameter && e.parameter.action;
+
+  if (action === "wishes") {
+    return wishesResponse_(e);
+  }
+
   return jsonResponse_({ result: "ok", service: "JomKahwin RSVP" });
 }
 
@@ -75,6 +81,35 @@ function ensureHeaders_(sheet) {
   sheet.autoResizeColumns(1, HEADERS.length);
 }
 
+function wishesResponse_(e) {
+  var spreadsheet = SpreadsheetApp.getActiveSpreadsheet();
+  var sheet = spreadsheet.getSheetByName(SHEET_NAME);
+  var wishes = [];
+
+  if (sheet && sheet.getLastRow() >= 2) {
+    var rows = sheet.getRange(2, 1, sheet.getLastRow() - 1, HEADERS.length).getDisplayValues();
+
+    for (var index = rows.length - 1; index >= 0; index--) {
+      var row = rows[index];
+      var message = cleanCell_(row[5], 1000);
+
+      if (!message || message === "-") continue;
+
+      wishes.push({
+        id: "sheet-" + (index + 2),
+        name: cleanCell_(row[1], 120) || "Tetamu",
+        message: message,
+        createdAt: row[0] || "",
+        attendance: row[3] === "TIDAK HADIR" ? "tidak_hadir" : "hadir"
+      });
+
+      if (wishes.length >= 30) break;
+    }
+  }
+
+  return dataResponse_(e, { result: "success", wishes: wishes });
+}
+
 function findPhoneRow_(sheet, phone) {
   var lastRow = sheet.getLastRow();
   if (lastRow < 2) return 0;
@@ -102,4 +137,15 @@ function clamp_(value, minimum, maximum) {
 function jsonResponse_(payload) {
   return ContentService.createTextOutput(JSON.stringify(payload))
     .setMimeType(ContentService.MimeType.JSON);
+}
+
+function dataResponse_(e, payload) {
+  var callback = e && e.parameter && e.parameter.callback;
+
+  if (callback) {
+    return ContentService.createTextOutput(callback + "(" + JSON.stringify(payload) + ");")
+      .setMimeType(ContentService.MimeType.JAVASCRIPT);
+  }
+
+  return jsonResponse_(payload);
 }
