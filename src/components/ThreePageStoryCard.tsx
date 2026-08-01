@@ -365,7 +365,7 @@ export const ThreePageStoryCard: React.FC<ThreePageStoryCardProps> = ({ isOpened
                     <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '3px', color: 'rgba(40,5,11,0.7)' }}>
                       <div style={{ display: 'flex', alignItems: 'center', gap: '4px', fontWeight: 600, color: '#28050B', fontSize: 'clamp(10px, 1.5vw, 12px)' }}>
                         <MapPin size={13} style={{ color: '#D4AF37', flexShrink: 0 }} />
-                        <span>Dewan Seri Endon, Presint 10, Putrajaya</span>
+                        <span>Jiwa Damansara, Petaling Jaya</span>
                       </div>
                       <span style={{ fontSize: '9.5px', color: 'rgba(40,5,11,0.45)' }}>Masa: 11:00 PAGI – 4:00 PETANG</span>
                     </div>
@@ -564,7 +564,7 @@ export const ThreePageStoryCard: React.FC<ThreePageStoryCardProps> = ({ isOpened
                       }}
                     >
                       <MapPin size={13} style={{ color: '#D4AF37', flexShrink: 0 }} />
-                      <span>Dewan Seri Endon, Presint 10, Putrajaya</span>
+                      <span>Jiwa Damansara, Petaling Jaya</span>
                     </div>
                   </motion.div>
                 </motion.div>
@@ -645,7 +645,7 @@ export const ThreePageStoryCard: React.FC<ThreePageStoryCardProps> = ({ isOpened
                     </p>
                     <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '8px' }}>
                       <a
-                        href="https://wa.me/60123456789"
+                        href="https://wa.me/60143140182"
                         target="_blank"
                         rel="noopener noreferrer"
                         style={{
@@ -664,7 +664,7 @@ export const ThreePageStoryCard: React.FC<ThreePageStoryCardProps> = ({ isOpened
                             Hj. Ahmad
                           </p>
                           <p style={{ fontSize: '10px', color: 'rgba(40,5,11,0.45)', marginTop: '1px' }}>
-                            Abah • 012-3456789
+                            Abah • 014-3140182
                           </p>
                         </div>
                         <Phone size={13} style={{ color: '#D4AF37' }} />
@@ -703,7 +703,7 @@ export const ThreePageStoryCard: React.FC<ThreePageStoryCardProps> = ({ isOpened
                     style={{ display: 'flex', alignItems: 'center', gap: '10px', flexWrap: 'wrap', justifyContent: 'center' }}
                   >
                     <a
-                      href="https://waze.com/ul?q=Dewan%20Seri%20Endon%20Putrajaya"
+                      href="https://waze.com/ul?q=Jiwa%20Damansara%20Petaling%20Jaya"
                       target="_blank"
                       rel="noopener noreferrer"
                       style={{
@@ -725,7 +725,7 @@ export const ThreePageStoryCard: React.FC<ThreePageStoryCardProps> = ({ isOpened
                       <span>Navigasi Waze</span>
                     </a>
                     <a
-                      href="https://maps.google.com/?q=Dewan+Seri+Endon+Presint+10+Putrajaya"
+                      href="https://maps.google.com/?q=Jiwa+Damansara+Block+C+Neo+Damansara+Petaling+Jaya"
                       target="_blank"
                       rel="noopener noreferrer"
                       style={{

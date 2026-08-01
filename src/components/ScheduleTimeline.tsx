@@ -8,7 +8,7 @@ export const ScheduleTimeline: React.FC = () => {
     {
       time: '11:00 PAGI',
       title: 'Ketibaan Tetamu Jemputan',
-      description: 'Selamat datang ke Dewan Seri Endon. Jamuan makan bermula.',
+      description: 'Selamat datang ke Jiwa Damansara. Jamuan makan bermula.',
     },
     {
       time: '12:30 TENGAH HARI',

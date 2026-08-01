@@ -5,14 +5,14 @@ import type { ContactPerson } from '../types';
 
 export const EventDetails: React.FC = () => {
   const contacts: ContactPerson[] = [
-    { role: 'Bapa Pengantin', name: 'Hj. Ahmad', phone: '60123456789', relation: 'Ayah' },
+    { role: 'Bapa Pengantin', name: 'Hj. Ahmad', phone: '60143140182', relation: 'Ayah' },
     { role: 'Ibu Pengantin', name: 'Hjh. Aminah', phone: '60198765432', relation: 'Ibu' },
     { role: 'Pengapit / Hajat', name: 'Syahmi (Abang)', phone: '60111223344', relation: 'Wali/Hajat' },
   ];
 
-  const wazeUrl = 'https://waze.com/ul?q=Dewan%20Seri%20Endon%20Putrajaya';
-  const googleMapsUrl = 'https://maps.google.com/?q=Dewan+Seri+Endon+Presint+10+Putrajaya';
-  const googleCalendarUrl = 'https://calendar.google.com/calendar/render?action=TEMPLATE&text=Walimatulurus+Alyea+%26+Amirul&dates=20261024T030000Z/20261024T080000Z&details=Majlis+Perkahwinan+Alyea+Dania+%26+Amirul+Iqhwan.&location=Dewan+Seri+Endon,+Presint+10,+Putrajaya';
+  const wazeUrl = 'https://waze.com/ul?q=Jiwa%20Damansara%20Petaling%20Jaya';
+  const googleMapsUrl = 'https://maps.google.com/?q=Jiwa+Damansara+Block+C+Neo+Damansara+Petaling+Jaya';
+  const googleCalendarUrl = 'https://calendar.google.com/calendar/render?action=TEMPLATE&text=Walimatulurus+Alyea+%26+Amirul&dates=20261024T030000Z/20261024T080000Z&details=Majlis+Perkahwinan+Alyea+Dania+%26+Amirul+Iqhwan.&location=Jiwa+Damansara,+Block+C,+Neo+Damansara,+Jalan+PJU+8/1,+Damansara+Perdana,+47820+Petaling+Jaya,+Selangor';
 
   return (
     <section id="lokasi" className="py-16 px-4 max-w-4xl mx-auto space-y-12">
@@ -29,10 +29,10 @@ export const EventDetails: React.FC = () => {
           Lokasi Majlis
         </span>
         <h2 className="text-3xl md:text-4xl font-serif font-bold text-burgundy-950">
-          Dewan Seri Endon
+          Jiwa Damansara
         </h2>
         <p className="text-slate-600 text-xs md:text-sm max-w-md mx-auto">
-          Jalan P10/1, Presint 10, 62250 Putrajaya, Wilayah Persekutuan Putrajaya
+          Block C, Neo Damansara, Jalan PJU 8/1, Damansara Perdana, 47820 Petaling Jaya, Selangor
         </p>
       </motion.div>
 
@@ -48,11 +48,11 @@ export const EventDetails: React.FC = () => {
           <iframe
             className="w-full h-[180px] sm:h-[350px]"
             style={{ border: 0, display: 'block' }}
-            src="https://maps.google.com/maps?q=Dewan%20Seri%20Endon,%20Putrajaya&t=&z=15&ie=UTF8&iwloc=&output=embed"
+            src="https://maps.google.com/maps?q=Jiwa%20Damansara,%20Neo%20Damansara,%20Petaling%20Jaya&t=&z=16&ie=UTF8&iwloc=&output=embed"
             allowFullScreen
             loading="lazy"
             referrerPolicy="no-referrer-when-downgrade"
-            title="Peta Lokasi - Dewan Seri Endon"
+            title="Peta Lokasi - Jiwa Damansara"
           />
         </div>
       </motion.div>
