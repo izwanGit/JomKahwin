@@ -155,7 +155,7 @@ export const ThreePageStoryCard: React.FC<ThreePageStoryCardProps> = ({ isOpened
                   initial="enter"
                   animate="center"
                   exit="exit"
-                  className="absolute inset-0 flex flex-col items-center justify-center gap-[clamp(6px,1.2vh,16px)] px-2 will-change-transform"
+                  className="story-page absolute inset-0 flex flex-col items-center justify-center gap-[clamp(6px,1.2vh,16px)] px-2"
                 >
                   {/* Bismillah */}
                   <motion.div
@@ -366,7 +366,7 @@ export const ThreePageStoryCard: React.FC<ThreePageStoryCardProps> = ({ isOpened
                   initial="enter"
                   animate="center"
                   exit="exit"
-                  className="absolute inset-0 flex flex-col items-center justify-center gap-[clamp(8px,1.5vh,20px)] px-2 will-change-transform"
+                  className="story-page absolute inset-0 flex flex-col items-center justify-center gap-[clamp(8px,1.5vh,20px)] px-2"
                 >
                   {/* Section label */}
                   <motion.span
@@ -563,7 +563,7 @@ export const ThreePageStoryCard: React.FC<ThreePageStoryCardProps> = ({ isOpened
                   initial="enter"
                   animate="center"
                   exit="exit"
-                  className="absolute inset-0 flex flex-col items-center justify-center gap-[clamp(8px,1.5vh,20px)] px-2 will-change-transform"
+                  className="story-page absolute inset-0 flex flex-col items-center justify-center gap-[clamp(8px,1.5vh,20px)] px-2"
                 >
                   {/* Section label */}
                   <motion.span

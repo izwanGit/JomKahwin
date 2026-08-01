@@ -62,19 +62,19 @@ export function App() {
       <EnvelopeModal onOpen={handleEnvelopeOpen} guestName={guestName} />
 
       {/* Flagship Responsive Floating Navigation Bar */}
-      <Navbar />
+      {isEnvelopeOpen && <Navbar />}
 
       {/* 60fps Floating Petals & Gold Dust Canvas */}
-      <FloatingPetals />
+      {isEnvelopeOpen && <FloatingPetals />}
 
       {/* Floating Alive Butterflies */}
-      <FloatingButterflies />
+      {isEnvelopeOpen && <FloatingButterflies />}
 
       {/* Floating Acoustic Music Player */}
-      <MusicPlayer autoPlay={isAudioAutoPlay} />
+      {isEnvelopeOpen && <MusicPlayer autoPlay={isAudioAutoPlay} />}
 
       {/* Main Page Layout */}
-      <main className="relative z-10 space-y-8 pb-12 overflow-x-hidden w-full max-w-full">
+      <main className="invitation-content relative z-10 space-y-8 pb-12 overflow-x-hidden w-full max-w-full">
         <ThreePageStoryCard isOpened={isEnvelopeOpen} />
         <CountdownTimer />
         <EventDetails />

@@ -73,6 +73,32 @@ html {
   -webkit-tap-highlight-color: transparent;
 }
 
+/* Keep below-the-fold sections out of layout/paint until they approach the viewport. */
+.invitation-content > section:not(:first-child) {
+  content-visibility: auto;
+  contain-intrinsic-block-size: auto 720px;
+}
+
+/* Isolate the two transparent ambient layers from the document paint tree. */
+.ambient-canvas {
+  contain: strict;
+  backface-visibility: hidden;
+}
+
+/* Isolate each cinematic blur dissolve to the story card's paint area. */
+.story-page {
+  backface-visibility: hidden;
+  contain: paint;
+  will-change: transform, opacity, filter;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+}
+
 /* 3D Perspective & Clip Path Utilities */
 .perspective-1000 {
   perspective: 1000px;

@@ -21,17 +21,25 @@ export const FloatingButterflies: React.FC = () => {
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
-    const ctx = canvas.getContext('2d');
+    const ctx = canvas.getContext('2d', { alpha: true, desynchronized: true });
     if (!ctx) return;
 
-    let animationFrameId: number;
+    let animationFrameId = 0;
+    let lastFrameTime = 0;
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const lowPowerDevice = (navigator.hardwareConcurrency ?? 4) <= 4;
+    const frameInterval = reducedMotion ? 1000 : lowPowerDevice ? 1000 / 30 : 1000 / 60;
     let width = (canvas.width = window.innerWidth);
     let height = (canvas.height = window.innerHeight);
 
+    let resizeFrameId = 0;
     const handleResize = () => {
       if (!canvas) return;
-      width = canvas.width = window.innerWidth;
-      height = canvas.height = window.innerHeight;
+      cancelAnimationFrame(resizeFrameId);
+      resizeFrameId = requestAnimationFrame(() => {
+        width = canvas.width = window.innerWidth;
+        height = canvas.height = window.innerHeight;
+      });
     };
 
     window.addEventListener('resize', handleResize);
@@ -117,6 +125,9 @@ export const FloatingButterflies: React.FC = () => {
     };
 
     const render = (time: number) => {
+      animationFrameId = requestAnimationFrame(render);
+      if (document.hidden || time - lastFrameTime < frameInterval) return;
+      lastFrameTime = time - ((time - lastFrameTime) % frameInterval);
       ctx.clearRect(0, 0, width, height);
 
       for (let i = 0; i < butterflies.length; i++) {
@@ -139,7 +150,6 @@ export const FloatingButterflies: React.FC = () => {
         drawButterfly(b, time);
       }
 
-      animationFrameId = requestAnimationFrame(render);
     };
 
     animationFrameId = requestAnimationFrame(render);
@@ -147,13 +157,14 @@ export const FloatingButterflies: React.FC = () => {
     return () => {
       window.removeEventListener('resize', handleResize);
       cancelAnimationFrame(animationFrameId);
+      cancelAnimationFrame(resizeFrameId);
     };
   }, []);
 
   return (
     <canvas
       ref={canvasRef}
-      className="fixed inset-0 pointer-events-none z-30 transform-gpu"
+      className="ambient-canvas fixed inset-0 pointer-events-none z-30 transform-gpu"
       aria-hidden="true"
     />
   );

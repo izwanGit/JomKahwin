@@ -13,12 +13,15 @@ export const EnvelopeModal: React.FC<EnvelopeModalProps> = ({ onOpen, guestName 
   const [isDismissed, setIsDismissed] = useState(false);
 
   const handleOpenEnvelope = () => {
+    if (isOpen) return;
     setIsOpen(true);
 
     // Trigger celebratory gold & rose confetti
     try {
+      const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const lowPowerDevice = (navigator.hardwareConcurrency ?? 4) <= 4;
       confetti({
-        particleCount: 80,
+        particleCount: reducedMotion ? 24 : lowPowerDevice ? 48 : 80,
         spread: 90,
         origin: { y: 0.6 },
         colors: ['#D4AF37', '#F5E6AB', '#4A0E17', '#E8B4B8', '#FAF9F6'],
@@ -71,7 +74,16 @@ export const EnvelopeModal: React.FC<EnvelopeModalProps> = ({ onOpen, guestName 
           {/* Photorealistic 3D Envelope Interactive Display */}
           <div
             className="relative w-full max-w-xs aspect-square my-2 cursor-pointer group flex items-center justify-center"
-            onClick={!isOpen ? handleOpenEnvelope : undefined}
+            onClick={handleOpenEnvelope}
+            role="button"
+            tabIndex={isOpen ? -1 : 0}
+            aria-label="Buka jemputan"
+            onKeyDown={(event) => {
+              if (event.key === 'Enter' || event.key === ' ') {
+                event.preventDefault();
+                handleOpenEnvelope();
+              }
+            }}
           >
             {/* Outer Gold Glow Effect */}
             <div className="absolute inset-4 rounded-3xl bg-gold-500/20 blur-xl group-hover:bg-gold-500/30 transition-all" />

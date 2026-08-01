@@ -9,25 +9,24 @@ interface TimeLeft {
   seconds: number;
 }
 
-export const CountdownTimer: React.FC = () => {
-  const targetDate = new Date('2026-10-24T11:00:00+08:00').getTime();
+const TARGET_DATE = new Date('2026-10-24T11:00:00+08:00').getTime();
 
-  const calculateTimeLeft = (): TimeLeft => {
-    const now = new Date().getTime();
-    const difference = targetDate - now;
+const calculateTimeLeft = (): TimeLeft => {
+  const difference = TARGET_DATE - Date.now();
 
-    if (difference <= 0) {
-      return { days: 0, hours: 0, minutes: 0, seconds: 0 };
-    }
+  if (difference <= 0) {
+    return { days: 0, hours: 0, minutes: 0, seconds: 0 };
+  }
 
-    return {
-      days: Math.floor(difference / (1000 * 60 * 60 * 24)),
-      hours: Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)),
-      minutes: Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60)),
-      seconds: Math.floor((difference % (1000 * 60)) / 1000),
-    };
+  return {
+    days: Math.floor(difference / (1000 * 60 * 60 * 24)),
+    hours: Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)),
+    minutes: Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60)),
+    seconds: Math.floor((difference % (1000 * 60)) / 1000),
   };
+};
 
+export const CountdownTimer: React.FC = () => {
   const [timeLeft, setTimeLeft] = useState<TimeLeft>(calculateTimeLeft());
 
   useEffect(() => {

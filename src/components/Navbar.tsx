@@ -8,16 +8,16 @@ interface NavItem {
   icon: React.ElementType;
 }
 
+const NAV_ITEMS: NavItem[] = [
+  { id: 'utama', label: 'Utama', icon: Home },
+  { id: 'lokasi', label: 'Lokasi', icon: MapPin },
+  { id: 'tentatif', label: 'Tentatif', icon: Calendar },
+  { id: 'rsvp', label: 'RSVP', icon: CheckCircle2 },
+  { id: 'ucapan', label: 'Ucapan', icon: MessageCircle },
+];
+
 export const Navbar: React.FC = () => {
   const [activeSection, setActiveSection] = useState<string>('utama');
-
-  const navItems: NavItem[] = [
-    { id: 'utama', label: 'Utama', icon: Home },
-    { id: 'lokasi', label: 'Lokasi', icon: MapPin },
-    { id: 'tentatif', label: 'Tentatif', icon: Calendar },
-    { id: 'rsvp', label: 'RSVP', icon: CheckCircle2 },
-    { id: 'ucapan', label: 'Ucapan', icon: MessageCircle },
-  ];
 
   // Real-time active section tracking via IntersectionObserver
   useEffect(() => {
@@ -37,7 +37,7 @@ export const Navbar: React.FC = () => {
 
     const observer = new IntersectionObserver(handleIntersect, observerOptions);
 
-    navItems.forEach((item) => {
+    NAV_ITEMS.forEach((item) => {
       const element = document.getElementById(item.id);
       if (element) observer.observe(element);
     });
@@ -85,7 +85,7 @@ export const Navbar: React.FC = () => {
 
         {/* Navigation Tabs */}
         <div className="flex items-center gap-0.5 bg-[#FFFEFA]/5 p-0.5 rounded-full border border-[#D4AF37]/25">
-          {navItems.map((item) => {
+          {NAV_ITEMS.map((item) => {
             const isActive = activeSection === item.id;
             const Icon = item.icon;
             return (
@@ -129,7 +129,7 @@ export const Navbar: React.FC = () => {
         className="md:hidden fixed bottom-3 left-1/2 -translate-x-1/2 z-40 w-[88%] max-w-[320px] flex items-center justify-around px-2 py-1.5 rounded-full backdrop-blur-2xl bg-[#28050B]/92 border border-[#D4AF37]/45 shadow-[0_10px_28px_rgba(40,5,11,0.45)]"
         style={{ willChange: 'transform' }}
       >
-        {navItems.map((item) => {
+        {NAV_ITEMS.map((item) => {
           const isActive = activeSection === item.id;
           const Icon = item.icon;
           return (
