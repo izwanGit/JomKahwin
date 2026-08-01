@@ -469,7 +469,7 @@ export const ThreePageStoryCard: React.FC<ThreePageStoryCardProps> = ({ isOpened
                     <h3
                       style={{
                         fontFamily: "'Cormorant Garamond', serif",
-                        fontSize: 'clamp(14px, 3.2vw, 22px)',
+                        fontSize: 'clamp(13px, 2.8vw, 20px)',
                         fontWeight: 700,
                         color: '#28050B',
                         letterSpacing: '-0.01em',
@@ -493,7 +493,7 @@ export const ThreePageStoryCard: React.FC<ThreePageStoryCardProps> = ({ isOpened
                     <h3
                       style={{
                         fontFamily: "'Cormorant Garamond', serif",
-                        fontSize: 'clamp(14px, 3.2vw, 22px)',
+                        fontSize: 'clamp(13px, 2.8vw, 20px)',
                         fontWeight: 700,
                         color: '#28050B',
                         letterSpacing: '-0.01em',
@@ -501,7 +501,7 @@ export const ThreePageStoryCard: React.FC<ThreePageStoryCardProps> = ({ isOpened
                         whiteSpace: 'nowrap',
                       }}
                     >
-                      Amirul Iqhwan Bin Ahmad
+                      Muhammad Amirul Iqhwan Bin Mohd Zahir
                     </h3>
                   </motion.div>
 
@@ -660,8 +660,8 @@ export const ThreePageStoryCard: React.FC<ThreePageStoryCardProps> = ({ isOpened
                         }}
                       >
                         <div>
-                          <p style={{ fontFamily: "'Cormorant Garamond', serif", fontWeight: 700, fontSize: '13px', color: '#28050B' }}>
-                            Hj. Ahmad
+                          <p style={{ fontFamily: "'Cormorant Garamond', serif", fontWeight: 700, fontSize: '12px', color: '#28050B' }}>
+                            Mohd Zahir
                           </p>
                           <p style={{ fontSize: '10px', color: 'rgba(40,5,11,0.45)', marginTop: '1px' }}>
                             Abah • 014-3140182
@@ -685,11 +685,11 @@ export const ThreePageStoryCard: React.FC<ThreePageStoryCardProps> = ({ isOpened
                         }}
                       >
                         <div>
-                          <p style={{ fontFamily: "'Cormorant Garamond', serif", fontWeight: 700, fontSize: '13px', color: '#28050B' }}>
-                            Hjh. Aminah
+                          <p style={{ fontFamily: "'Cormorant Garamond', serif", fontWeight: 700, fontSize: '12px', color: '#28050B' }}>
+                            Daini Dzulkarnain
                           </p>
                           <p style={{ fontSize: '10px', color: 'rgba(40,5,11,0.45)', marginTop: '1px' }}>
-                            Ibu • 019-8765432
+                            Abah • 019-8765432
                           </p>
                         </div>
                         <Phone size={13} style={{ color: '#D4AF37' }} />

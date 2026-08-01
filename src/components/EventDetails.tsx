@@ -5,9 +5,9 @@ import type { ContactPerson } from '../types';
 
 export const EventDetails: React.FC = () => {
   const contacts: ContactPerson[] = [
-    { role: 'Bapa Pengantin', name: 'Hj. Ahmad', phone: '60143140182', relation: 'Ayah' },
-    { role: 'Ibu Pengantin', name: 'Hjh. Aminah', phone: '60198765432', relation: 'Ibu' },
-    { role: 'Pengapit / Hajat', name: 'Syahmi (Abang)', phone: '60111223344', relation: 'Wali/Hajat' },
+    { role: 'Bapa Pengantin Perempuan', name: 'Daini Dzulkarnain', phone: '60198765432', relation: 'Bapa' },
+    { role: 'Bapa Pengantin Lelaki', name: 'Mohd Zahir', phone: '60143140182', relation: 'Bapa' },
+    { role: 'Wali / Hajat', name: 'Syahmi (Abang)', phone: '60111223344', relation: 'Wali' },
   ];
 
   const wazeUrl = 'https://waze.com/ul?q=Jiwa%20Damansara%20Petaling%20Jaya';
