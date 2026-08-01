@@ -145,15 +145,6 @@ export const ThreePageStoryCard: React.FC<ThreePageStoryCardProps> = ({ isOpened
         }}
       />
 
-      {/* ── Botanical frame fixed to full viewport corners ── */}
-      <div
-        aria-hidden="true"
-        className="pointer-events-none"
-        style={{ position: 'absolute', inset: 0, zIndex: 30, overflow: 'visible' }}
-      >
-        <BotanicalFrame />
-      </div>
-
       {/* ── CINEMATIC STORY CARD ── */}
       <motion.div
         initial={{ opacity: 0, scale: 0.95, y: 20 }}
@@ -161,7 +152,10 @@ export const ThreePageStoryCard: React.FC<ThreePageStoryCardProps> = ({ isOpened
         transition={{ duration: 2.0, ease: [0.16, 1, 0.3, 1] }}
         className="relative z-10 w-full max-w-xl mx-auto py-4"
       >
-
+        {/* Botanical frame anchored to card corners */}
+        <div className="absolute inset-0 pointer-events-none z-30 overflow-visible">
+          <BotanicalFrame />
+        </div>
         <IslamicArchCard>
           {/* Stage locked to exact uniform height across all 3 pages */}
           <div className="relative w-full h-[490px] sm:h-[550px] overflow-hidden flex items-center justify-center">
