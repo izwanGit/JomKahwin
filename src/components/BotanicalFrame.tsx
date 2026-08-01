@@ -4,9 +4,8 @@ import { motion } from 'framer-motion';
 /**
  * BotanicalFrame
  *
- * Flawless mobile & desktop corner botanical frame anchored directly to IslamicArchCard.
- * Sized and offset so that corner flowers hug the card frame line perfectly on mobile phones
- * without colliding with text, buttons, or the fixed bottom navigation dock.
+ * Lush, prominent burgundy rose corner bouquets for both Mobile & Desktop viewports.
+ * Sized up so corner flowers look rich, full, and grand while anchored flush to card corners.
  */
 export const BotanicalFrame: React.FC = () => {
   return (
@@ -21,9 +20,9 @@ export const BotanicalFrame: React.FC = () => {
         transition={{ duration: 12, repeat: Infinity, ease: 'easeInOut' }}
         style={{
           position: 'absolute',
-          top: 'clamp(-14px, -2vw, -24px)',
-          left: 'clamp(-14px, -2vw, -24px)',
-          width: 'clamp(85px, 22%, 145px)',
+          top: 'clamp(-20px, -3.2vw, -34px)',
+          left: 'clamp(-20px, -3.2vw, -34px)',
+          width: 'clamp(115px, 28%, 185px)',
           zIndex: 25,
           transformOrigin: 'top left',
           willChange: 'transform',
@@ -58,7 +57,7 @@ export const BotanicalFrame: React.FC = () => {
             width: '100%',
             position: 'relative',
             zIndex: 25,
-            filter: 'drop-shadow(0 6px 16px rgba(40,5,11,0.2))',
+            filter: 'drop-shadow(0 8px 22px rgba(40,5,11,0.25))',
           }}
         />
       </motion.div>
@@ -72,9 +71,9 @@ export const BotanicalFrame: React.FC = () => {
         transition={{ duration: 15, delay: 2, repeat: Infinity, ease: 'easeInOut' }}
         style={{
           position: 'absolute',
-          top: 'clamp(-12px, -1.8vw, -20px)',
-          right: 'clamp(-12px, -1.8vw, -20px)',
-          width: 'clamp(72px, 18%, 125px)',
+          top: 'clamp(-18px, -2.6vw, -28px)',
+          right: 'clamp(-18px, -2.6vw, -28px)',
+          width: 'clamp(98px, 24%, 160px)',
           zIndex: 25,
           transformOrigin: 'top right',
           pointerEvents: 'none',
@@ -109,7 +108,7 @@ export const BotanicalFrame: React.FC = () => {
             width: '100%',
             position: 'relative',
             zIndex: 25,
-            filter: 'drop-shadow(0 5px 14px rgba(40,5,11,0.18))',
+            filter: 'drop-shadow(0 6px 18px rgba(40,5,11,0.22))',
           }}
         />
       </motion.div>
@@ -123,9 +122,9 @@ export const BotanicalFrame: React.FC = () => {
         transition={{ duration: 14, delay: 1, repeat: Infinity, ease: 'easeInOut' }}
         style={{
           position: 'absolute',
-          bottom: 'clamp(-12px, -1.8vw, -20px)',
-          left: 'clamp(-12px, -1.8vw, -20px)',
-          width: 'clamp(78px, 19%, 130px)',
+          bottom: 'clamp(-18px, -2.6vw, -28px)',
+          left: 'clamp(-18px, -2.6vw, -28px)',
+          width: 'clamp(105px, 25%, 165px)',
           zIndex: 25,
           pointerEvents: 'none',
           transformOrigin: 'bottom left',
@@ -160,7 +159,7 @@ export const BotanicalFrame: React.FC = () => {
             width: '100%',
             position: 'relative',
             zIndex: 25,
-            filter: 'drop-shadow(0 5px 14px rgba(40,5,11,0.18))',
+            filter: 'drop-shadow(0 6px 18px rgba(40,5,11,0.22))',
           }}
         />
       </motion.div>
@@ -174,9 +173,9 @@ export const BotanicalFrame: React.FC = () => {
         transition={{ duration: 16, delay: 3, repeat: Infinity, ease: 'easeInOut' }}
         style={{
           position: 'absolute',
-          bottom: 'clamp(-14px, -2vw, -24px)',
-          right: 'clamp(-14px, -2vw, -24px)',
-          width: 'clamp(82px, 20%, 135px)',
+          bottom: 'clamp(-20px, -3.2vw, -34px)',
+          right: 'clamp(-20px, -3.2vw, -34px)',
+          width: 'clamp(110px, 26%, 175px)',
           zIndex: 25,
           pointerEvents: 'none',
           transformOrigin: 'bottom right',
@@ -194,7 +193,7 @@ export const BotanicalFrame: React.FC = () => {
             width: '100%',
             position: 'relative',
             zIndex: 25,
-            filter: 'drop-shadow(0 6px 16px rgba(40,5,11,0.2))',
+            filter: 'drop-shadow(0 8px 22px rgba(40,5,11,0.24))',
           }}
         />
       </motion.div>
