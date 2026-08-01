@@ -49,16 +49,11 @@ function doPost(e) {
     var spreadsheet = getSpreadsheet_();
     var sheet = spreadsheet.getSheetByName(SHEET_NAME) || spreadsheet.insertSheet(SHEET_NAME);
     ensureHeaders_(sheet);
-    sheet.getRange(1, 3, sheet.getMaxRows(), 1).setNumberFormat("@");
 
     var row = [new Date(), name, phone, attendance, pax, wishes];
     var existingRow = findPhoneRow_(sheet, phone);
 
-    if (existingRow) {
-      sheet.getRange(existingRow, 1, 1, row.length).setValues([row]);
-    } else {
-      sheet.appendRow(row);
-    }
+    writeRsvpRow_(sheet, existingRow || sheet.getLastRow() + 1, row);
 
     sheet.getRange(2, 1, Math.max(sheet.getLastRow() - 1, 1), 1)
       .setNumberFormat("dd/MM/yyyy HH:mm:ss");
@@ -121,6 +116,30 @@ function findPhoneRow_(sheet, phone) {
     if (normalizePhone_(phones[index][0]) === phone) return index + 2;
   }
   return 0;
+}
+
+function writeRsvpRow_(sheet, rowNumber, row) {
+  sheet.getRange(rowNumber, 1, 1, row.length).setValues([row]);
+
+  // The apostrophe forces Google Sheets to keep the leading 0 as text.
+  sheet.getRange(rowNumber, 3)
+    .setNumberFormat("@")
+    .setValue("'" + row[2]);
+}
+
+// Run once from the Apps Script editor to correct phone numbers saved before
+// the text-format fix was added.
+function repairStoredPhoneNumbers() {
+  var sheet = getSpreadsheet_().getSheetByName(SHEET_NAME);
+  var lastRow = sheet ? sheet.getLastRow() : 0;
+  if (lastRow < 2) return;
+
+  var phoneRange = sheet.getRange(2, 3, lastRow - 1, 1);
+  var correctedPhones = phoneRange.getDisplayValues().map(function (row) {
+    return ["'" + normalizePhone_(row[0])];
+  });
+
+  phoneRange.setNumberFormat("@").setValues(correctedPhones);
 }
 
 function getSpreadsheet_() {
