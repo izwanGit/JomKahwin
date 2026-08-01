@@ -34,9 +34,8 @@ const PAGE_DWELL_MS: Record<number, number> = {
  * the romantic, cinematic feel of a wedding film.
  *
  * NOTE: We use `filter` for blur. On low-end devices the blur
- * is kept to 8px max (not 20px+) and duration is long enough
- * that the GPU has time to composite without frame drops.
  * The `will-change` hint is applied in the className.
+ */
 const pageVariants = {
   enter: {
     opacity: 0,
