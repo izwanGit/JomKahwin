@@ -27,8 +27,9 @@ export const FloatingButterflies: React.FC = () => {
     let animationFrameId = 0;
     let lastFrameTime = 0;
     const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reducedMotion) return;
     const lowPowerDevice = (navigator.hardwareConcurrency ?? 4) <= 4;
-    const frameInterval = reducedMotion ? 1000 : lowPowerDevice ? 1000 / 30 : 1000 / 60;
+    const frameInterval = lowPowerDevice ? 1000 / 30 : 1000 / 60;
     let width = (canvas.width = window.innerWidth);
     let height = (canvas.height = window.innerHeight);
 
@@ -44,30 +45,31 @@ export const FloatingButterflies: React.FC = () => {
 
     window.addEventListener('resize', handleResize);
 
-    const butterflyCount = width < 768 ? 6 : 12;
+    // Only a few butterflies: a romantic accent, never visual clutter.
+    const butterflyCount = width < 768 ? 2 : lowPowerDevice ? 3 : 4;
     const butterflies: Butterfly[] = [];
 
     // Elegant gold and soft white colors for a premium look
     const colors = [
-      'rgba(212, 175, 55, 0.7)',  // Gold
-      'rgba(245, 230, 171, 0.8)', // Light Gold
-      'rgba(255, 254, 250, 0.8)', // Cream/White
-      'rgba(184, 134, 11, 0.6)',  // Dark Gold
+      'rgba(184, 134, 11, 0.72)', // Antique gold
+      'rgba(232, 210, 121, 0.78)', // Champagne gold
+      'rgba(139, 30, 49, 0.58)', // Romantic burgundy
+      'rgba(220, 154, 163, 0.68)', // Dusty rose
     ];
 
     for (let i = 0; i < butterflyCount; i++) {
       butterflies.push({
         x: Math.random() * width,
         y: Math.random() * height,
-        size: Math.random() * 8 + 8, // Size between 8 and 16
-        speedY: -Math.random() * 1.0 - 0.5, // Fly upwards (negative Y)
-        speedX: (Math.random() - 0.5) * 1.5, // Fly left or right
+        size: Math.random() * 3 + 5,
+        speedY: -Math.random() * 0.35 - 0.18,
+        speedX: (Math.random() - 0.5) * 0.55,
         baseRotation: Math.random() * 360,
         wobbleSpeed: Math.random() * 0.02 + 0.01,
         wobbleAmount: Math.random() * 30 + 10,
         flutterSpeed: Math.random() * 0.015 + 0.015,
         flutterOffset: Math.random() * Math.PI * 2,
-        opacity: Math.random() * 0.5 + 0.3,
+        opacity: Math.random() * 0.24 + 0.46,
         color: colors[Math.floor(Math.random() * colors.length)],
       });
     }
@@ -90,6 +92,8 @@ export const FloatingButterflies: React.FC = () => {
 
       // Draw wings
       ctx.fillStyle = b.color;
+      ctx.strokeStyle = 'rgba(74, 14, 23, 0.2)';
+      ctx.lineWidth = 0.55;
       
       // Left wing
       ctx.save();
@@ -101,6 +105,7 @@ export const FloatingButterflies: React.FC = () => {
       // Bottom lobe
       ctx.bezierCurveTo(-b.size * 1.5, b.size * 1.2, -b.size * 0.5, b.size * 1.8, 0, b.size * 1.0);
       ctx.fill();
+      ctx.stroke();
       ctx.restore();
 
       // Right wing
@@ -113,6 +118,7 @@ export const FloatingButterflies: React.FC = () => {
       // Bottom lobe
       ctx.bezierCurveTo(b.size * 1.5, b.size * 1.2, b.size * 0.5, b.size * 1.8, 0, b.size * 1.0);
       ctx.fill();
+      ctx.stroke();
       ctx.restore();
 
       // Draw body
