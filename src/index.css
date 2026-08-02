@@ -288,15 +288,6 @@ html {
   animation: butterflyFlyTwo 28s ease-in-out infinite alternate;
 }
 
-.romantic-butterfly--ghost {
-  top: 62%;
-  left: 12%;
-  width: clamp(24px, 3.2vw, 36px);
-  opacity: .38;
-  filter: none;
-  animation: butterflyFlyGhost 36s ease-in-out infinite alternate;
-}
-
 .romantic-petal {
   color: #8b1e31;
   font-family: Georgia, serif;
@@ -335,13 +326,6 @@ html {
   100% { transform: translate3d(-82vw, 27vh, 0) rotate(7deg); }
 }
 
-@keyframes butterflyFlyGhost {
-  0% { transform: translate3d(0, 0, 0) rotate(-10deg); }
-  32% { transform: translate3d(22vw, -18vh, 0) rotate(8deg); }
-  67% { transform: translate3d(47vw, 8vh, 0) rotate(-7deg); }
-  100% { transform: translate3d(70vw, -24vh, 0) rotate(9deg); }
-}
-
 @keyframes petalFallOne {
   0% { transform: translate3d(0, -20px, 0) rotate(0); opacity: 0; }
   12%, 84% { opacity: .82; }
@@ -367,8 +351,7 @@ html {
 /* Mobile keeps the romance while avoiding expensive canvas loops, SVG wing
    repaints and animated shadow filters on lower-power GPUs. */
 @media (max-width: 767px) {
-  .romantic-petal--three,
-  .romantic-butterfly--ghost {
+  .romantic-petal--three {
     display: none;
   }
 
