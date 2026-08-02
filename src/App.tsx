@@ -81,12 +81,19 @@ export function App() {
     document.body.appendChild(script);
 
     return () => {
-      cleanup();
+      script.remove();
+      // A JSONP response can still arrive after navigation or hot reload.
+      // Keep a short-lived no-op callback so that late responses stay harmless.
+      callbackStore[callbackName] = () => {};
+      window.setTimeout(() => {
+        delete callbackStore[callbackName];
+      }, 60_000);
     };
   }, [rsvpWebhookUrl]);
 
   return (
-    <div className="min-h-screen bg-cream-100 text-slate-800 relative selection:bg-gold-500 selection:text-white">
+    <div className="romantic-shell min-h-screen bg-cream-100 text-slate-800 relative selection:bg-gold-500 selection:text-white">
+      <div aria-hidden="true" className="romantic-vignette" />
       {/* 3D Interactive Opening Envelope */}
       <EnvelopeModal onOpen={handleEnvelopeOpen} guestName={guestName} />
 

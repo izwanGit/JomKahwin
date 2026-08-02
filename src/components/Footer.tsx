@@ -1,5 +1,6 @@
 import React from 'react';
 import { Share2, Heart } from 'lucide-react';
+import { CoupleMonogram } from './CoupleMonogram';
 
 export const Footer: React.FC = () => {
   const shareText = "Assalamualaikum! Anda dijemput ke Majlis Perkahwinan Alyea Dania & Amirul Iqhwan pada Sabtu, 24 Oktober 2026. Klik pautan untuk maklumat lanjut dan pengesahan kehadiran: " + window.location.href;
@@ -19,6 +20,7 @@ export const Footer: React.FC = () => {
   return (
     <footer className="pt-12 pb-40 md:pb-16 px-4 text-center bg-burgundy-950 text-white relative overflow-hidden border-t border-gold-500/30">
       <div className="max-w-md mx-auto space-y-6 relative z-10">
+        <div className="flex justify-center"><CoupleMonogram light /></div>
         
         {/* Share Button */}
         <button

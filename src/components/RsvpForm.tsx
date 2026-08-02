@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { CheckCircle2, Send, Users, User, Phone, MessageSquareHeart } from 'lucide-react';
 import confetti from 'canvas-confetti';
 import type { RsvpFormState, WishMessage } from '../types';
+import { CoupleMonogram } from './CoupleMonogram';
 
 interface RsvpFormProps {
   onAddWish?: (wish: WishMessage) => void;
@@ -100,9 +101,10 @@ export const RsvpForm: React.FC<RsvpFormProps> = ({ onAddWish, webhookUrl }) => 
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
-            className="p-8 rounded-2xl bg-emerald-900 text-white text-center space-y-3 shadow-emerald-glow border border-gold-400/40"
+            className="rsvp-thank-you p-8 rounded-2xl text-white text-center space-y-3 shadow-emerald-glow border border-gold-400/40"
           >
-            <CheckCircle2 className="w-12 h-12 text-gold-400 mx-auto" />
+            <div className="flex justify-center"><CoupleMonogram compact light /></div>
+            <CheckCircle2 className="w-9 h-9 text-gold-400 mx-auto" />
             <h3 className="text-xl font-serif font-bold text-gold-200">
               Terima Kasih, {formData.name}!
             </h3>
@@ -115,7 +117,7 @@ export const RsvpForm: React.FC<RsvpFormProps> = ({ onAddWish, webhookUrl }) => 
               onClick={() => setIsSubmitted(false)}
               className="mt-4 px-6 py-2 rounded-full bg-emerald-800 text-gold-300 text-xs font-semibold hover:bg-emerald-700 transition-colors"
             >
-              Kemaskini Borang
+              Kemas Kini Maklumat
             </button>
           </motion.div>
         ) : (

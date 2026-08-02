@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Gift, Copy, Check, X, QrCode } from 'lucide-react';
+import { Gift, Copy, Check, X, Landmark } from 'lucide-react';
 
 export const SalamKautModal: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -64,15 +64,13 @@ export const SalamKautModal: React.FC = () => {
                 </p>
               </div>
 
-              {/* DuitNow QR Card Visual */}
+              {/* Bank transfer details. A decorative QR icon must not be presented as scannable. */}
               <div className="p-4 rounded-2xl bg-cream-100 border border-gold-300/50 flex flex-col items-center space-y-3">
-                <div className="w-40 h-40 rounded-xl bg-white border-2 border-pink-500/80 p-2 shadow-inner flex flex-col items-center justify-center relative">
-                  {/* Generated QR SVG representation */}
-                  <QrCode className="w-32 h-32 text-slate-900" />
-                  <span className="absolute bottom-1 text-[9px] font-bold text-pink-600 tracking-wider">
-                    DuitNow QR
-                  </span>
+                <div className="w-16 h-16 rounded-full bg-burgundy-950 border border-gold-500/50 shadow-burgundy-glow flex items-center justify-center">
+                  <Landmark className="w-7 h-7 text-gold-300" />
                 </div>
+
+                <span className="text-[10px] font-bold uppercase tracking-[0.22em] text-gold-700">Pindahan Bank</span>
 
                 <div className="space-y-0.5 text-xs">
                   <span className="font-semibold text-emerald-950 block">{bankName}</span>

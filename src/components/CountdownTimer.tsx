@@ -79,7 +79,7 @@ export const CountdownTimer: React.FC = () => {
           </div>
 
           <p className="text-xs text-gold-200/80 font-serif italic mt-6">
-            Sabtu, 24 Oktober 2026 • 13 Rabiulakhir 1448H
+            Sabtu, 24 Oktober 2026 • 13 Jamadilawal 1448H
           </p>
         </div>
       </motion.div>

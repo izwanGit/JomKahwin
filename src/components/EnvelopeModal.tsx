@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Sparkles, Volume2 } from 'lucide-react';
 import confetti from 'canvas-confetti';
+import { CoupleMonogram } from './CoupleMonogram';
 
 interface EnvelopeModalProps {
   onOpen: () => void;
@@ -58,6 +59,7 @@ export const EnvelopeModal: React.FC<EnvelopeModalProps> = ({ onOpen, guestName 
             transition={{ delay: 0.2, duration: 0.6 }}
             className="text-center mb-6"
           >
+            <div className="mb-3 flex justify-center"><CoupleMonogram compact light /></div>
             <span className="text-gold-300 font-serif text-xs md:text-sm tracking-[0.3em] uppercase block mb-1">
               Walimatulurus
             </span>

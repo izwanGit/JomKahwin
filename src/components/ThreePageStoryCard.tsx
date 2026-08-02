@@ -1,7 +1,8 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Heart, Calendar, MapPin, Phone, Clock } from 'lucide-react';
+import { Heart, Calendar, MapPin, Clock } from 'lucide-react';
 import { IslamicArchCard } from './IslamicArchCard';
+import { CoupleMonogram } from './CoupleMonogram';
 
 interface ThreePageStoryCardProps {
   isOpened?: boolean;
@@ -157,6 +158,9 @@ export const ThreePageStoryCard: React.FC<ThreePageStoryCardProps> = ({ isOpened
                   exit="exit"
                   className="story-page absolute inset-0 flex flex-col items-center justify-center gap-[clamp(6px,1.2vh,16px)] px-2"
                 >
+                  <motion.div variants={childReveal} className="absolute top-0 left-1/2 -translate-x-1/2 opacity-90">
+                    <CoupleMonogram compact />
+                  </motion.div>
                   {/* Bismillah */}
                   <motion.div
                     variants={childReveal}
@@ -380,7 +384,7 @@ export const ThreePageStoryCard: React.FC<ThreePageStoryCardProps> = ({ isOpened
                       textTransform: 'uppercase',
                     }}
                   >
-                    Atur Cara Majlis
+                    Jemputan Keluarga
                   </motion.span>
 
                   {/* Gold ornamental divider */}
@@ -393,39 +397,12 @@ export const ThreePageStoryCard: React.FC<ThreePageStoryCardProps> = ({ isOpened
                     }}
                   />
 
-                  {/* Parents' names */}
-                  <motion.div variants={childReveal} className="text-center space-y-0.5">
-                    <p
-                      style={{
-                        fontFamily: "'Cormorant Garamond', serif",
-                        fontWeight: 700,
-                        fontSize: 'clamp(14px, 2.2vw, 20px)',
-                        color: '#28050B',
-                        lineHeight: 1.3,
-                      }}
-                    >
-                      Hj. Ahmad Bin Ibrahim
+                  <motion.div variants={childReveal} className="text-center space-y-1">
+                    <p className="font-serif text-lg sm:text-xl font-bold text-burgundy-950">
+                      Dengan izin dan rahmat Allah SWT
                     </p>
-                    <p
-                      style={{
-                        fontFamily: "'Cormorant Garamond', serif",
-                        fontStyle: 'italic',
-                        fontSize: 'clamp(10px, 1.4vw, 12px)',
-                        color: 'rgba(40,5,11,0.5)',
-                      }}
-                    >
-                      &amp;
-                    </p>
-                    <p
-                      style={{
-                        fontFamily: "'Cormorant Garamond', serif",
-                        fontWeight: 700,
-                        fontSize: 'clamp(14px, 2.2vw, 20px)',
-                        color: '#28050B',
-                        lineHeight: 1.3,
-                      }}
-                    >
-                      Hjh. Aminah Binti Ali
+                    <p className="font-serif italic text-[11px] sm:text-xs text-burgundy-950/55">
+                      Kedua-dua keluarga mempelai dengan penuh kesyukuran
                     </p>
                   </motion.div>
 
@@ -577,7 +554,7 @@ export const ThreePageStoryCard: React.FC<ThreePageStoryCardProps> = ({ isOpened
                       textTransform: 'uppercase',
                     }}
                   >
-                    Titipan Doa &amp; Perhubungan
+                    Titipan Doa &amp; Lokasi
                   </motion.span>
 
                   {/* Gold ornamental divider */}
@@ -605,79 +582,6 @@ export const ThreePageStoryCard: React.FC<ThreePageStoryCardProps> = ({ isOpened
                   >
                     &ldquo;Ya Allah, berkatilah majlis perkahwinan ini. Limpahkanlah baraqah dan rahmat-Mu kepada kedua mempelai, kurniakanlah zuriat yang soleh dan solehah, serta kekalkanlah jodoh mereka hingga ke Jannah.&rdquo;
                   </motion.p>
-
-                  {/* Contact persons */}
-                  <motion.div
-                    variants={childReveal}
-                    style={{ width: '100%', maxWidth: '380px' }}
-                  >
-                    <p
-                      style={{
-                        fontFamily: "'Plus Jakarta Sans', sans-serif",
-                        fontSize: '10px',
-                        color: '#976E07',
-                        letterSpacing: '0.2em',
-                        textTransform: 'uppercase',
-                        fontWeight: 600,
-                        textAlign: 'center',
-                        marginBottom: '8px',
-                      }}
-                    >
-                      Hubungi Pihak Keluarga
-                    </p>
-                    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '8px' }}>
-                      <a
-                        href="https://wa.me/60143140182"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        style={{
-                          padding: '10px 12px',
-                          borderRadius: '12px',
-                          background: 'rgba(255,254,250,0.9)',
-                          border: '1px solid rgba(212,175,55,0.3)',
-                          display: 'flex',
-                          alignItems: 'center',
-                          justifyContent: 'space-between',
-                          textDecoration: 'none',
-                        }}
-                      >
-                        <div>
-                          <p style={{ fontFamily: "'Cormorant Garamond', serif", fontWeight: 700, fontSize: '12px', color: '#28050B' }}>
-                            Mohd Zahir
-                          </p>
-                          <p style={{ fontSize: '10px', color: 'rgba(40,5,11,0.45)', marginTop: '1px' }}>
-                            Abah • 014-3140182
-                          </p>
-                        </div>
-                        <Phone size={13} style={{ color: '#D4AF37' }} />
-                      </a>
-                      <a
-                        href="https://wa.me/60198765432"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        style={{
-                          padding: '10px 12px',
-                          borderRadius: '12px',
-                          background: 'rgba(255,254,250,0.9)',
-                          border: '1px solid rgba(212,175,55,0.3)',
-                          display: 'flex',
-                          alignItems: 'center',
-                          justifyContent: 'space-between',
-                          textDecoration: 'none',
-                        }}
-                      >
-                        <div>
-                          <p style={{ fontFamily: "'Cormorant Garamond', serif", fontWeight: 700, fontSize: '12px', color: '#28050B' }}>
-                            Daini Dzulkarnain
-                          </p>
-                          <p style={{ fontSize: '10px', color: 'rgba(40,5,11,0.45)', marginTop: '1px' }}>
-                            Abah • 019-8765432
-                          </p>
-                        </div>
-                        <Phone size={13} style={{ color: '#D4AF37' }} />
-                      </a>
-                    </div>
-                  </motion.div>
 
                   {/* GPS Quick Access */}
                   <motion.div
@@ -734,6 +638,21 @@ export const ThreePageStoryCard: React.FC<ThreePageStoryCardProps> = ({ isOpened
             </AnimatePresence>
           </div>
         </IslamicArchCard>
+
+        <div className="story-pagination" aria-label="Pilihan halaman jemputan">
+          {[1, 2, 3].map((page) => (
+            <button
+              key={page}
+              type="button"
+              aria-label={`Lihat halaman ${page}`}
+              aria-current={currentPage === page ? 'page' : undefined}
+              onClick={() => setCurrentPage(page)}
+              className={currentPage === page ? 'is-active' : ''}
+            >
+              <span>{page}</span>
+            </button>
+          ))}
+        </div>
       </motion.div>
     </section>
   );
