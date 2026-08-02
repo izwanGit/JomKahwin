@@ -75,14 +75,14 @@ export const SalamKautModal: React.FC = () => {
 
                 <div className="space-y-0.5 text-xs">
                   <span className="font-semibold text-emerald-950 block">{bankName}</span>
-                  <span className="text-slate-500 text-[11px] block">{accHolder}</span>
+                  <span className="block break-words text-[11px] text-slate-500">{accHolder}</span>
                 </div>
 
-                <div className="w-full flex items-center justify-between p-2.5 rounded-xl bg-white border border-slate-200 text-xs font-mono font-bold text-slate-800">
-                  <span>{bankAcc}</span>
+                <div className="flex w-full min-w-0 items-center justify-between gap-2 rounded-xl border border-slate-200 bg-white p-2.5 font-mono text-xs font-bold text-slate-800">
+                  <span className="min-w-0 whitespace-nowrap tabular-nums">{bankAcc}</span>
                   <button
                     onClick={handleCopy}
-                    className="flex items-center gap-1 text-[10px] px-2.5 py-1 rounded-lg bg-emerald-950 text-gold-300 hover:bg-emerald-900 transition-colors"
+                    className="flex shrink-0 items-center gap-1 rounded-lg bg-emerald-950 px-2 py-1 text-[10px] text-gold-300 transition-colors hover:bg-emerald-900 sm:px-2.5"
                   >
                     {copied ? (
                       <>

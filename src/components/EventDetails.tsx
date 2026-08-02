@@ -137,14 +137,14 @@ export const EventDetails: React.FC = () => {
               rel="noopener noreferrer"
               className="flex items-center justify-between p-4 rounded-xl bg-cream-100/70 border border-gold-300/40 hover:bg-burgundy-900 hover:text-white group transition-all duration-300"
             >
-              <div>
+              <div className="min-w-0">
                 <span className="text-[10px] uppercase font-bold tracking-wider text-gold-600 group-hover:text-gold-300 block">{contact.role}</span>
-                <span className="text-sm font-semibold text-slate-800 group-hover:text-white">{contact.name}</span>
-                <span className="mt-0.5 block text-xs font-medium tabular-nums text-slate-500 group-hover:text-cream-100">
+                <span className="block break-words text-sm font-semibold text-slate-800 group-hover:text-white">{contact.name}</span>
+                <span className="mt-0.5 block whitespace-nowrap text-xs font-medium tabular-nums text-slate-500 group-hover:text-cream-100">
                   {formatPhoneNumber(contact.phone)}
                 </span>
               </div>
-              <div className="w-9 h-9 rounded-full bg-burgundy-100 text-burgundy-800 group-hover:bg-gold-500 group-hover:text-burgundy-950 flex items-center justify-center transition-colors">
+              <div className="ml-2 flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-burgundy-100 text-burgundy-800 transition-colors group-hover:bg-gold-500 group-hover:text-burgundy-950">
                 <Phone className="w-4 h-4" />
               </div>
             </a>

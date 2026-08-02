@@ -254,7 +254,8 @@ export const ThreePageStoryCard: React.FC<ThreePageStoryCardProps> = ({ isOpened
                         color: '#28050B',
                         letterSpacing: '-0.02em',
                         lineHeight: 1.05,
-                        whiteSpace: 'nowrap',
+                        whiteSpace: 'normal',
+                        textWrap: 'balance',
                       }}
                     >
                       Alyea Dania
@@ -274,7 +275,8 @@ export const ThreePageStoryCard: React.FC<ThreePageStoryCardProps> = ({ isOpened
                         color: '#28050B',
                         letterSpacing: '-0.02em',
                         lineHeight: 1.05,
-                        whiteSpace: 'nowrap',
+                        whiteSpace: 'normal',
+                        textWrap: 'balance',
                       }}
                     >
                       Amirul Iqhwan
@@ -435,7 +437,8 @@ export const ThreePageStoryCard: React.FC<ThreePageStoryCardProps> = ({ isOpened
                         color: '#28050B',
                         letterSpacing: '-0.01em',
                         lineHeight: 1.2,
-                        whiteSpace: 'nowrap',
+                        whiteSpace: 'normal',
+                        textWrap: 'balance',
                       }}
                     >
                       Alyea Dania Binti Daini Dzulkarnain
@@ -459,7 +462,8 @@ export const ThreePageStoryCard: React.FC<ThreePageStoryCardProps> = ({ isOpened
                         color: '#28050B',
                         letterSpacing: '-0.01em',
                         lineHeight: 1.2,
-                        whiteSpace: 'nowrap',
+                        whiteSpace: 'normal',
+                        textWrap: 'balance',
                       }}
                     >
                       Muhammad Amirul Iqhwan Bin Mohd Zahir
@@ -590,20 +594,22 @@ export const ThreePageStoryCard: React.FC<ThreePageStoryCardProps> = ({ isOpened
                     <p className="mb-2 text-center text-[10px] font-semibold uppercase tracking-[0.2em] text-gold-700">
                       Hubungi Pihak Keluarga
                     </p>
-                    <div className="grid grid-cols-2 gap-2">
-                      <a href="https://wa.me/60143140182" target="_blank" rel="noopener noreferrer" className="flex items-center justify-between rounded-xl border border-gold-500/30 bg-cream-50/90 px-3 py-2.5 no-underline">
-                        <div className="text-left">
-                          <p className="font-serif text-xs font-bold text-burgundy-950">Mohd Zahir</p>
-                          <p className="mt-0.5 text-[10px] text-burgundy-950/45">Bapa Amirul • 014-314 0182</p>
+                    <div className="grid grid-cols-1 gap-2 min-[360px]:grid-cols-2">
+                      <a href="https://wa.me/60143140182" target="_blank" rel="noopener noreferrer" className="flex min-w-0 items-center justify-between gap-1.5 rounded-xl border border-gold-500/30 bg-cream-50/90 px-2.5 py-2.5 no-underline sm:px-3">
+                        <div className="min-w-0 text-left">
+                          <p className="font-serif text-xs font-bold leading-tight text-burgundy-950">Mohd Zahir</p>
+                          <p className="mt-1 text-[9px] leading-tight text-burgundy-950/45 sm:text-[10px]">Bapa Amirul</p>
+                          <p className="mt-0.5 whitespace-nowrap text-[10px] font-medium leading-tight tabular-nums text-burgundy-950/55">014-314 0182</p>
                         </div>
-                        <Phone size={13} className="text-gold-500" />
+                        <Phone size={13} className="shrink-0 text-gold-500" />
                       </a>
-                      <a href="https://wa.me/60198765432" target="_blank" rel="noopener noreferrer" className="flex items-center justify-between rounded-xl border border-gold-500/30 bg-cream-50/90 px-3 py-2.5 no-underline">
-                        <div className="text-left">
-                          <p className="font-serif text-xs font-bold text-burgundy-950">Daini Dzulkarnain</p>
-                          <p className="mt-0.5 text-[10px] text-burgundy-950/45">Bapa Alyea • 019-876 5432</p>
+                      <a href="https://wa.me/60198765432" target="_blank" rel="noopener noreferrer" className="flex min-w-0 items-center justify-between gap-1.5 rounded-xl border border-gold-500/30 bg-cream-50/90 px-2.5 py-2.5 no-underline sm:px-3">
+                        <div className="min-w-0 text-left">
+                          <p className="font-serif text-xs font-bold leading-tight text-burgundy-950">Daini Dzulkarnain</p>
+                          <p className="mt-1 text-[9px] leading-tight text-burgundy-950/45 sm:text-[10px]">Bapa Alyea</p>
+                          <p className="mt-0.5 whitespace-nowrap text-[10px] font-medium leading-tight tabular-nums text-burgundy-950/55">019-876 5432</p>
                         </div>
-                        <Phone size={13} className="text-gold-500" />
+                        <Phone size={13} className="shrink-0 text-gold-500" />
                       </a>
                     </div>
                   </motion.div>

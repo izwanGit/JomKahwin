@@ -51,26 +51,26 @@ export const Wishbook: React.FC<WishbookProps> = ({ wishes, isLoading = false, l
               animate={{ opacity: 1, y: 0 }}
               className="p-5 rounded-2xl bg-white border border-gold-300/40 shadow-card-soft space-y-2 relative overflow-hidden"
             >
-              <div className="flex items-center justify-between">
-                <div className="flex items-center gap-2">
-                  <div className="w-8 h-8 rounded-full bg-emerald-950 text-gold-300 font-serif font-bold text-xs flex items-center justify-center border border-gold-400/40">
+              <div className="flex min-w-0 items-start justify-between gap-2">
+                <div className="flex min-w-0 items-center gap-2">
+                  <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-gold-400/40 bg-emerald-950 font-serif text-xs font-bold text-gold-300">
                     {w.name.charAt(0).toUpperCase()}
                   </div>
-                  <div>
-                    <h4 className="font-serif font-bold text-slate-800 text-sm">
+                  <div className="min-w-0">
+                    <h4 className="break-words font-serif text-sm font-bold leading-tight text-slate-800">
                       {w.name}
                     </h4>
-                    <span className="text-[10px] text-slate-400 block">{w.createdAt}</span>
+                    <span className="block text-[10px] leading-tight text-slate-400">{w.createdAt}</span>
                   </div>
                 </div>
 
-                <div className="flex items-center gap-1 text-[10px] font-semibold px-2.5 py-1 rounded-full bg-cream-100 text-gold-700 border border-gold-300/50">
+                <div className="flex shrink-0 items-center gap-1 whitespace-nowrap rounded-full border border-gold-300/50 bg-cream-100 px-2 py-1 text-[10px] font-semibold text-gold-700 sm:px-2.5">
                   <Heart className="w-3 h-3 text-gold-500 fill-gold-500/20" />
                   <span>{w.attendance === 'hadir' ? 'Hadir' : 'Doa Berkat'}</span>
                 </div>
               </div>
 
-              <p className="text-xs text-slate-700 font-sans italic leading-relaxed pt-1 pl-1 border-l-2 border-gold-300">
+              <p className="break-words border-l-2 border-gold-300 pt-1 pl-1 font-sans text-xs italic leading-relaxed text-slate-700 [overflow-wrap:anywhere]">
                 &quot;{w.message}&quot;
               </p>
             </motion.div>
