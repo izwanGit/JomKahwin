@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { EnvelopeModal } from './components/EnvelopeModal';
 import { FloatingPetals } from './components/FloatingPetals';
 import { FloatingButterflies } from './components/FloatingButterflies';
+import { RomanticOverlay } from './components/RomanticOverlay';
 import { MusicPlayer } from './components/MusicPlayer';
 import { Navbar } from './components/Navbar';
 import { ThreePageStoryCard } from './components/ThreePageStoryCard';
@@ -105,6 +106,9 @@ export function App() {
 
       {/* Floating Alive Butterflies */}
       {isEnvelopeOpen && <FloatingButterflies />}
+
+      {/* Visible romantic accents above the invitation card. */}
+      {isEnvelopeOpen && <RomanticOverlay />}
 
       {/* Floating Acoustic Music Player */}
       {isEnvelopeOpen && <MusicPlayer autoPlay={isAudioAutoPlay} />}
