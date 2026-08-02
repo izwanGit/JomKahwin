@@ -1,8 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Heart, Calendar, MapPin, Clock } from 'lucide-react';
+import { Heart, Calendar, MapPin, Phone, Clock } from 'lucide-react';
 import { IslamicArchCard } from './IslamicArchCard';
-import { CoupleMonogram } from './CoupleMonogram';
 
 interface ThreePageStoryCardProps {
   isOpened?: boolean;
@@ -158,9 +157,6 @@ export const ThreePageStoryCard: React.FC<ThreePageStoryCardProps> = ({ isOpened
                   exit="exit"
                   className="story-page absolute inset-0 flex flex-col items-center justify-center gap-[clamp(6px,1.2vh,16px)] px-2"
                 >
-                  <motion.div variants={childReveal} className="absolute top-0 left-1/2 -translate-x-1/2 opacity-90">
-                    <CoupleMonogram compact />
-                  </motion.div>
                   {/* Bismillah */}
                   <motion.div
                     variants={childReveal}
@@ -384,7 +380,7 @@ export const ThreePageStoryCard: React.FC<ThreePageStoryCardProps> = ({ isOpened
                       textTransform: 'uppercase',
                     }}
                   >
-                    Jemputan Keluarga
+                    Jemputan Walimatulurus
                   </motion.span>
 
                   {/* Gold ornamental divider */}
@@ -397,13 +393,19 @@ export const ThreePageStoryCard: React.FC<ThreePageStoryCardProps> = ({ isOpened
                     }}
                   />
 
-                  <motion.div variants={childReveal} className="text-center space-y-1">
-                    <p className="font-serif text-lg sm:text-xl font-bold text-burgundy-950">
-                      Dengan izin dan rahmat Allah SWT
-                    </p>
-                    <p className="font-serif italic text-[11px] sm:text-xs text-burgundy-950/55">
-                      Kedua-dua keluarga mempelai dengan penuh kesyukuran
-                    </p>
+                  {/* Fathers follow the couple's full names; mother names remain explicit client placeholders. */}
+                  <motion.div variants={childReveal} className="grid w-full max-w-[410px] grid-cols-[1fr_auto_1fr] items-center gap-2 text-center">
+                    <div className="space-y-0.5">
+                      <p className="text-[8px] font-bold uppercase tracking-[0.16em] text-gold-700">Keluarga Alyea</p>
+                      <p className="font-serif text-sm font-bold text-burgundy-950 sm:text-base">Daini Dzulkarnain</p>
+                      <p className="font-serif text-[11px] italic text-burgundy-950/55">&amp; Puan [Nama Ibu Alyea]</p>
+                    </div>
+                    <p className="font-serif text-xs italic text-gold-600">bersama</p>
+                    <div className="space-y-0.5">
+                      <p className="text-[8px] font-bold uppercase tracking-[0.16em] text-gold-700">Keluarga Amirul</p>
+                      <p className="font-serif text-sm font-bold text-burgundy-950 sm:text-base">Mohd Zahir</p>
+                      <p className="font-serif text-[11px] italic text-burgundy-950/55">&amp; Puan [Nama Ibu Amirul]</p>
+                    </div>
                   </motion.div>
 
                   {/* Formal invitation text */}
@@ -420,7 +422,7 @@ export const ThreePageStoryCard: React.FC<ThreePageStoryCardProps> = ({ isOpened
                       textAlign: 'center',
                     }}
                   >
-                    Dengan segala hormatnya kami menjemput Dato&apos;/Datin/Tuan/Puan/Encik/Cik sekeluarga ke majlis perkahwinan puteri/putera kami
+                    Dengan segala hormatnya kami menjemput Dato&apos;/Datin/Tuan/Puan/Encik/Cik sekeluarga ke majlis perkahwinan anakanda kami
                   </motion.p>
 
                   {/* Couple full formal names on Page 2 */}
@@ -582,6 +584,29 @@ export const ThreePageStoryCard: React.FC<ThreePageStoryCardProps> = ({ isOpened
                   >
                     &ldquo;Ya Allah, berkatilah majlis perkahwinan ini. Limpahkanlah baraqah dan rahmat-Mu kepada kedua mempelai, kurniakanlah zuriat yang soleh dan solehah, serta kekalkanlah jodoh mereka hingga ke Jannah.&rdquo;
                   </motion.p>
+
+                  {/* Placeholder family contacts — replace after client confirmation. */}
+                  <motion.div variants={childReveal} style={{ width: '100%', maxWidth: '380px' }}>
+                    <p className="mb-2 text-center text-[10px] font-semibold uppercase tracking-[0.2em] text-gold-700">
+                      Hubungi Pihak Keluarga
+                    </p>
+                    <div className="grid grid-cols-2 gap-2">
+                      <a href="https://wa.me/60143140182" target="_blank" rel="noopener noreferrer" className="flex items-center justify-between rounded-xl border border-gold-500/30 bg-cream-50/90 px-3 py-2.5 no-underline">
+                        <div className="text-left">
+                          <p className="font-serif text-xs font-bold text-burgundy-950">Mohd Zahir</p>
+                          <p className="mt-0.5 text-[10px] text-burgundy-950/45">Bapa Amirul • 014-314 0182</p>
+                        </div>
+                        <Phone size={13} className="text-gold-500" />
+                      </a>
+                      <a href="https://wa.me/60198765432" target="_blank" rel="noopener noreferrer" className="flex items-center justify-between rounded-xl border border-gold-500/30 bg-cream-50/90 px-3 py-2.5 no-underline">
+                        <div className="text-left">
+                          <p className="font-serif text-xs font-bold text-burgundy-950">Daini Dzulkarnain</p>
+                          <p className="mt-0.5 text-[10px] text-burgundy-950/45">Bapa Alyea • 019-876 5432</p>
+                        </div>
+                        <Phone size={13} className="text-gold-500" />
+                      </a>
+                    </div>
+                  </motion.div>
 
                   {/* GPS Quick Access */}
                   <motion.div

@@ -14,8 +14,6 @@ export const CoupleMonogram: React.FC<CoupleMonogramProps> = ({ compact = false,
     transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
     className={`couple-monogram ${compact ? 'couple-monogram--compact' : ''} ${light ? 'couple-monogram--light' : ''}`}
   >
-    <span aria-hidden="true" className="couple-monogram__flourish">✦</span>
-    <span className="couple-monogram__letters">A<span>&amp;</span>I</span>
-    <span aria-hidden="true" className="couple-monogram__flourish">✦</span>
+    <img src="/assets/monogram-ai-v1.png" alt="" className="couple-monogram__image" />
   </motion.div>
 );

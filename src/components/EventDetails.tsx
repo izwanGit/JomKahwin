@@ -1,11 +1,23 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { MapPin, Navigation, Calendar as CalendarIcon, ExternalLink } from 'lucide-react';
+import { MapPin, Navigation, Calendar as CalendarIcon, Phone, ExternalLink } from 'lucide-react';
+import type { ContactPerson } from '../types';
 
 export const EventDetails: React.FC = () => {
+  // Placeholder contact details: replace after client confirmation.
+  const contacts: ContactPerson[] = [
+    { role: 'Bapa Pengantin Perempuan', name: 'Daini Dzulkarnain', phone: '60198765432', relation: 'Bapa' },
+    { role: 'Bapa Pengantin Lelaki', name: 'Mohd Zahir', phone: '60143140182', relation: 'Bapa' },
+    { role: 'Abang Pengantin Perempuan', name: 'Syahmi', phone: '60111223344', relation: 'Abang' },
+  ];
   const wazeUrl = 'https://waze.com/ul?q=Jiwa%20Damansara%20Petaling%20Jaya';
   const googleMapsUrl = 'https://maps.google.com/?q=Jiwa+Damansara+Block+C+Neo+Damansara+Petaling+Jaya';
   const googleCalendarUrl = 'https://calendar.google.com/calendar/render?action=TEMPLATE&text=Walimatulurus+Alyea+%26+Amirul&dates=20261024T030000Z/20261024T080000Z&details=Majlis+Perkahwinan+Alyea+Dania+%26+Amirul+Iqhwan.&location=Jiwa+Damansara,+Block+C,+Neo+Damansara,+Jalan+PJU+8/1,+Damansara+Perdana,+47820+Petaling+Jaya,+Selangor';
+
+  const formatPhoneNumber = (phone: string) => {
+    const localNumber = phone.replace(/^60/, '0');
+    return `${localNumber.slice(0, 3)}-${localNumber.slice(3, 6)} ${localNumber.slice(6)}`;
+  };
 
   return (
     <section id="lokasi" className="py-16 px-4 max-w-4xl mx-auto space-y-12">
@@ -102,6 +114,42 @@ export const EventDetails: React.FC = () => {
             Tambah <ExternalLink className="w-2.5 h-2.5 sm:w-3 sm:h-3 text-gold-600" />
           </span>
         </a>
+      </motion.div>
+
+      {/* Placeholder family contacts — replace after client confirmation. */}
+      <motion.div
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.6, delay: 0.3 }}
+        className="p-8 rounded-3xl bg-white border border-gold-500/30 shadow-card-soft space-y-6"
+      >
+        <div className="text-center space-y-1">
+          <h3 className="text-xl font-serif font-bold text-burgundy-950">Hubungi Tuan Rumah</h3>
+          <p className="text-xs text-slate-500">Sila hubungi kami jika terdapat sebarang pertanyaan mengenai majlis</p>
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 pt-2">
+          {contacts.map((contact) => (
+            <a
+              key={contact.phone}
+              href={`https://wa.me/${contact.phone}?text=Assalamualaikum%20${encodeURIComponent(contact.name)},%20saya%20ingin%20bertanya%20mengenai%20majlis%20Alyea%20%26%20Amirul.`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center justify-between p-4 rounded-xl bg-cream-100/70 border border-gold-300/40 hover:bg-burgundy-900 hover:text-white group transition-all duration-300"
+            >
+              <div>
+                <span className="text-[10px] uppercase font-bold tracking-wider text-gold-600 group-hover:text-gold-300 block">{contact.role}</span>
+                <span className="text-sm font-semibold text-slate-800 group-hover:text-white">{contact.name}</span>
+                <span className="mt-0.5 block text-xs font-medium tabular-nums text-slate-500 group-hover:text-cream-100">
+                  {formatPhoneNumber(contact.phone)}
+                </span>
+              </div>
+              <div className="w-9 h-9 rounded-full bg-burgundy-100 text-burgundy-800 group-hover:bg-gold-500 group-hover:text-burgundy-950 flex items-center justify-center transition-colors">
+                <Phone className="w-4 h-4" />
+              </div>
+            </a>
+          ))}
+        </div>
       </motion.div>
 
     </section>

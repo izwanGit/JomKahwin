@@ -6,9 +6,10 @@ export const SalamKautModal: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [copied, setCopied] = useState(false);
 
+  // Placeholder banking details: confirm all three fields with the client before launch.
   const bankAcc = '12029020481982';
   const bankName = 'Bank Islam Malaysia Berhad';
-  const accHolder = 'Alyea Dania binti Ahmad';
+  const accHolder = 'Alyea Dania binti Daini Dzulkarnain';
 
   const handleCopy = () => {
     navigator.clipboard.writeText(bankAcc);
