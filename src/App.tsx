@@ -1,7 +1,5 @@
 import { useEffect, useState } from 'react';
 import { EnvelopeModal } from './components/EnvelopeModal';
-import { FloatingPetals } from './components/FloatingPetals';
-import { FloatingButterflies } from './components/FloatingButterflies';
 import { RomanticOverlay } from './components/RomanticOverlay';
 import { MusicPlayer } from './components/MusicPlayer';
 import { Navbar } from './components/Navbar';
@@ -101,13 +99,7 @@ export function App() {
       {/* Flagship Responsive Floating Navigation Bar */}
       {isEnvelopeOpen && <Navbar />}
 
-      {/* 60fps Floating Petals & Gold Dust Canvas */}
-      {isEnvelopeOpen && <FloatingPetals />}
-
-      {/* Floating Alive Butterflies */}
-      {isEnvelopeOpen && <FloatingButterflies />}
-
-      {/* Visible romantic accents above the invitation card. */}
+      {/* Lightweight romantic accents above the invitation card. */}
       {isEnvelopeOpen && <RomanticOverlay />}
 
       {/* Floating Acoustic Music Player */}
