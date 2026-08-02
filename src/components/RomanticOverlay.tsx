@@ -43,6 +43,7 @@ export const RomanticOverlay: React.FC = () => (
   <div className="romantic-overlay" aria-hidden="true">
     <Butterfly className="romantic-butterfly--one" />
     <Butterfly className="romantic-butterfly--two" />
+    <Butterfly className="romantic-butterfly--ghost" />
 
     <span className="romantic-petal romantic-petal--one">♥</span>
     <span className="romantic-petal romantic-petal--two">♥</span>
