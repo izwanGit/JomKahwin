@@ -258,7 +258,7 @@ export const ThreePageStoryCard: React.FC<ThreePageStoryCardProps> = ({ isOpened
                         textWrap: 'balance',
                       }}
                     >
-                      Alyea Dania
+                      Amirul Iqhwan
                     </h1>
 
                     <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px', margin: 'clamp(3px, 0.8vh, 8px) 0' }}>
@@ -279,7 +279,7 @@ export const ThreePageStoryCard: React.FC<ThreePageStoryCardProps> = ({ isOpened
                         textWrap: 'balance',
                       }}
                     >
-                      Amirul Iqhwan
+                      Alyea Dania
                     </h1>
                   </motion.div>
 
@@ -441,7 +441,7 @@ export const ThreePageStoryCard: React.FC<ThreePageStoryCardProps> = ({ isOpened
                         textWrap: 'balance',
                       }}
                     >
-                      Alyea Dania Binti Daini Dzulkarnain
+                      Muhammad Amirul Iqhwan Bin Mohd Zahir
                     </h3>
                     <p
                       style={{
@@ -466,7 +466,7 @@ export const ThreePageStoryCard: React.FC<ThreePageStoryCardProps> = ({ isOpened
                         textWrap: 'balance',
                       }}
                     >
-                      Muhammad Amirul Iqhwan Bin Mohd Zahir
+                      Alyea Dania Binti Daini Dzulkarnain
                     </h3>
                   </motion.div>
 

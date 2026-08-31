@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { MapPin, Navigation, Calendar as CalendarIcon, Phone, ExternalLink } from 'lucide-react';
+import { MapPin, Navigation, Calendar as CalendarIcon, Phone, ExternalLink, CalendarPlus } from 'lucide-react';
 import type { ContactPerson } from '../types';
 
 export const EventDetails: React.FC = () => {
@@ -12,7 +12,7 @@ export const EventDetails: React.FC = () => {
   ];
   const wazeUrl = 'https://waze.com/ul?q=Jiwa%20Damansara%20Petaling%20Jaya';
   const googleMapsUrl = 'https://maps.google.com/?q=Jiwa+Damansara+Block+C+Neo+Damansara+Petaling+Jaya';
-  const googleCalendarUrl = 'https://calendar.google.com/calendar/render?action=TEMPLATE&text=Walimatulurus+Alyea+%26+Amirul&dates=20261024T030000Z/20261024T080000Z&details=Majlis+Perkahwinan+Alyea+Dania+%26+Amirul+Iqhwan.&location=Jiwa+Damansara,+Block+C,+Neo+Damansara,+Jalan+PJU+8/1,+Damansara+Perdana,+47820+Petaling+Jaya,+Selangor';
+  const googleCalendarUrl = 'https://calendar.google.com/calendar/render?action=TEMPLATE&text=Walimatulurus+Amirul+%26+Alyea&dates=20261024T030000Z/20261024T080000Z&details=Majlis+Perkahwinan+Amirul+Iqhwan+%26+Alyea+Dania.&location=Jiwa+Damansara,+Block+C,+Neo+Damansara,+Jalan+PJU+8/1,+Damansara+Perdana,+47820+Petaling+Jaya,+Selangor';
 
   const formatPhoneNumber = (phone: string) => {
     const localNumber = phone.replace(/^60/, '0');
@@ -30,6 +30,19 @@ export const EventDetails: React.FC = () => {
         transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
         className="text-center space-y-3"
       >
+        <div className="col-span-3 mb-2 rounded-2xl border border-gold-500/35 bg-burgundy-950 px-4 py-3 text-center shadow-burgundy-glow">
+          <a
+            href={googleCalendarUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 font-serif text-sm font-bold text-gold-200 no-underline transition-transform duration-200 hover:scale-[1.02] focus:outline-none focus-visible:ring-2 focus-visible:ring-gold-300 focus-visible:ring-offset-2 focus-visible:ring-offset-burgundy-950"
+          >
+            <CalendarPlus className="h-4 w-4 text-gold-400" />
+            Simpan Tarikh · 24 Oktober 2026
+          </a>
+          <span className="mx-2 text-gold-300/50">•</span>
+          <a href="/amirul-alyea-save-the-date.ics" className="text-xs font-semibold text-gold-200 underline underline-offset-4">Muat turun .ics</a>
+        </div>
         <span className="text-gold-600 font-serif text-xs md:text-sm tracking-[0.25em] uppercase font-semibold block">
           Lokasi Majlis
         </span>
@@ -132,7 +145,7 @@ export const EventDetails: React.FC = () => {
           {contacts.map((contact) => (
             <a
               key={contact.phone}
-              href={`https://wa.me/${contact.phone}?text=Assalamualaikum%20${encodeURIComponent(contact.name)},%20saya%20ingin%20bertanya%20mengenai%20majlis%20Alyea%20%26%20Amirul.`}
+              href={`https://wa.me/${contact.phone}?text=Assalamualaikum%20${encodeURIComponent(contact.name)},%20saya%20ingin%20bertanya%20mengenai%20majlis%20Amirul%20%26%20Alyea.`}
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center justify-between p-4 rounded-xl bg-cream-100/70 border border-gold-300/40 hover:bg-burgundy-900 hover:text-white group transition-all duration-300"

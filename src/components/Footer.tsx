@@ -3,13 +3,13 @@ import { Share2, Heart } from 'lucide-react';
 import { CoupleMonogram } from './CoupleMonogram';
 
 export const Footer: React.FC = () => {
-  const shareText = "Assalamualaikum! Anda dijemput ke Majlis Perkahwinan Alyea Dania & Amirul Iqhwan pada Sabtu, 24 Oktober 2026. Klik pautan untuk maklumat lanjut dan pengesahan kehadiran: " + window.location.href;
+  const shareText = "Assalamualaikum! Anda dijemput ke Majlis Perkahwinan Amirul Iqhwan & Alyea Dania pada Sabtu, 24 Oktober 2026. Klik pautan untuk maklumat lanjut dan pengesahan kehadiran: " + window.location.href;
 
   const handleShare = () => {
     if (navigator.share) {
       navigator.share({
-        title: 'Walimatulurus Alyea ❤️ Amirul',
-        text: 'Kad Jemputan Digital Majlis Perkahwinan Alyea & Amirul',
+        title: 'Walimatulurus Amirul ❤️ Alyea',
+        text: 'Kad Jemputan Digital Majlis Perkahwinan Amirul & Alyea',
         url: window.location.href,
       }).catch(() => {});
     } else {
@@ -33,7 +33,7 @@ export const Footer: React.FC = () => {
 
         <div className="space-y-1">
           <h3 className="font-serif text-2xl font-bold text-gold-300">
-            Alyea <span className="text-gold-500 font-normal">&amp;</span> Amirul
+            Amirul <span className="text-gold-500 font-normal">&amp;</span> Alyea
           </h3>
           <p className="text-xs text-burgundy-200/80 font-serif italic">
             #AlyeaAmirul #Walimatulurus #JomKahwin
