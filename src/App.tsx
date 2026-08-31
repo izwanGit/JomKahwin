@@ -4,13 +4,11 @@ import { RomanticOverlay } from './components/RomanticOverlay';
 import { MusicPlayer } from './components/MusicPlayer';
 import { Navbar } from './components/Navbar';
 import { ThreePageStoryCard } from './components/ThreePageStoryCard';
-import { CountdownTimer } from './components/CountdownTimer';
 import { EventDetails } from './components/EventDetails';
 import { ScheduleTimeline } from './components/ScheduleTimeline';
 import { RsvpForm } from './components/RsvpForm';
 import { Wishbook } from './components/Wishbook';
 import { SalamKautModal } from './components/SalamKautModal';
-import { Footer } from './components/Footer';
 import type { WishMessage } from './types';
 import { getPageFromPath, getRoute, getRouteHref, type PageId } from './routes';
 
@@ -69,7 +67,6 @@ export function App() {
 
   useEffect(() => {
     document.title = getRoute(activePage).title;
-    window.scrollTo({ top: 0, behavior: 'auto' });
   }, [activePage]);
 
   useEffect(() => {
@@ -125,7 +122,7 @@ export function App() {
   }, [rsvpWebhookUrl]);
 
   return (
-    <div className="romantic-shell min-h-screen bg-cream-100 text-slate-800 relative selection:bg-gold-500 selection:text-white">
+    <div className="romantic-shell h-[100svh] overflow-hidden bg-cream-100 text-slate-800 relative selection:bg-gold-500 selection:text-white">
       <div aria-hidden="true" className="romantic-vignette" />
       {/* 3D Interactive Opening Envelope */}
       <EnvelopeModal onOpen={handleEnvelopeOpen} guestName={guestName} />
@@ -142,13 +139,10 @@ export function App() {
       {/* Each navigation destination renders as its own page instead of an in-page scroll target. */}
       <main
         key={activePage}
-        className="invitation-content relative z-10 min-h-[70svh] space-y-8 pb-12 overflow-x-hidden w-full max-w-full"
+        className="invitation-content relative z-10 h-full overflow-hidden w-full max-w-full"
       >
         {activePage === 'utama' && (
-          <>
-            <ThreePageStoryCard isOpened={isEnvelopeOpen} />
-            <CountdownTimer />
-          </>
+          <ThreePageStoryCard isOpened={isEnvelopeOpen} />
         )}
         {activePage === 'lokasi' && <EventDetails />}
         {activePage === 'tentatif' && <ScheduleTimeline />}
@@ -163,8 +157,6 @@ export function App() {
         )}
       </main>
 
-      {/* Footer */}
-      <Footer />
     </div>
   );
 }

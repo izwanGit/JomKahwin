@@ -61,15 +61,23 @@
 }
 
 html, body, #root, main {
+  height: 100%;
   overflow-x: hidden !important;
+  overflow-y: hidden !important;
   max-width: 100vw !important;
   width: 100% !important;
   position: relative;
-  touch-action: pan-y;
+  overscroll-behavior: none;
+  touch-action: manipulation;
 }
 
 html {
   -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  position: fixed;
+  inset: 0;
 }
 
 .romantic-shell {
@@ -78,6 +86,19 @@ html {
     radial-gradient(circle at 12% 12%, rgba(212, 175, 55, 0.08), transparent 28rem),
     radial-gradient(circle at 88% 62%, rgba(116, 25, 40, 0.055), transparent 32rem),
     #faf9f6;
+}
+
+/* This invitation is a page-by-page experience: never create a document scroll. */
+.invitation-content {
+  height: 100svh;
+  overflow: hidden;
+}
+
+.invitation-content > section {
+  box-sizing: border-box;
+  height: 100%;
+  max-height: 100%;
+  overflow: hidden;
 }
 
 .romantic-shell::before {
