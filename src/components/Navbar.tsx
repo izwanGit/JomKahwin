@@ -1,11 +1,17 @@
-import React, { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
+import React from 'react';
+import { motion, useReducedMotion } from 'framer-motion';
 import { Home, MapPin, Calendar, CheckCircle2, MessageCircle, Heart } from 'lucide-react';
+import { getRouteHref, type PageId } from '../routes';
 
 interface NavItem {
-  id: string;
+  id: PageId;
   label: string;
   icon: React.ElementType;
+}
+
+interface NavbarProps {
+  activePage: PageId;
+  onNavigate: (page: PageId) => void;
 }
 
 const NAV_ITEMS: NavItem[] = [
@@ -16,58 +22,43 @@ const NAV_ITEMS: NavItem[] = [
   { id: 'ucapan', label: 'Ucapan', icon: MessageCircle },
 ];
 
-export const Navbar: React.FC = () => {
-  const [activeSection, setActiveSection] = useState<string>('utama');
+export const Navbar: React.FC<NavbarProps> = ({ activePage, onNavigate }) => {
+  const shouldReduceMotion = useReducedMotion();
 
-  // Real-time active section tracking via IntersectionObserver
-  useEffect(() => {
-    const observerOptions = {
-      root: null,
-      rootMargin: '-20% 0px -40% 0px',
-      threshold: 0.15,
-    };
-
-    const handleIntersect: IntersectionObserverCallback = (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          setActiveSection(entry.target.id);
-        }
-      });
-    };
-
-    const observer = new IntersectionObserver(handleIntersect, observerOptions);
-
-    NAV_ITEMS.forEach((item) => {
-      const element = document.getElementById(item.id);
-      if (element) observer.observe(element);
-    });
-
-    return () => observer.disconnect();
-  }, []);
-
-  const scrollToSection = (id: string) => {
-    setActiveSection(id);
-    const element = document.getElementById(id);
-    if (element) {
-      const yOffset = -40;
-      const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset;
-      window.scrollTo({ top: y, behavior: 'smooth' });
+  const handleNavigation = (event: React.MouseEvent<HTMLAnchorElement>, page: PageId) => {
+    if (
+      event.button !== 0 ||
+      event.metaKey ||
+      event.ctrlKey ||
+      event.shiftKey ||
+      event.altKey
+    ) {
+      return;
     }
+
+    event.preventDefault();
+    onNavigate(page);
   };
+
+  const entranceProps = shouldReduceMotion
+    ? { initial: false as const }
+    : { initial: { y: 80, opacity: 0 } };
 
   return (
     <nav aria-label="Navigasi Utama">
       {/* ── DESKTOP & TABLET BOTTOM FLOATING GLASS DOCK ── */}
       <motion.div
-        initial={{ y: 80, opacity: 0 }}
+        {...entranceProps}
         animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+        transition={{ duration: shouldReduceMotion ? 0 : 0.35, ease: [0.16, 1, 0.3, 1] }}
         className="hidden md:flex fixed bottom-4 left-1/2 -translate-x-1/2 z-40 w-[90%] max-w-3xl items-center justify-between px-4 py-1.5 rounded-full backdrop-blur-xl bg-[#28050B]/92 border border-[#D4AF37]/45 shadow-[0_12px_36px_rgba(40,5,11,0.45)]"
         style={{ willChange: 'transform' }}
       >
         {/* Brand / Monogram */}
-        <button
-          onClick={() => scrollToSection('utama')}
+        <a
+          href={getRouteHref('utama')}
+          onClick={(event) => handleNavigation(event, 'utama')}
+          aria-label="Ke halaman utama"
           className="flex items-center gap-1.5 text-left group focus:outline-none focus-visible:ring-2 focus-visible:ring-[#D4AF37] rounded-lg px-1.5 py-0.5 transition-all"
         >
           <div className="w-6 h-6 rounded-full bg-[#D4AF37]/15 border border-[#D4AF37]/50 flex items-center justify-center text-[#D4AF37] group-hover:scale-110 transition-transform">
@@ -81,17 +72,19 @@ export const Navbar: React.FC = () => {
               Walimatulurus
             </span>
           </div>
-        </button>
+        </a>
 
         {/* Navigation Tabs */}
         <div className="flex items-center gap-0.5 bg-[#FFFEFA]/5 p-0.5 rounded-full border border-[#D4AF37]/25">
           {NAV_ITEMS.map((item) => {
-            const isActive = activeSection === item.id;
+            const isActive = activePage === item.id;
             const Icon = item.icon;
             return (
-              <button
+              <a
                 key={item.id}
-                onClick={() => scrollToSection(item.id)}
+                href={getRouteHref(item.id)}
+                onClick={(event) => handleNavigation(event, item.id)}
+                aria-current={isActive ? 'page' : undefined}
                 className={`relative px-3 py-1 rounded-full text-[11px] font-medium transition-all duration-300 flex items-center gap-1 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#D4AF37] ${
                   isActive
                     ? 'text-[#D4AF37] font-semibold'
@@ -102,41 +95,44 @@ export const Navbar: React.FC = () => {
                   <motion.div
                     layoutId="activeTabDesktop"
                     className="absolute inset-0 bg-[#D4AF37]/20 rounded-full border border-[#D4AF37]/60 shadow-[0_0_10px_rgba(212,175,55,0.25)]"
-                    transition={{ type: 'spring', stiffness: 380, damping: 30 }}
+                    transition={shouldReduceMotion ? { duration: 0 } : { type: 'spring', stiffness: 380, damping: 30 }}
                   />
                 )}
                 <Icon className={`w-3 h-3 relative z-10 ${isActive ? 'text-[#D4AF37]' : 'text-[#FFFEFA]/60'}`} />
                 <span className="relative z-10">{item.label}</span>
-              </button>
+              </a>
             );
           })}
         </div>
 
         {/* Quick RSVP CTA Button */}
-        <button
-          onClick={() => scrollToSection('rsvp')}
+        <a
+          href={getRouteHref('rsvp')}
+          onClick={(event) => handleNavigation(event, 'rsvp')}
           className="px-3.5 py-1 rounded-full bg-gradient-to-r from-[#D4AF37] to-[#B8860B] text-[#28050B] font-bold text-[11px] shadow-[0_4px_12px_rgba(212,175,55,0.3)] hover:scale-105 active:scale-95 transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#FFFEFA]"
         >
           Hadir RSVP
-        </button>
+        </a>
       </motion.div>
 
       {/* ── MOBILE FLOATING GLASS DOCK (iOS Style) ── */}
       <motion.div
-        initial={{ y: 80, opacity: 0 }}
+        {...entranceProps}
         animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+        transition={{ duration: shouldReduceMotion ? 0 : 0.35, ease: [0.16, 1, 0.3, 1] }}
         className="md:hidden fixed bottom-3 left-1/2 -translate-x-1/2 z-40 w-[88%] max-w-[320px] flex items-center justify-around px-2 py-1.5 rounded-full backdrop-blur-2xl bg-[#28050B]/92 border border-[#D4AF37]/45 shadow-[0_10px_28px_rgba(40,5,11,0.45)]"
         style={{ willChange: 'transform' }}
       >
         {NAV_ITEMS.map((item) => {
-          const isActive = activeSection === item.id;
+          const isActive = activePage === item.id;
           const Icon = item.icon;
           return (
-            <button
+            <a
               key={item.id}
-              onClick={() => scrollToSection(item.id)}
+              href={getRouteHref(item.id)}
+              onClick={(event) => handleNavigation(event, item.id)}
               aria-label={item.label}
+              aria-current={isActive ? 'page' : undefined}
               className={`relative flex flex-col items-center justify-center px-2.5 py-1 rounded-full transition-all duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#D4AF37] ${
                 isActive ? 'text-[#D4AF37]' : 'text-[#FFFEFA]/60 hover:text-[#FFFEFA]'
               }`}
@@ -145,14 +141,14 @@ export const Navbar: React.FC = () => {
                 <motion.div
                   layoutId="activeTabMobile"
                   className="absolute inset-0 bg-[#D4AF37]/25 rounded-full border border-[#D4AF37]/60 shadow-[0_0_8px_rgba(212,175,55,0.3)]"
-                  transition={{ type: 'spring', stiffness: 400, damping: 32 }}
+                  transition={shouldReduceMotion ? { duration: 0 } : { type: 'spring', stiffness: 400, damping: 32 }}
                 />
               )}
               <Icon className={`w-3.5 h-3.5 relative z-10 transition-transform ${isActive ? 'scale-110 text-[#D4AF37]' : ''}`} />
               <span className={`text-[9px] font-medium mt-0.5 relative z-10 ${isActive ? 'font-bold text-[#FFFEFA]' : ''}`}>
                 {item.label}
               </span>
-            </button>
+            </a>
           );
         })}
       </motion.div>

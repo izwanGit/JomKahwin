@@ -12,12 +12,22 @@ import { Wishbook } from './components/Wishbook';
 import { SalamKautModal } from './components/SalamKautModal';
 import { Footer } from './components/Footer';
 import type { WishMessage } from './types';
+import { getPageFromPath, getRoute, getRouteHref, type PageId } from './routes';
+
+const INVITATION_OPEN_KEY = 'jomkahwin-invitation-open';
 
 export function App() {
   const defaultRsvpWebhookUrl =
     'https://script.google.com/macros/s/AKfycby3LEl3e0GklItH0PVcqQY8X2AXsY_dBcrRkCqDv3xFlEvLrpFbnS582HTYnG5hNuZdrw/exec';
   const [isAudioAutoPlay, setIsAudioAutoPlay] = useState(false);
-  const [isEnvelopeOpen, setIsEnvelopeOpen] = useState(false);
+  const [isEnvelopeOpen, setIsEnvelopeOpen] = useState(() => {
+    try {
+      return window.sessionStorage.getItem(INVITATION_OPEN_KEY) === 'true';
+    } catch {
+      return false;
+    }
+  });
+  const [activePage, setActivePage] = useState<PageId>(() => getPageFromPath(window.location.pathname));
   const [wishes, setWishes] = useState<WishMessage[]>([]);
   const [isWishbookLoading, setIsWishbookLoading] = useState(true);
   const [wishbookError, setWishbookError] = useState('');
@@ -29,6 +39,19 @@ export function App() {
   const handleEnvelopeOpen = () => {
     setIsAudioAutoPlay(true);
     setIsEnvelopeOpen(true);
+
+    try {
+      window.sessionStorage.setItem(INVITATION_OPEN_KEY, 'true');
+    } catch {
+      // The invitation still works when browser storage is unavailable.
+    }
+  };
+
+  const handleNavigate = (page: PageId) => {
+    if (page === activePage) return;
+
+    window.history.pushState({}, '', getRouteHref(page));
+    setActivePage(page);
   };
 
   const handleAddWish = (newWish: WishMessage) => {
@@ -37,6 +60,17 @@ export function App() {
 
   const rsvpWebhookUrl =
     (import.meta.env.VITE_RSVP_WEBHOOK_URL as string | undefined) || defaultRsvpWebhookUrl;
+
+  useEffect(() => {
+    const handlePopState = () => setActivePage(getPageFromPath(window.location.pathname));
+    window.addEventListener('popstate', handlePopState);
+    return () => window.removeEventListener('popstate', handlePopState);
+  }, []);
+
+  useEffect(() => {
+    document.title = getRoute(activePage).title;
+    window.scrollTo({ top: 0, behavior: 'auto' });
+  }, [activePage]);
 
   useEffect(() => {
     if (!rsvpWebhookUrl) {
@@ -97,7 +131,7 @@ export function App() {
       <EnvelopeModal onOpen={handleEnvelopeOpen} guestName={guestName} />
 
       {/* Flagship Responsive Floating Navigation Bar */}
-      {isEnvelopeOpen && <Navbar />}
+      {isEnvelopeOpen && <Navbar activePage={activePage} onNavigate={handleNavigate} />}
 
       {/* Lightweight romantic accents above the invitation card. */}
       {isEnvelopeOpen && <RomanticOverlay />}
@@ -105,15 +139,28 @@ export function App() {
       {/* Floating Acoustic Music Player */}
       {isEnvelopeOpen && <MusicPlayer autoPlay={isAudioAutoPlay} />}
 
-      {/* Main Page Layout */}
-      <main className="invitation-content relative z-10 space-y-8 pb-12 overflow-x-hidden w-full max-w-full">
-        <ThreePageStoryCard isOpened={isEnvelopeOpen} />
-        <CountdownTimer />
-        <EventDetails />
-        <ScheduleTimeline />
-        <RsvpForm onAddWish={handleAddWish} webhookUrl={rsvpWebhookUrl} />
-        <Wishbook wishes={wishes} isLoading={isWishbookLoading} loadError={wishbookError} />
-        <SalamKautModal />
+      {/* Each navigation destination renders as its own page instead of an in-page scroll target. */}
+      <main
+        key={activePage}
+        className="invitation-content relative z-10 min-h-[70svh] space-y-8 pb-12 overflow-x-hidden w-full max-w-full"
+      >
+        {activePage === 'utama' && (
+          <>
+            <ThreePageStoryCard isOpened={isEnvelopeOpen} />
+            <CountdownTimer />
+          </>
+        )}
+        {activePage === 'lokasi' && <EventDetails />}
+        {activePage === 'tentatif' && <ScheduleTimeline />}
+        {activePage === 'rsvp' && (
+          <>
+            <RsvpForm onAddWish={handleAddWish} webhookUrl={rsvpWebhookUrl} />
+            <SalamKautModal />
+          </>
+        )}
+        {activePage === 'ucapan' && (
+          <Wishbook wishes={wishes} isLoading={isWishbookLoading} loadError={wishbookError} />
+        )}
       </main>
 
       {/* Footer */}
