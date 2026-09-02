@@ -120,7 +120,7 @@ export const EnvelopeModal: React.FC<EnvelopeModalProps> = ({ onOpen, guestName 
             whileTap={{ scale: 0.96 }}
             onClick={handleOpenEnvelope}
             disabled={isOpen}
-            className="mt-4 px-8 py-3.5 rounded-full bg-gradient-to-r from-gold-400 via-gold-500 to-gold-600 text-burgundy-950 font-bold tracking-widest uppercase text-xs shadow-gold-glow flex items-center gap-2.5 transition-all focus:outline-none focus:ring-2 focus:ring-gold-300"
+            className="mt-4 px-8 py-3.5 rounded-full bg-gradient-to-r from-[#F7D76A] via-[#F2C94C] to-[#DFAE2B] text-burgundy-950 font-bold tracking-widest uppercase text-xs shadow-[0_8px_24px_rgba(242,201,76,0.26)] flex items-center gap-2.5 transition-all focus:outline-none focus:ring-2 focus:ring-hibiscus-300"
           >
             <Sparkles className="w-4 h-4 text-burgundy-950" />
             <span>{isOpen ? 'Membuka Kad...' : 'Buka Jemputan'}</span>

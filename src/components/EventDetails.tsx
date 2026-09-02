@@ -1,14 +1,14 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { MapPin, Navigation, Calendar as CalendarIcon, Phone, ExternalLink, CalendarPlus } from 'lucide-react';
+import { MapPin, Navigation, Phone, ExternalLink, CalendarPlus } from 'lucide-react';
 import type { ContactPerson } from '../types';
 
 export const EventDetails: React.FC = () => {
-  // Placeholder contact details: replace after client confirmation.
   const contacts: ContactPerson[] = [
-    { role: 'Bapa Pengantin Perempuan', name: 'Daini Dzulkarnain', phone: '60198765432', relation: 'Bapa' },
-    { role: 'Bapa Pengantin Lelaki', name: 'Mohd Zahir', phone: '60143140182', relation: 'Bapa' },
-    { role: 'Abang Pengantin Perempuan', name: 'Syahmi', phone: '60111223344', relation: 'Abang' },
+    { role: 'Ibu Pengantin Perempuan', name: 'Norizan Noor', phone: '60172366277', relation: 'Ibu' },
+    { role: 'Abang Pengantin Lelaki', name: 'Muhammad Amirul Asyraf', phone: '60182070102', relation: 'Abang' },
+    { role: 'Adik Pengantin Perempuan', name: 'Alysia Dania', phone: '601121636798', relation: 'Adik' },
+    { role: 'Adik Pengantin Lelaki', name: 'Nur Amira Aqila', phone: '601119180693', relation: 'Adik' },
   ];
   const wazeUrl = 'https://waze.com/ul?q=Jiwa%20Damansara%20Petaling%20Jaya';
   const googleMapsUrl = 'https://maps.google.com/?q=Jiwa+Damansara+Block+C+Neo+Damansara+Petaling+Jaya';
@@ -30,18 +30,16 @@ export const EventDetails: React.FC = () => {
         transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
         className="text-center space-y-3"
       >
-        <div className="col-span-3 mb-2 rounded-2xl border border-gold-500/35 bg-burgundy-950 px-4 py-3 text-center shadow-burgundy-glow">
+        <div className="mb-3 text-center">
           <a
             href={googleCalendarUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 font-serif text-sm font-bold text-gold-200 no-underline transition-transform duration-200 hover:scale-[1.02] focus:outline-none focus-visible:ring-2 focus-visible:ring-gold-300 focus-visible:ring-offset-2 focus-visible:ring-offset-burgundy-950"
+            className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-[#F7D76A] to-[#F2C94C] px-5 py-2.5 font-serif text-sm font-bold text-burgundy-950 no-underline shadow-[0_8px_22px_rgba(242,201,76,0.24)] transition-transform duration-200 hover:scale-[1.02] focus:outline-none focus-visible:ring-2 focus-visible:ring-hibiscus-500 focus-visible:ring-offset-2 focus-visible:ring-offset-cream-100"
           >
-            <CalendarPlus className="h-4 w-4 text-gold-400" />
-            Simpan Tarikh · 24 Oktober 2026
+            <CalendarPlus className="h-4 w-4 text-burgundy-800" />
+            Save the Date · 24 Oktober 2026
           </a>
-          <span className="mx-2 text-gold-300/50">•</span>
-          <a href="/amirul-alyea-save-the-date.ics" className="text-xs font-semibold text-gold-200 underline underline-offset-4">Muat turun .ics</a>
         </div>
         <span className="text-gold-600 font-serif text-xs md:text-sm tracking-[0.25em] uppercase font-semibold block">
           Lokasi Majlis
@@ -81,7 +79,7 @@ export const EventDetails: React.FC = () => {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.6, delay: 0.2 }}
-        className="grid grid-cols-3 gap-2 sm:gap-4"
+        className="grid grid-cols-2 gap-3 sm:gap-4"
       >
         <a
           href={wazeUrl}
@@ -113,23 +111,8 @@ export const EventDetails: React.FC = () => {
           </span>
         </a>
 
-        <a
-          href={googleCalendarUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="group flex flex-col items-center justify-center p-3 sm:p-6 rounded-2xl bg-white border border-gold-500/30 shadow-card-soft hover:shadow-gold-glow hover:border-gold-500 transition-all duration-300 text-center"
-        >
-          <div className="w-9 h-9 sm:w-12 sm:h-12 rounded-full bg-burgundy-50 flex items-center justify-center text-burgundy-800 mb-2 sm:mb-3 group-hover:scale-110 transition-transform">
-            <CalendarIcon className="w-4 h-4 sm:w-6 sm:h-6 text-burgundy-700" />
-          </div>
-          <span className="font-serif font-bold text-slate-800 text-xs sm:text-sm truncate max-w-full px-1">Kalendar</span>
-          <span className="text-[9px] sm:text-[11px] text-slate-500 mt-0.5 sm:mt-1 flex items-center gap-0.5 sm:gap-1">
-            Tambah <ExternalLink className="w-2.5 h-2.5 sm:w-3 sm:h-3 text-gold-600" />
-          </span>
-        </a>
       </motion.div>
 
-      {/* Placeholder family contacts — replace after client confirmation. */}
       <motion.div
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -141,27 +124,19 @@ export const EventDetails: React.FC = () => {
           <h3 className="text-xl font-serif font-bold text-burgundy-950">Hubungi Tuan Rumah</h3>
           <p className="text-xs text-slate-500">Sila hubungi kami jika terdapat sebarang pertanyaan mengenai majlis</p>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 pt-2">
-          {contacts.map((contact) => (
-            <a
-              key={contact.phone}
-              href={`https://wa.me/${contact.phone}?text=Assalamualaikum%20${encodeURIComponent(contact.name)},%20saya%20ingin%20bertanya%20mengenai%20majlis%20Amirul%20%26%20Alyea.`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center justify-between p-4 rounded-xl bg-cream-100/70 border border-gold-300/40 hover:bg-burgundy-900 hover:text-white group transition-all duration-300"
-            >
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pt-2">
+          {contacts.map((contact) => {
+            const cardClassName = 'flex items-center justify-between p-4 rounded-xl bg-cream-100/70 border border-gold-300/40 transition-all duration-300';
+            const contactContent = <>
               <div className="min-w-0">
                 <span className="text-[10px] uppercase font-bold tracking-wider text-gold-600 group-hover:text-gold-300 block">{contact.role}</span>
                 <span className="block break-words text-sm font-semibold text-slate-800 group-hover:text-white">{contact.name}</span>
-                <span className="mt-0.5 block whitespace-nowrap text-xs font-medium tabular-nums text-slate-500 group-hover:text-cream-100">
-                  {formatPhoneNumber(contact.phone)}
-                </span>
+                {contact.phone && <span className="mt-0.5 block whitespace-nowrap text-xs font-medium tabular-nums text-slate-500 group-hover:text-cream-100">{formatPhoneNumber(contact.phone)}</span>}
               </div>
-              <div className="ml-2 flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-burgundy-100 text-burgundy-800 transition-colors group-hover:bg-gold-500 group-hover:text-burgundy-950">
-                <Phone className="w-4 h-4" />
-              </div>
-            </a>
-          ))}
+              {contact.phone && <div className="ml-2 flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-burgundy-100 text-burgundy-800 transition-colors group-hover:bg-gold-500 group-hover:text-burgundy-950"><Phone className="w-4 h-4" /></div>}
+            </>;
+            return contact.phone ? <a key={contact.name} href={`https://wa.me/${contact.phone}?text=Assalamualaikum%20${encodeURIComponent(contact.name)},%20saya%20ingin%20bertanya%20mengenai%20majlis%20Amirul%20%26%20Alyea.`} target="_blank" rel="noopener noreferrer" className={`${cardClassName} group hover:bg-burgundy-900 hover:text-white`}>{contactContent}</a> : <div key={contact.name} className={cardClassName}>{contactContent}</div>;
+          })}
         </div>
       </motion.div>
 

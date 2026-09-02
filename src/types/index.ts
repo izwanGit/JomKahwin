@@ -24,6 +24,6 @@ export interface EventScheduleItem {
 export interface ContactPerson {
   role: string;
   name: string;
-  phone: string;
+  phone?: string;
   relation: string;
 }

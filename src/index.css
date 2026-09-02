@@ -1,43 +1,48 @@
 @import "tailwindcss";
 
 @theme {
-  --color-burgundy-950: #193B25;
-  --color-burgundy-900: #28512E;
-  --color-burgundy-800: #3D6B32;
-  --color-burgundy-700: #557B35;
-  --color-burgundy-600: #6E8D3A;
-  --color-burgundy-500: #91A94A;
-  --color-burgundy-50: #F2F6E9;
+  --color-burgundy-950: #26331C;
+  --color-burgundy-900: #43542A;
+  --color-burgundy-800: #607635;
+  --color-burgundy-700: #7E963F;
+  --color-burgundy-600: #9DB14C;
+  --color-burgundy-500: #B8C96A;
+  --color-burgundy-50: #F4F7E8;
 
   /* Aliased emerald to burgundy for backward compatibility */
-  --color-emerald-950: #193B25;
-  --color-emerald-900: #28512E;
-  --color-emerald-800: #3D6B32;
-  --color-emerald-700: #557B35;
-  --color-emerald-600: #6E8D3A;
-  --color-emerald-500: #91A94A;
-  --color-emerald-50: #F2F6E9;
+  --color-emerald-950: #26331C;
+  --color-emerald-900: #43542A;
+  --color-emerald-800: #607635;
+  --color-emerald-700: #7E963F;
+  --color-emerald-600: #9DB14C;
+  --color-emerald-500: #B8C96A;
+  --color-emerald-50: #F4F7E8;
 
-  --color-gold-100: #FFF4F6;
-  --color-gold-200: #FDE4EA;
-  --color-gold-300: #F9C5D3;
-  --color-gold-400: #EF91AD;
-  --color-gold-500: #D95D83;
-  --color-gold-600: #B93E66;
-  --color-gold-700: #8D294C;
-  --color-gold-800: #651D38;
-  --color-gold-900: #431426;
+  --color-gold-100: #F8F8E9;
+  --color-gold-200: #EEF0CB;
+  --color-gold-300: #DCE29D;
+  --color-gold-400: #C1CB69;
+  --color-gold-500: #91A94A;
+  --color-gold-600: #708735;
+  --color-gold-700: #536625;
+  --color-gold-800: #3D4C1C;
+  --color-gold-900: #2A3514;
 
   --color-cream-50: #FFFCF5;
   --color-cream-100: #F8F2DE;
   --color-cream-200: #EEE4C7;
   --color-cream-300: #E3D7B6;
 
+  --color-hibiscus-100: #FFF2F6;
+  --color-hibiscus-300: #F5B1C5;
+  --color-hibiscus-500: #D95D83;
+  --color-hibiscus-700: #9E3154;
+
   --font-serif: 'Cormorant Garamond', 'Georgia', serif;
   --font-sans: 'Plus Jakarta Sans', system-ui, sans-serif;
   --font-arabic: 'Amiri', serif;
 
-  --shadow-gold-glow: 0 0 25px rgba(217, 93, 131, 0.28);
+  --shadow-gold-glow: 0 0 25px rgba(145, 169, 74, 0.25);
   --shadow-burgundy-glow: 0 10px 30px rgba(25, 59, 37, 0.26);
   --shadow-emerald-glow: 0 10px 30px rgba(25, 59, 37, 0.26);
   --shadow-card-soft: 0 10px 40px -10px rgba(0, 0, 0, 0.08);
@@ -75,8 +80,8 @@ html {
 .romantic-shell {
   isolation: isolate;
   background:
-    radial-gradient(circle at 12% 12%, rgba(145, 169, 74, 0.18), transparent 28rem),
-    radial-gradient(circle at 88% 62%, rgba(217, 93, 131, 0.12), transparent 32rem),
+    radial-gradient(circle at 12% 12%, rgba(157, 177, 76, 0.22), transparent 28rem),
+    radial-gradient(circle at 88% 62%, rgba(217, 93, 131, 0.18), transparent 32rem),
     #f8f2de;
 }
 

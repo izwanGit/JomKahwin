@@ -51,7 +51,7 @@ export const Navbar: React.FC<NavbarProps> = ({ activePage, onNavigate }) => {
         {...entranceProps}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: shouldReduceMotion ? 0 : 0.35, ease: [0.16, 1, 0.3, 1] }}
-        className="hidden md:flex fixed bottom-4 left-1/2 -translate-x-1/2 z-40 w-[90%] max-w-3xl items-center justify-between px-4 py-1.5 rounded-full backdrop-blur-xl bg-[#28050B]/92 border border-[#D4AF37]/45 shadow-[0_12px_36px_rgba(40,5,11,0.45)]"
+        className="hidden md:flex fixed bottom-4 left-1/2 -translate-x-1/2 z-40 w-[90%] max-w-3xl items-center justify-between px-4 py-1.5 rounded-full backdrop-blur-xl bg-[#26331C]/94 border border-[#9db14c]/55 shadow-[0_12px_36px_rgba(38,51,28,0.36)]"
         style={{ willChange: 'transform' }}
       >
         {/* Brand / Monogram */}
@@ -59,23 +59,23 @@ export const Navbar: React.FC<NavbarProps> = ({ activePage, onNavigate }) => {
           href={getRouteHref('utama')}
           onClick={(event) => handleNavigation(event, 'utama')}
           aria-label="Ke halaman utama"
-          className="flex items-center gap-1.5 text-left group focus:outline-none focus-visible:ring-2 focus-visible:ring-[#D4AF37] rounded-lg px-1.5 py-0.5 transition-all"
+          className="flex items-center gap-1.5 text-left group focus:outline-none focus-visible:ring-2 focus-visible:ring-[#f5b1c5] rounded-lg px-1.5 py-0.5 transition-all"
         >
-          <div className="w-6 h-6 rounded-full bg-[#D4AF37]/15 border border-[#D4AF37]/50 flex items-center justify-center text-[#D4AF37] group-hover:scale-110 transition-transform">
-            <Heart className="w-3 h-3 fill-[#D4AF37]/30 text-[#D4AF37]" />
+          <div className="w-6 h-6 rounded-full bg-[#d95d83]/15 border border-[#f5b1c5]/70 flex items-center justify-center text-[#f5b1c5] group-hover:scale-110 transition-transform">
+            <Heart className="w-3 h-3 fill-[#d95d83]/40 text-[#f5b1c5]" />
           </div>
           <div>
             <span className="font-serif font-bold text-sm text-[#FFFEFA] tracking-wide block leading-none">
               Amirul &amp; Alyea
             </span>
-            <span className="text-[9px] text-[#D4AF37] tracking-[0.2em] uppercase font-semibold block mt-0.5">
+            <span className="text-[9px] text-[#c8d771] tracking-[0.2em] uppercase font-semibold block mt-0.5">
               Walimatulurus
             </span>
           </div>
         </a>
 
         {/* Navigation Tabs */}
-        <div className="flex items-center gap-0.5 bg-[#FFFEFA]/5 p-0.5 rounded-full border border-[#D4AF37]/25">
+        <div className="flex items-center gap-0.5 bg-[#FFFEFA]/7 p-0.5 rounded-full border border-[#9db14c]/35">
           {NAV_ITEMS.map((item) => {
             const isActive = activePage === item.id;
             const Icon = item.icon;
@@ -85,20 +85,20 @@ export const Navbar: React.FC<NavbarProps> = ({ activePage, onNavigate }) => {
                 href={getRouteHref(item.id)}
                 onClick={(event) => handleNavigation(event, item.id)}
                 aria-current={isActive ? 'page' : undefined}
-                className={`relative px-3 py-1 rounded-full text-[11px] font-medium transition-all duration-300 flex items-center gap-1 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#D4AF37] ${
+                className={`relative px-3 py-1 rounded-full text-[11px] font-medium transition-all duration-300 flex items-center gap-1 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#f5b1c5] ${
                   isActive
-                    ? 'text-[#D4AF37] font-semibold'
+                    ? 'text-[#f5b1c5] font-semibold'
                     : 'text-[#FFFEFA]/75 hover:text-[#FFFEFA] hover:bg-[#FFFEFA]/10'
                 }`}
               >
                 {isActive && (
                   <motion.div
                     layoutId="activeTabDesktop"
-                    className="absolute inset-0 bg-[#D4AF37]/20 rounded-full border border-[#D4AF37]/60 shadow-[0_0_10px_rgba(212,175,55,0.25)]"
+                    className="absolute inset-0 bg-[#d95d83]/20 rounded-full border border-[#f5b1c5]/65 shadow-[0_0_10px_rgba(217,93,131,0.24)]"
                     transition={shouldReduceMotion ? { duration: 0 } : { type: 'spring', stiffness: 380, damping: 30 }}
                   />
                 )}
-                <Icon className={`w-3 h-3 relative z-10 ${isActive ? 'text-[#D4AF37]' : 'text-[#FFFEFA]/60'}`} />
+                <Icon className={`w-3 h-3 relative z-10 ${isActive ? 'text-[#f5b1c5]' : 'text-[#FFFEFA]/60'}`} />
                 <span className="relative z-10">{item.label}</span>
               </a>
             );
@@ -109,7 +109,7 @@ export const Navbar: React.FC<NavbarProps> = ({ activePage, onNavigate }) => {
         <a
           href={getRouteHref('rsvp')}
           onClick={(event) => handleNavigation(event, 'rsvp')}
-          className="px-3.5 py-1 rounded-full bg-gradient-to-r from-[#D4AF37] to-[#B8860B] text-[#28050B] font-bold text-[11px] shadow-[0_4px_12px_rgba(212,175,55,0.3)] hover:scale-105 active:scale-95 transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#FFFEFA]"
+          className="px-3.5 py-1 rounded-full bg-gradient-to-r from-[#F7D76A] to-[#F2C94C] text-[#26331C] font-bold text-[11px] shadow-[0_4px_12px_rgba(242,201,76,0.28)] hover:scale-105 active:scale-95 transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#FFFEFA]"
         >
           Hadir RSVP
         </a>
@@ -120,7 +120,7 @@ export const Navbar: React.FC<NavbarProps> = ({ activePage, onNavigate }) => {
         {...entranceProps}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: shouldReduceMotion ? 0 : 0.35, ease: [0.16, 1, 0.3, 1] }}
-        className="md:hidden fixed bottom-3 left-1/2 -translate-x-1/2 z-40 w-[88%] max-w-[320px] flex items-center justify-around px-2 py-1.5 rounded-full backdrop-blur-2xl bg-[#28050B]/92 border border-[#D4AF37]/45 shadow-[0_10px_28px_rgba(40,5,11,0.45)]"
+        className="md:hidden fixed bottom-3 left-1/2 -translate-x-1/2 z-40 w-[88%] max-w-[320px] flex items-center justify-around px-2 py-1.5 rounded-full backdrop-blur-2xl bg-[#26331C]/94 border border-[#9db14c]/55 shadow-[0_10px_28px_rgba(38,51,28,0.36)]"
         style={{ willChange: 'transform' }}
       >
         {NAV_ITEMS.map((item) => {
@@ -133,18 +133,18 @@ export const Navbar: React.FC<NavbarProps> = ({ activePage, onNavigate }) => {
               onClick={(event) => handleNavigation(event, item.id)}
               aria-label={item.label}
               aria-current={isActive ? 'page' : undefined}
-              className={`relative flex flex-col items-center justify-center px-2.5 py-1 rounded-full transition-all duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#D4AF37] ${
-                isActive ? 'text-[#D4AF37]' : 'text-[#FFFEFA]/60 hover:text-[#FFFEFA]'
+              className={`relative flex flex-col items-center justify-center px-2.5 py-1 rounded-full transition-all duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#f5b1c5] ${
+                isActive ? 'text-[#f5b1c5]' : 'text-[#FFFEFA]/60 hover:text-[#FFFEFA]'
               }`}
             >
               {isActive && (
                 <motion.div
                   layoutId="activeTabMobile"
-                  className="absolute inset-0 bg-[#D4AF37]/25 rounded-full border border-[#D4AF37]/60 shadow-[0_0_8px_rgba(212,175,55,0.3)]"
+                  className="absolute inset-0 bg-[#d95d83]/20 rounded-full border border-[#f5b1c5]/65 shadow-[0_0_8px_rgba(217,93,131,0.24)]"
                   transition={shouldReduceMotion ? { duration: 0 } : { type: 'spring', stiffness: 400, damping: 32 }}
                 />
               )}
-              <Icon className={`w-3.5 h-3.5 relative z-10 transition-transform ${isActive ? 'scale-110 text-[#D4AF37]' : ''}`} />
+              <Icon className={`w-3.5 h-3.5 relative z-10 transition-transform ${isActive ? 'scale-110 text-[#f5b1c5]' : ''}`} />
               <span className={`text-[9px] font-medium mt-0.5 relative z-10 ${isActive ? 'font-bold text-[#FFFEFA]' : ''}`}>
                 {item.label}
               </span>
