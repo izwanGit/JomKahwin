@@ -80,9 +80,9 @@ export const EnvelopeModal: React.FC<EnvelopeModalProps> = ({ onOpen, guestName 
             )}
           </motion.div>
 
-          {/* Photorealistic 3D Envelope Interactive Display */}
+          {/* Client-provided envelope artwork, aligned at the bottom in both states. */}
           <div
-            className="relative w-full max-w-xs aspect-square my-2 cursor-pointer group flex items-center justify-center"
+            className="relative w-full max-w-[280px] sm:max-w-xs aspect-[992/1272] my-2 cursor-pointer group flex items-center justify-center"
             onClick={handleOpenEnvelope}
             role="button"
             tabIndex={isOpen ? -1 : 0}
@@ -97,16 +97,29 @@ export const EnvelopeModal: React.FC<EnvelopeModalProps> = ({ onOpen, guestName 
             {/* Outer Gold Glow Effect */}
             <div className="absolute inset-4 rounded-3xl bg-gold-500/20 blur-xl group-hover:bg-gold-500/30 transition-all" />
 
-            {/* Photorealistic Closed & Open Velvet Envelope Assets */}
+            {/* Both images stay mounted so the open artwork is ready before the click. */}
             <motion.div
-              animate={isOpen ? { scale: [1, 1.05, 1.15], opacity: 0 } : { scale: [1, 1.02, 1] }}
-              transition={{ repeat: isOpen ? 0 : Infinity, duration: 3, ease: 'easeInOut' }}
-              className="relative w-full h-full flex items-center justify-center"
+              animate={isOpen ? { scale: [1, 1.03, 1.08], opacity: [1, 1, 0] } : { scale: [1, 1.02, 1], opacity: 1 }}
+              transition={{ repeat: isOpen ? 0 : Infinity, duration: isOpen ? 0.95 : 3, ease: 'easeInOut', ...(isOpen ? { times: [0, 0.65, 1] } : {}) }}
+              className="relative w-full h-full overflow-hidden"
             >
               <img
-                src={isOpen ? "/assets/envelope-open-v3.png" : "/assets/envelope-closed-v3.png"}
-                alt="Sampul Perkahwinan Velvet Burgundy"
-                className="w-full h-full object-contain drop-shadow-2xl transition-all duration-700"
+                src="/assets/envelope-closed-v4.png"
+                alt="Sampul perkahwinan hijau dengan lak mohor merah jambu"
+                aria-hidden={isOpen}
+                width={1241}
+                height={1748}
+                draggable={false}
+                className={`absolute left-[-12.5%] top-[3.62%] w-[125.1%] max-w-none h-auto transition-opacity duration-200 ${isOpen ? 'opacity-0' : 'opacity-100'}`}
+              />
+              <img
+                src="/assets/envelope-open-v4.png"
+                alt="Sampul perkahwinan hijau terbuka"
+                aria-hidden={!isOpen}
+                width={1241}
+                height={1748}
+                draggable={false}
+                className={`absolute left-[-12.5%] top-[-18.71%] w-[125.1%] max-w-none h-auto transition-opacity duration-200 ${isOpen ? 'opacity-100' : 'opacity-0'}`}
               />
             </motion.div>
           </div>
