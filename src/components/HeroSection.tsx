@@ -257,7 +257,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ isOpened = true }) => 
               }}
             >
               <Calendar size={16} style={{ color: '#D4AF37' }} />
-              Sabtu, 24 Oktober 2026
+              Ahad, 29 November 2026
             </div>
             <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '4px', color: 'rgba(40,5,11,0.7)' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '4px', fontWeight: 600, color: '#28050B', fontSize: 'clamp(10px, 1.6vw, 13px)' }}>

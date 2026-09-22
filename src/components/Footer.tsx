@@ -3,7 +3,7 @@ import { Share2, Heart } from 'lucide-react';
 import { CoupleMonogram } from './CoupleMonogram';
 
 export const Footer: React.FC = () => {
-  const shareText = "Assalamualaikum! Anda dijemput ke Majlis Perkahwinan Amirul Iqhwan & Alyea Dania pada Sabtu, 24 Oktober 2026. Klik pautan untuk maklumat lanjut dan pengesahan kehadiran: " + window.location.href;
+  const shareText = "Assalamualaikum! Anda dijemput ke Majlis Perkahwinan Amirul Iqhwan & Alyea Dania pada Ahad, 29 November 2026. #AlyeaIsTheWan Klik pautan untuk maklumat lanjut dan pengesahan kehadiran: " + window.location.href;
 
   const handleShare = () => {
     if (navigator.share) {
@@ -36,7 +36,7 @@ export const Footer: React.FC = () => {
             Amirul <span className="text-gold-500 font-normal">&amp;</span> Alyea
           </h3>
           <p className="text-xs text-burgundy-200/80 font-serif italic">
-            #AlyeaAmirul #Walimatulurus #JomKahwin
+            #AlyeaIsTheWan
           </p>
         </div>
 

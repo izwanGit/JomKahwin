@@ -93,7 +93,7 @@ export const RsvpForm: React.FC<RsvpFormProps> = ({ onAddWish, webhookUrl }) => 
             Borang Kehadiran (RSVP)
           </h2>
           <p className="text-xs text-slate-500 max-w-sm mx-auto">
-            Sila sahkan kehadiran anda sebelum <span className="font-semibold text-slate-700">10 Oktober 2026</span> bagi memudahkan urusan jamuan.
+            Sila sahkan kehadiran anda bagi memudahkan urusan jamuan.
           </p>
         </div>
 

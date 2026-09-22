@@ -127,7 +127,7 @@ export function App() {
     <div className="romantic-shell min-h-screen bg-cream-100 text-slate-800 relative selection:bg-gold-500 selection:text-white">
       <div aria-hidden="true" className="romantic-vignette" />
       {/* 3D Interactive Opening Envelope */}
-      <EnvelopeModal onOpen={handleEnvelopeOpen} guestName={guestName} />
+      <EnvelopeModal onOpen={handleEnvelopeOpen} guestName={guestName} alreadyOpened={isEnvelopeOpen} />
 
       {/* Flagship Responsive Floating Navigation Bar */}
       {isEnvelopeOpen && <Navbar activePage={activePage} onNavigate={handleNavigate} />}

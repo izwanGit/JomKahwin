@@ -12,7 +12,7 @@ export const EventDetails: React.FC = () => {
   ];
   const wazeUrl = 'https://waze.com/ul?q=Jiwa%20Damansara%20Petaling%20Jaya';
   const googleMapsUrl = 'https://maps.google.com/?q=Jiwa+Damansara+Block+C+Neo+Damansara+Petaling+Jaya';
-  const googleCalendarUrl = 'https://calendar.google.com/calendar/render?action=TEMPLATE&text=Walimatulurus+Amirul+%26+Alyea&dates=20261024T030000Z/20261024T080000Z&details=Majlis+Perkahwinan+Amirul+Iqhwan+%26+Alyea+Dania.&location=Jiwa+Damansara,+Block+C,+Neo+Damansara,+Jalan+PJU+8/1,+Damansara+Perdana,+47820+Petaling+Jaya,+Selangor';
+  const googleCalendarUrl = 'https://calendar.google.com/calendar/render?action=TEMPLATE&text=Walimatulurus+Amirul+%26+Alyea&dates=20261129T030000Z/20261129T080000Z&details=Majlis+Perkahwinan+Amirul+Iqhwan+%26+Alyea+Dania.&location=Jiwa+Damansara,+Block+C,+Neo+Damansara,+Jalan+PJU+8/1,+Damansara+Perdana,+47820+Petaling+Jaya,+Selangor';
 
   const formatPhoneNumber = (phone: string) => {
     const localNumber = phone.replace(/^60/, '0');
@@ -38,7 +38,7 @@ export const EventDetails: React.FC = () => {
             className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-[#F7D76A] to-[#F2C94C] px-5 py-2.5 font-serif text-sm font-bold text-burgundy-950 no-underline shadow-[0_8px_22px_rgba(242,201,76,0.24)] transition-transform duration-200 hover:scale-[1.02] focus:outline-none focus-visible:ring-2 focus-visible:ring-hibiscus-500 focus-visible:ring-offset-2 focus-visible:ring-offset-cream-100"
           >
             <CalendarPlus className="h-4 w-4 text-burgundy-800" />
-            Save the Date · 24 Oktober 2026
+            Save the Date · 29 November 2026
           </a>
         </div>
         <span className="text-gold-600 font-serif text-xs md:text-sm tracking-[0.25em] uppercase font-semibold block">

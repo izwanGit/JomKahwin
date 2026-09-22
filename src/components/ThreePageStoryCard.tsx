@@ -17,16 +17,18 @@ export const ThreePageStoryCard: React.FC<ThreePageStoryCardProps> = ({ isOpened
         transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
         className="relative z-10 mx-auto w-full max-w-[660px] overflow-hidden rounded-[18px] shadow-[0_24px_70px_rgba(94,48,68,0.18)] min-[1100px]:max-w-[560px]"
       >
-        <video
-          className="block h-auto w-full"
-          src="/assets/amirul-alyea-opening-v3.mp4"
-          aria-label="Video pembukaan majlis perkahwinan Amirul dan Alyea"
-          autoPlay
-          loop
-          muted
-          playsInline
-          preload="auto"
-        />
+        {isOpened && (
+          <video
+            className="block h-auto w-full"
+            src="/assets/amirul-alyea-opening-v3.mp4"
+            aria-label="Video pembukaan majlis perkahwinan Amirul dan Alyea"
+            autoPlay
+            loop
+            muted
+            playsInline
+            preload="auto"
+          />
+        )}
       </motion.div>
     </section>
   );

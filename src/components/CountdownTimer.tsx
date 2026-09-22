@@ -9,7 +9,7 @@ interface TimeLeft {
   seconds: number;
 }
 
-const TARGET_DATE = new Date('2026-10-24T11:00:00+08:00').getTime();
+const TARGET_DATE = new Date('2026-11-29T11:00:00+08:00').getTime();
 
 const calculateTimeLeft = (): TimeLeft => {
   const difference = TARGET_DATE - Date.now();
@@ -79,7 +79,7 @@ export const CountdownTimer: React.FC = () => {
           </div>
 
           <p className="text-xs text-gold-200/80 font-serif italic mt-6">
-            Sabtu, 24 Oktober 2026 • 13 Jamadilawal 1448H
+            Ahad, 29 November 2026 • 19 Jamadilakhir 1448H
           </p>
         </div>
       </motion.div>

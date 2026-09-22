@@ -7,11 +7,12 @@ import { CoupleMonogram } from './CoupleMonogram';
 interface EnvelopeModalProps {
   onOpen: () => void;
   guestName?: string;
+  alreadyOpened?: boolean;
 }
 
-export const EnvelopeModal: React.FC<EnvelopeModalProps> = ({ onOpen, guestName }) => {
+export const EnvelopeModal: React.FC<EnvelopeModalProps> = ({ onOpen, guestName, alreadyOpened = false }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [isDismissed, setIsDismissed] = useState(false);
+  const [isDismissed, setIsDismissed] = useState(alreadyOpened);
 
   useEffect(() => {
     if (isDismissed) return;
@@ -72,7 +73,7 @@ export const EnvelopeModal: React.FC<EnvelopeModalProps> = ({ onOpen, guestName 
           {/* Header Greeting */}
           <motion.div
             initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
+            animate={isOpen ? { opacity: 0, y: -12 } : { opacity: 1, y: 0 }}
             transition={{ delay: 0.2, duration: 0.6 }}
             className="mb-3 text-center sm:mb-4"
           >
@@ -94,9 +95,9 @@ export const EnvelopeModal: React.FC<EnvelopeModalProps> = ({ onOpen, guestName 
             )}
           </motion.div>
 
-          {/* Crop the transparent canvas to the actual envelope artwork. */}
+          {/* Keep one fixed layout slot; the open artwork grows out of it without moving the button. */}
           <div
-            className={`relative my-2 w-[min(78vw,320px)] cursor-pointer overflow-hidden ${isOpen ? 'aspect-[992/1272]' : 'aspect-[992/704]'}`}
+            className="relative my-2 aspect-[992/704] w-[min(78vw,320px)] cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-[#B85779] focus-visible:ring-offset-4 focus-visible:ring-offset-[#F8C8D9]"
             onClick={handleOpenEnvelope}
             role="button"
             tabIndex={isOpen ? -1 : 0}
@@ -114,32 +115,36 @@ export const EnvelopeModal: React.FC<EnvelopeModalProps> = ({ onOpen, guestName 
               transition={{ repeat: isOpen ? 0 : Infinity, duration: isOpen ? 0.95 : 3, ease: 'easeInOut', ...(isOpen ? { times: [0, 0.75, 1] } : {}) }}
               className="relative h-full w-full drop-shadow-[0_12px_18px_rgba(52,69,42,0.18)]"
             >
-              <img
-                src="/assets/envelope-closed-v4.png"
-                alt="Sampul perkahwinan hijau dengan lak mohor merah jambu"
-                aria-hidden={isOpen}
-                width={1241}
-                height={1748}
-                draggable={false}
-                className={`absolute left-[-12.5%] top-[-74.15%] h-auto w-[125.1%] max-w-none transition-opacity duration-200 ${isOpen ? 'opacity-0' : 'opacity-100'}`}
-              />
-              <img
-                src="/assets/envelope-open-v4.png"
-                alt="Sampul perkahwinan hijau terbuka"
-                aria-hidden={!isOpen}
-                width={1241}
-                height={1748}
-                draggable={false}
-                className={`absolute left-[-12.5%] top-[-18.71%] h-auto w-[125.1%] max-w-none transition-opacity duration-200 ${isOpen ? 'opacity-100' : 'opacity-0'}`}
-              />
+              <div className={`absolute inset-0 overflow-hidden transition-opacity duration-200 ${isOpen ? 'opacity-0' : 'opacity-100'}`}>
+                <img
+                  src="/assets/envelope-closed-v4.png"
+                  alt="Sampul perkahwinan hijau dengan lak mohor merah jambu"
+                  aria-hidden={isOpen}
+                  width={1241}
+                  height={1748}
+                  draggable={false}
+                  className="absolute left-[-12.5%] top-[-74.15%] h-auto w-[125.1%] max-w-none"
+                />
+              </div>
+              <div className={`absolute left-0 top-1/2 aspect-[992/1272] w-full -translate-y-1/2 overflow-hidden transition-opacity duration-200 ${isOpen ? 'opacity-100' : 'opacity-0'}`}>
+                <img
+                  src="/assets/envelope-open-v4.png"
+                  alt="Sampul perkahwinan hijau terbuka"
+                  aria-hidden={!isOpen}
+                  width={1241}
+                  height={1748}
+                  draggable={false}
+                  className="absolute left-[-12.5%] top-[-18.71%] h-auto w-[125.1%] max-w-none"
+                />
+              </div>
             </motion.div>
           </div>
 
           {/* Open Button */}
           <motion.button
             initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.4, duration: 0.6 }}
+            animate={isOpen ? { opacity: 0, y: 0 } : { opacity: 1, y: 0 }}
+            transition={{ delay: isOpen ? 0 : 0.4, duration: isOpen ? 0.2 : 0.6 }}
             whileHover={{ scale: 1.04 }}
             whileTap={{ scale: 0.96 }}
             onClick={handleOpenEnvelope}
@@ -151,7 +156,7 @@ export const EnvelopeModal: React.FC<EnvelopeModalProps> = ({ onOpen, guestName 
             <Volume2 className="ml-1 h-4 w-4 animate-pulse text-[#F4C9D6]" />
           </motion.button>
           
-          <p className="mt-3 flex items-center gap-1 font-serif text-[11px] italic text-[#755665]">
+          <p className={`mt-3 flex items-center gap-1 font-serif text-[11px] italic text-[#755665] transition-opacity duration-200 ${isOpen ? 'opacity-0' : 'opacity-100'}`}>
             <span>🎵 Tekan untuk memainkan lagu &amp; membuka kad jemputan</span>
           </p>
         </div>
