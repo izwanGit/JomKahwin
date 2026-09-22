@@ -14,6 +14,6 @@ export const CoupleMonogram: React.FC<CoupleMonogramProps> = ({ compact = false,
     transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
     className={`couple-monogram ${compact ? 'couple-monogram--compact' : ''} ${light ? 'couple-monogram--light' : ''}`}
   >
-    <img src="/assets/alyea-amirul-monogram-ai-v2.png" alt="" className="couple-monogram__image" />
+    <img src="/assets/amirul-alyea-logo.png" alt="" className="couple-monogram__image" />
   </motion.div>
 );

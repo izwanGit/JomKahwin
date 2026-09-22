@@ -146,7 +146,7 @@ html {
 }
 
 .couple-monogram--light .couple-monogram__image {
-  filter: drop-shadow(0 6px 16px rgba(0,0,0,.28));
+  filter: brightness(0) invert(1) drop-shadow(0 6px 16px rgba(0,0,0,.28));
 }
 
 .rsvp-thank-you {
