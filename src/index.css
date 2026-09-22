@@ -85,6 +85,10 @@ html {
     #f8f2de;
 }
 
+.invitation-pink-stage {
+  background: radial-gradient(ellipse at 50% 34%, #ffe5ee 0%, #f8c8d9 55%, #efacc5 100%);
+}
+
 .romantic-shell::before {
   content: '';
   position: fixed;

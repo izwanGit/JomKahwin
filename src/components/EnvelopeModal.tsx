@@ -66,8 +66,7 @@ export const EnvelopeModal: React.FC<EnvelopeModalProps> = ({ onOpen, guestName 
         initial={{ opacity: 1 }}
         exit={{ opacity: 0, scale: 0.95 }}
         transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-        className="fixed inset-0 z-[100] flex items-center justify-center overflow-hidden px-4 py-5"
-        style={{ background: 'radial-gradient(ellipse at 50% 35%, #FFF5F6 0%, #F9E2E9 54%, #EEC7D3 100%)' }}
+        className="invitation-pink-stage fixed inset-0 z-[100] flex items-center justify-center overflow-hidden px-4 py-5"
       >
         <div className="relative flex w-full max-w-md flex-col items-center">
           {/* Header Greeting */}
@@ -145,7 +144,7 @@ export const EnvelopeModal: React.FC<EnvelopeModalProps> = ({ onOpen, guestName 
             whileTap={{ scale: 0.96 }}
             onClick={handleOpenEnvelope}
             disabled={isOpen}
-            className="mt-4 flex items-center gap-2.5 rounded-full bg-[#34452A] px-8 py-3.5 text-xs font-bold uppercase tracking-widest text-white shadow-[0_8px_24px_rgba(52,69,42,0.22)] transition-all hover:bg-[#43542A] focus:outline-none focus:ring-2 focus:ring-[#B85779] focus:ring-offset-2 focus:ring-offset-[#F9E2E9]"
+            className="mt-4 flex items-center gap-2.5 rounded-full bg-[#34452A] px-8 py-3.5 text-xs font-bold uppercase tracking-widest text-white shadow-[0_8px_24px_rgba(52,69,42,0.22)] transition-all hover:bg-[#43542A] focus:outline-none focus:ring-2 focus:ring-[#B85779] focus:ring-offset-2 focus:ring-offset-[#F8C8D9]"
           >
             <Sparkles className="h-4 w-4 text-[#F4C9D6]" />
             <span>{isOpen ? 'Membuka Kad...' : 'Buka Jemputan'}</span>
