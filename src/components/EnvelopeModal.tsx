@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Sparkles, Volume2 } from 'lucide-react';
 import confetti from 'canvas-confetti';
@@ -13,11 +13,24 @@ export const EnvelopeModal: React.FC<EnvelopeModalProps> = ({ onOpen, guestName 
   const [isOpen, setIsOpen] = useState(false);
   const [isDismissed, setIsDismissed] = useState(false);
 
+  useEffect(() => {
+    if (isDismissed) return;
+
+    const previousHtmlOverflow = document.documentElement.style.overflow;
+    const previousOverflow = document.body.style.overflow;
+    document.documentElement.style.overflow = 'hidden';
+    document.body.style.overflow = 'hidden';
+    return () => {
+      document.documentElement.style.overflow = previousHtmlOverflow;
+      document.body.style.overflow = previousOverflow;
+    };
+  }, [isDismissed]);
+
   const handleOpenEnvelope = () => {
     if (isOpen) return;
     setIsOpen(true);
 
-    // Trigger celebratory gold & rose confetti
+    // Keep the opening confetti in the invitation's olive-and-blush palette.
     try {
       const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
       const lowPowerDevice = (navigator.hardwareConcurrency ?? 4) <= 4;
@@ -31,14 +44,14 @@ export const EnvelopeModal: React.FC<EnvelopeModalProps> = ({ onOpen, guestName 
           ticks: 90,
           scalar: 0.82,
           origin: { y: 0.6 },
-          colors: ['#D4AF37', '#F5E6AB', '#4A0E17', '#E8B4B8', '#FAF9F6'],
+          colors: ['#43542A', '#9DB14C', '#E8A9BD', '#F4C9D6', '#FFFCF5'],
         });
       }
     } catch {
       // Fallback silently
     }
 
-    // Delay dismissal to let photorealistic envelope reveal transition finish
+    // Let the open envelope appear before revealing the invitation.
     setTimeout(() => {
       onOpen();
       setIsDismissed(true);
@@ -53,36 +66,38 @@ export const EnvelopeModal: React.FC<EnvelopeModalProps> = ({ onOpen, guestName 
         initial={{ opacity: 1 }}
         exit={{ opacity: 0, scale: 0.95 }}
         transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-        className="fixed inset-0 z-50 flex items-center justify-center bg-burgundy-950/95 backdrop-blur-md px-4 py-8 overflow-hidden"
+        className="fixed inset-0 z-[100] flex items-center justify-center overflow-hidden px-4 py-5"
+        style={{ background: 'radial-gradient(ellipse at 50% 35%, #FFF5F6 0%, #F9E2E9 54%, #EEC7D3 100%)' }}
       >
-        {/* Background Islamic Geometric Pattern Accent */}
-        <div className="absolute inset-0 opacity-10 bg-[radial-gradient(#D4AF37_1px,transparent_1px)] [background-size:16px_16px] pointer-events-none" />
-
-        <div className="relative w-full max-w-md flex flex-col items-center">
+        <div className="relative flex w-full max-w-md flex-col items-center">
           {/* Header Greeting */}
           <motion.div
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2, duration: 0.6 }}
-            className="text-center mb-6"
+            className="mb-3 text-center sm:mb-4"
           >
-            <div className="mb-3 flex justify-center"><CoupleMonogram compact light /></div>
-            <span className="text-gold-300 font-serif text-xs md:text-sm tracking-[0.3em] uppercase block mb-1">
+            <div className="mb-3 flex justify-center">
+              <div className="rounded-full bg-[#34452A] p-1 shadow-[0_6px_18px_rgba(52,69,42,0.16)] ring-1 ring-white/80">
+                <CoupleMonogram compact light />
+              </div>
+            </div>
+            <span className="mb-1 block font-serif text-xs uppercase tracking-[0.3em] text-[#657337] md:text-sm">
               Walimatulurus
             </span>
-            <h1 className="text-3xl md:text-4xl font-serif text-white font-bold tracking-wide">
-              Amirul <span className="text-gold-500 font-normal">&amp;</span> Alyea
+            <h1 className="font-serif text-3xl font-bold tracking-wide text-[#34452A] md:text-4xl">
+              Amirul <span className="font-normal text-[#B85779]">&amp;</span> Alyea
             </h1>
             {guestName && (
-              <div className="mt-3 inline-block px-4 py-1 rounded-full bg-burgundy-900/80 border border-gold-500/40 text-gold-200 text-xs tracking-wider">
-                Kepada Tuan/Puan: <span className="font-semibold text-white">{guestName}</span>
+              <div className="mt-3 inline-block rounded-full border border-[#DDA7B8] bg-white/55 px-4 py-1 text-xs tracking-wider text-[#53643B]">
+                Kepada Tuan/Puan: <span className="font-semibold text-[#34452A]">{guestName}</span>
               </div>
             )}
           </motion.div>
 
-          {/* Client-provided envelope artwork, aligned at the bottom in both states. */}
+          {/* Crop the transparent canvas to the actual envelope artwork. */}
           <div
-            className="relative w-full max-w-[280px] sm:max-w-xs aspect-[992/1272] my-2 cursor-pointer group flex items-center justify-center"
+            className={`relative my-2 w-[min(78vw,320px)] cursor-pointer overflow-hidden ${isOpen ? 'aspect-[992/1272]' : 'aspect-[992/704]'}`}
             onClick={handleOpenEnvelope}
             role="button"
             tabIndex={isOpen ? -1 : 0}
@@ -94,14 +109,11 @@ export const EnvelopeModal: React.FC<EnvelopeModalProps> = ({ onOpen, guestName 
               }
             }}
           >
-            {/* Outer Gold Glow Effect */}
-            <div className="absolute inset-4 rounded-3xl bg-gold-500/20 blur-xl group-hover:bg-gold-500/30 transition-all" />
-
             {/* Both images stay mounted so the open artwork is ready before the click. */}
             <motion.div
-              animate={isOpen ? { scale: [1, 1.03, 1.08], opacity: [1, 1, 0] } : { scale: [1, 1.02, 1], opacity: 1 }}
-              transition={{ repeat: isOpen ? 0 : Infinity, duration: isOpen ? 0.95 : 3, ease: 'easeInOut', ...(isOpen ? { times: [0, 0.65, 1] } : {}) }}
-              className="relative w-full h-full overflow-hidden"
+              animate={isOpen ? { scale: [1, 1.03, 1.06], opacity: [1, 1, 0] } : { scale: [1, 1.015, 1], opacity: 1 }}
+              transition={{ repeat: isOpen ? 0 : Infinity, duration: isOpen ? 0.95 : 3, ease: 'easeInOut', ...(isOpen ? { times: [0, 0.75, 1] } : {}) }}
+              className="relative h-full w-full drop-shadow-[0_12px_18px_rgba(52,69,42,0.18)]"
             >
               <img
                 src="/assets/envelope-closed-v4.png"
@@ -110,7 +122,7 @@ export const EnvelopeModal: React.FC<EnvelopeModalProps> = ({ onOpen, guestName 
                 width={1241}
                 height={1748}
                 draggable={false}
-                className={`absolute left-[-12.5%] top-[3.62%] w-[125.1%] max-w-none h-auto transition-opacity duration-200 ${isOpen ? 'opacity-0' : 'opacity-100'}`}
+                className={`absolute left-[-12.5%] top-[-74.15%] h-auto w-[125.1%] max-w-none transition-opacity duration-200 ${isOpen ? 'opacity-0' : 'opacity-100'}`}
               />
               <img
                 src="/assets/envelope-open-v4.png"
@@ -119,7 +131,7 @@ export const EnvelopeModal: React.FC<EnvelopeModalProps> = ({ onOpen, guestName 
                 width={1241}
                 height={1748}
                 draggable={false}
-                className={`absolute left-[-12.5%] top-[-18.71%] w-[125.1%] max-w-none h-auto transition-opacity duration-200 ${isOpen ? 'opacity-100' : 'opacity-0'}`}
+                className={`absolute left-[-12.5%] top-[-18.71%] h-auto w-[125.1%] max-w-none transition-opacity duration-200 ${isOpen ? 'opacity-100' : 'opacity-0'}`}
               />
             </motion.div>
           </div>
@@ -133,14 +145,14 @@ export const EnvelopeModal: React.FC<EnvelopeModalProps> = ({ onOpen, guestName 
             whileTap={{ scale: 0.96 }}
             onClick={handleOpenEnvelope}
             disabled={isOpen}
-            className="mt-4 px-8 py-3.5 rounded-full bg-gradient-to-r from-[#F7D76A] via-[#F2C94C] to-[#DFAE2B] text-burgundy-950 font-bold tracking-widest uppercase text-xs shadow-[0_8px_24px_rgba(242,201,76,0.26)] flex items-center gap-2.5 transition-all focus:outline-none focus:ring-2 focus:ring-hibiscus-300"
+            className="mt-4 flex items-center gap-2.5 rounded-full bg-[#34452A] px-8 py-3.5 text-xs font-bold uppercase tracking-widest text-white shadow-[0_8px_24px_rgba(52,69,42,0.22)] transition-all hover:bg-[#43542A] focus:outline-none focus:ring-2 focus:ring-[#B85779] focus:ring-offset-2 focus:ring-offset-[#F9E2E9]"
           >
-            <Sparkles className="w-4 h-4 text-burgundy-950" />
+            <Sparkles className="h-4 w-4 text-[#F4C9D6]" />
             <span>{isOpen ? 'Membuka Kad...' : 'Buka Jemputan'}</span>
-            <Volume2 className="w-4 h-4 text-burgundy-950/80 ml-1 animate-pulse" />
+            <Volume2 className="ml-1 h-4 w-4 animate-pulse text-[#F4C9D6]" />
           </motion.button>
           
-          <p className="text-[11px] text-gold-300/70 mt-3 flex items-center gap-1 font-serif italic">
+          <p className="mt-3 flex items-center gap-1 font-serif text-[11px] italic text-[#755665]">
             <span>🎵 Tekan untuk memainkan lagu &amp; membuka kad jemputan</span>
           </p>
         </div>
