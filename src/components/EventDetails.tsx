@@ -12,7 +12,7 @@ export const EventDetails: React.FC = () => {
   ];
   const wazeUrl = 'https://waze.com/ul?q=Jiwa%20Damansara%20Petaling%20Jaya';
   const googleMapsUrl = 'https://maps.google.com/?q=Jiwa+Damansara+Block+C+Neo+Damansara+Petaling+Jaya';
-  const googleCalendarUrl = 'https://calendar.google.com/calendar/render?action=TEMPLATE&text=Walimatulurus+Amirul+%26+Alyea&dates=20261129T030000Z/20261129T080000Z&details=Majlis+Perkahwinan+Amirul+Iqhwan+%26+Alyea+Dania.&location=Jiwa+Damansara,+Block+C,+Neo+Damansara,+Jalan+PJU+8/1,+Damansara+Perdana,+47820+Petaling+Jaya,+Selangor';
+  const googleCalendarUrl = 'https://calendar.google.com/calendar/render?action=TEMPLATE&text=Walimatulurus+Iqhwan+%26+Alyea&dates=20261129T030000Z/20261129T080000Z&details=Majlis+Perkahwinan+Amirul+Iqhwan+%26+Alyea+Dania.&location=Jiwa+Damansara,+Block+C,+Neo+Damansara,+Jalan+PJU+8/1,+Damansara+Perdana,+47820+Petaling+Jaya,+Selangor';
 
   const formatPhoneNumber = (phone: string) => {
     const localNumber = phone.replace(/^60/, '0');
@@ -135,7 +135,7 @@ export const EventDetails: React.FC = () => {
               </div>
               {contact.phone && <div className="ml-2 flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-burgundy-100 text-burgundy-800 transition-colors group-hover:bg-gold-500 group-hover:text-burgundy-950"><Phone className="w-4 h-4" /></div>}
             </>;
-            return contact.phone ? <a key={contact.name} href={`https://wa.me/${contact.phone}?text=Assalamualaikum%20${encodeURIComponent(contact.name)},%20saya%20ingin%20bertanya%20mengenai%20majlis%20Amirul%20%26%20Alyea.`} target="_blank" rel="noopener noreferrer" className={`${cardClassName} group hover:bg-burgundy-900 hover:text-white`}>{contactContent}</a> : <div key={contact.name} className={cardClassName}>{contactContent}</div>;
+            return contact.phone ? <a key={contact.name} href={`https://wa.me/${contact.phone}?text=Assalamualaikum%20${encodeURIComponent(contact.name)},%20saya%20ingin%20bertanya%20mengenai%20majlis%20Iqhwan%20%26%20Alyea.`} target="_blank" rel="noopener noreferrer" className={`${cardClassName} group hover:bg-burgundy-900 hover:text-white`}>{contactContent}</a> : <div key={contact.name} className={cardClassName}>{contactContent}</div>;
           })}
         </div>
       </motion.div>

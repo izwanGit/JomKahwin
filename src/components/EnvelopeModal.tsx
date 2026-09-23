@@ -86,7 +86,7 @@ export const EnvelopeModal: React.FC<EnvelopeModalProps> = ({ onOpen, guestName,
               Walimatulurus
             </span>
             <h1 className="font-serif text-3xl font-bold tracking-wide text-[#34452A] md:text-4xl">
-              Amirul <span className="font-normal text-[#B85779]">&amp;</span> Alyea
+              Iqhwan <span className="font-normal text-[#B85779]">&amp;</span> Alyea
             </h1>
             {guestName && (
               <div className="mt-3 inline-block rounded-full border border-[#DDA7B8] bg-white/55 px-4 py-1 text-xs tracking-wider text-[#53643B]">

@@ -66,7 +66,7 @@ export const Navbar: React.FC<NavbarProps> = ({ activePage, onNavigate }) => {
           </div>
           <div>
             <span className="font-serif font-bold text-sm text-[#FFFEFA] tracking-wide block leading-none">
-              Amirul &amp; Alyea
+              Iqhwan &amp; Alyea
             </span>
             <span className="text-[9px] text-[#c8d771] tracking-[0.2em] uppercase font-semibold block mt-0.5">
               Walimatulurus

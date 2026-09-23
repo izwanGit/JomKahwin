@@ -7,11 +7,11 @@ export interface AppRoute {
 }
 
 export const APP_ROUTES: AppRoute[] = [
-  { id: 'utama', path: '/', title: 'Amirul & Alyea | Walimatulurus' },
-  { id: 'lokasi', path: '/lokasi', title: 'Lokasi Majlis | Amirul & Alyea' },
-  { id: 'tentatif', path: '/tentatif', title: 'Tentatif Majlis | Amirul & Alyea' },
-  { id: 'rsvp', path: '/rsvp', title: 'RSVP | Amirul & Alyea' },
-  { id: 'ucapan', path: '/ucapan', title: 'Ucapan Tetamu | Amirul & Alyea' },
+  { id: 'utama', path: '/', title: 'Iqhwan & Alyea | Walimatulurus' },
+  { id: 'lokasi', path: '/lokasi', title: 'Lokasi Majlis | Iqhwan & Alyea' },
+  { id: 'tentatif', path: '/tentatif', title: 'Tentatif Majlis | Iqhwan & Alyea' },
+  { id: 'rsvp', path: '/rsvp', title: 'RSVP | Iqhwan & Alyea' },
+  { id: 'ucapan', path: '/ucapan', title: 'Ucapan Tetamu | Iqhwan & Alyea' },
 ];
 
 const routeById = new Map(APP_ROUTES.map((route) => [route.id, route]));

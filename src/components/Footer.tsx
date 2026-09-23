@@ -8,8 +8,8 @@ export const Footer: React.FC = () => {
   const handleShare = () => {
     if (navigator.share) {
       navigator.share({
-        title: 'Walimatulurus Amirul ❤️ Alyea',
-        text: 'Kad Jemputan Digital Majlis Perkahwinan Amirul & Alyea',
+        title: 'Walimatulurus Iqhwan ❤️ Alyea',
+        text: 'Kad Jemputan Digital Majlis Perkahwinan Iqhwan & Alyea',
         url: window.location.href,
       }).catch(() => {});
     } else {
@@ -33,7 +33,7 @@ export const Footer: React.FC = () => {
 
         <div className="space-y-1">
           <h3 className="font-serif text-2xl font-bold text-gold-300">
-            Amirul <span className="text-gold-500 font-normal">&amp;</span> Alyea
+            Iqhwan <span className="text-gold-500 font-normal">&amp;</span> Alyea
           </h3>
           <p className="text-xs text-burgundy-200/80 font-serif italic">
             #AlyeaIsTheWan

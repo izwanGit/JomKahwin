@@ -21,7 +21,7 @@ export const ThreePageStoryCard: React.FC<ThreePageStoryCardProps> = ({ isOpened
           <video
             className="block h-auto w-full"
             src="/assets/amirul-alyea-opening-v3.mp4"
-            aria-label="Video pembukaan majlis perkahwinan Amirul dan Alyea"
+            aria-label="Video pembukaan majlis perkahwinan Iqhwan dan Alyea"
             autoPlay
             loop
             muted
