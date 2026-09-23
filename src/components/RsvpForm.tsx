@@ -210,7 +210,7 @@ export const RsvpForm: React.FC<RsvpFormProps> = ({ onAddWish, webhookUrl }) => 
               </label>
               <textarea
                 rows={3}
-                placeholder="Titipkan ucapan selamat dan doa keberkatan buat Alyea & Amirul..."
+                placeholder="Titipkan ucapan selamat dan doa keberkatan buat Iqhwan & Alyea..."
                 value={formData.wishes}
                 onChange={(e) => setFormData({ ...formData, wishes: e.target.value })}
                 className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-gold-500 focus:ring-2 focus:ring-gold-200 text-sm outline-none transition-all resize-none"

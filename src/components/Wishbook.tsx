@@ -66,7 +66,7 @@ export const Wishbook: React.FC<WishbookProps> = ({ wishes, isLoading = false, l
 
                 <div className="flex shrink-0 items-center gap-1 whitespace-nowrap rounded-full border border-gold-300/50 bg-cream-100 px-2 py-1 text-[10px] font-semibold text-gold-700 sm:px-2.5">
                   <Heart className="w-3 h-3 text-gold-500 fill-gold-500/20" />
-                  <span>{w.attendance === 'hadir' ? 'Hadir' : 'Doa Berkat'}</span>
+                  <span>Ucapan Tulus</span>
                 </div>
               </div>
 
