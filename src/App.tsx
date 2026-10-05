@@ -9,7 +9,6 @@ import { EventDetails } from './components/EventDetails';
 import { ScheduleTimeline } from './components/ScheduleTimeline';
 import { RsvpForm } from './components/RsvpForm';
 import { Wishbook } from './components/Wishbook';
-import { SalamKautModal } from './components/SalamKautModal';
 import { Footer } from './components/Footer';
 import type { WishMessage } from './types';
 import { getPageFromPath, getRoute, getRouteHref, type PageId } from './routes';
@@ -152,10 +151,7 @@ export function App() {
         {activePage === 'lokasi' && <EventDetails />}
         {activePage === 'tentatif' && <ScheduleTimeline />}
         {activePage === 'rsvp' && (
-          <>
-            <RsvpForm onAddWish={handleAddWish} webhookUrl={rsvpWebhookUrl} />
-            <SalamKautModal />
-          </>
+          <RsvpForm onAddWish={handleAddWish} webhookUrl={rsvpWebhookUrl} />
         )}
         {activePage === 'ucapan' && (
           <Wishbook wishes={wishes} isLoading={isWishbookLoading} loadError={wishbookError} />
