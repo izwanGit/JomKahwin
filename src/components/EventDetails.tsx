@@ -5,7 +5,7 @@ import type { ContactPerson } from '../types';
 
 export const EventDetails: React.FC = () => {
   const contacts: ContactPerson[] = [
-    { role: 'Ibu Pengantin Perempuan', name: 'Norizan Noor', phone: '60172366277', relation: 'Ibu' },
+    { role: 'Abang Pengantin Perempuan', name: 'Aiman', phone: '601163732162', relation: 'Abang' },
     { role: 'Abang Pengantin Lelaki', name: 'Muhammad Amirul Asyraf', phone: '60182070102', relation: 'Abang' },
     { role: 'Adik Pengantin Perempuan', name: 'Alysia Dania', phone: '601121636798', relation: 'Adik' },
     { role: 'Adik Pengantin Lelaki', name: 'Nur Amira Aqila', phone: '601119180693', relation: 'Adik' },
