@@ -3,14 +3,15 @@ import { Share2, Heart } from 'lucide-react';
 import { CoupleMonogram } from './CoupleMonogram';
 
 export const Footer: React.FC = () => {
-  const shareText = "Assalamualaikum! Anda dijemput ke Majlis Perkahwinan Amirul Iqhwan & Alyea Dania pada Ahad, 29 November 2026. #AlyeaIsTheWan Klik pautan untuk maklumat lanjut dan pengesahan kehadiran: " + window.location.href;
+  const shareUrl = 'https://walimatulurus-iqhwanalyea.vercel.app/jemputan';
+  const shareText = "Assalamualaikum! Anda dijemput ke Majlis Perkahwinan Amirul Iqhwan & Alyea Dania pada Ahad, 29 November 2026. #AlyeaIsTheWan Klik pautan untuk maklumat lanjut dan pengesahan kehadiran: " + shareUrl;
 
   const handleShare = () => {
     if (navigator.share) {
       navigator.share({
         title: 'Walimatulurus Iqhwan ❤️ Alyea',
         text: 'Kad Jemputan Digital Majlis Perkahwinan Iqhwan & Alyea',
-        url: window.location.href,
+        url: shareUrl,
       }).catch(() => {});
     } else {
       window.open(`https://wa.me/?text=${encodeURIComponent(shareText)}`, '_blank');
